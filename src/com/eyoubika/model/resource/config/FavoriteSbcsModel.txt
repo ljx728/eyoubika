@@ -1,0 +1,5 @@
+FavoriteSbcs com.eyoubika.user tu_FavoriteSbcList userId
+Integer  userId 		int 	false 	用户id
+Integer sbcId 			int	 false 	SBCid
+String date		char(8) false 添加日期
+string time	varchar(12) false 添加时间

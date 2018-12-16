@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-08-03 15:39:24
+  -==========================================================================================-->
+<sqlMap namespace="ts_BadWordInfo">
+	<typeAlias alias="BadWordDomain" type="com.eyoubika.system.domain.BadWordDomain"/>
+	<resultMap id="BadWordResult" class="com.eyoubika.system.domain.BadWordDomain">
+		<result column="BWI_WordId" property="wordId" jdbcType="INT" />
+		<result column="BWI_Word" property="word" jdbcType="VARCHAR" />
+		<result column="BWI_Type" property="type" jdbcType="VARCHAR" />
+		<result column="BWI_Date" property="date" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertBadWord" parameterClass="com.eyoubika.system.domain.BadWordDomain">
+		insert into ts_BadWordInfo(BWI_Word ,BWI_Type ,BWI_Date) 
+		values (#word# ,#type# ,#date#)
+		<selectKey resultClass="int" keyProperty="wordId">
+			SELECT LAST_INSERT_ID() as wordId
+		</selectKey>
+	</insert>
+	<select id="selectBadWord" parameterClass="Integer" resultMap="BadWordResult">
+		select * from ts_BadWordInfo where BWI_WordId= #wordId#
+	</select>
+	<select id="selectBadWordByDomain" parameterClass="com.eyoubika.system.domain.BadWordDomain" resultMap="BadWordResult">
+		select * from ts_BadWordInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="wordId">
+				BWI_WordId = #wordId#
+			</isNotNull>
+			<isNotNull prepend="and" property="word">
+				BWI_Word = #word#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				BWI_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				BWI_Date = #date#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectBadWordList" parameterClass="com.eyoubika.system.domain.BadWordDomain" resultMap="BadWordResult">
+		select * from ts_BadWordInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="wordId">
+				BWI_WordId = #wordId#
+			</isNotNull>
+			<isNotNull prepend="and" property="word">
+				BWI_Word = #word#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				BWI_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				BWI_Date = #date#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteBadWord"  parameterClass="Integer">
+		delete from ts_BadWordInfo where BWI_WordId = #wordId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ts_BadWordInfo
+	</delete>
+	<update id = "updateBadWord" parameterClass="com.eyoubika.system.domain.BadWordDomain">
+		update ts_BadWordInfo
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="word">
+				BWI_Word = #word#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+				BWI_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="date">
+				BWI_Date = #date#
+			</isNotNull>
+		</dynamic>
+	where BWI_WordId = #wordId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.system.domain.BadWordDomain" resultClass="String">
+		select 1 from ts_BadWordInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="wordId">
+				BWI_WordId = #wordId#
+			</isNotNull>
+			<isNotNull prepend="and" property="word">
+				BWI_Word = #word#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				BWI_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				BWI_Date = #date#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<select id="isLikeBadWord" parameterClass="com.eyoubika.system.domain.BadWordDomain" resultClass="String">
+		select 1 from ts_BadWordInfo 
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="wordId">
+				BWI_WordId = #wordId#
+			</isNotNull>
+			<isNotNull prepend="and" property="word">
+				BWI_Word like concat('%', #word#, '%')
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				BWI_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				BWI_Date = #date#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+</sqlMap>

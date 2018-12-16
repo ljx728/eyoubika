@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-09-05 11:26:13
+  -==========================================================================================-->
+<sqlMap namespace="ta_InvestGamesNews">
+	<typeAlias alias="InvestGamesNewsDomain" type="com.eyoubika.spider.domain.InvestGamesNewsDomain"/>
+	<resultMap id="InvestGamesNewsResult" class="com.eyoubika.spider.domain.InvestGamesNewsDomain">
+		<result column="IGN_NewsId" property="newsId" jdbcType="INT" />
+		<result column="IGN_Title" property="title" jdbcType="VARCHAR" />
+		<result column="IGN_Url" property="url" jdbcType="VARCHAR" />
+		<result column="IGN_Brief" property="brief" jdbcType="VARCHAR" />
+		<result column="IGN_Type" property="type" jdbcType="CHAR" />
+		<result column="IGN_Date" property="date" jdbcType="CHAR" />
+		<result column="IGN_Time" property="time" jdbcType="CHAR" />
+	</resultMap>
+	<insert id="insertInvestGamesNews" parameterClass="com.eyoubika.spider.domain.InvestGamesNewsDomain">
+		insert into ta_InvestGamesNews(IGN_Title ,IGN_Url ,IGN_Brief ,IGN_Type ,IGN_Date ,IGN_Time) 
+		values (#title# ,#url# ,#brief# ,#type# ,#date# ,#time#)
+		<selectKey resultClass="int" keyProperty="newsId">
+			SELECT LAST_INSERT_ID() as newsId
+		</selectKey>
+	</insert>
+	<select id="selectInvestGamesNews" parameterClass="Integer" resultMap="InvestGamesNewsResult">
+		select * from ta_InvestGamesNews where IGN_NewsId= #newsId#
+	</select>
+	<select id="selectInvestGamesNewsByDomain" parameterClass="com.eyoubika.spider.domain.InvestGamesNewsDomain" resultMap="InvestGamesNewsResult">
+		select * from ta_InvestGamesNews
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="newsId">
+				IGN_NewsId = #newsId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				IGN_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="url">
+				IGN_Url = #url#
+			</isNotNull>
+			<isNotNull prepend="and" property="brief">
+				IGN_Brief = #brief#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				IGN_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				IGN_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="time">
+				IGN_Time = #time#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectInvestGamesNewsList" parameterClass="com.eyoubika.spider.domain.InvestGamesNewsDomain" resultMap="InvestGamesNewsResult">
+		select * from ta_InvestGamesNews
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="newsId">
+				IGN_NewsId = #newsId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				IGN_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="url">
+				IGN_Url = #url#
+			</isNotNull>
+			<isNotNull prepend="and" property="brief">
+				IGN_Brief = #brief#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				IGN_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				IGN_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="time">
+				IGN_Time = #time#
+			</isNotNull>
+		</dynamic>
+		order by IGN_Date desc, IGN_Time desc
+	</select>
+	<delete id = "deleteInvestGamesNews"  parameterClass="Integer">
+		delete from ta_InvestGamesNews where IGN_NewsId = #newsId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ta_InvestGamesNews
+	</delete>
+	<update id = "updateInvestGamesNews" parameterClass="com.eyoubika.spider.domain.InvestGamesNewsDomain">
+		update ta_InvestGamesNews
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="title">
+				IGN_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="," property="url">
+				IGN_Url = #url#
+			</isNotNull>
+			<isNotNull prepend="," property="brief">
+				IGN_Brief = #brief#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+				IGN_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="date">
+				IGN_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="," property="time">
+				IGN_Time = #time#
+			</isNotNull>
+		</dynamic>
+	where IGN_NewsId = #newsId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.spider.domain.InvestGamesNewsDomain" resultClass="String">
+		select 1 from ta_InvestGamesNews
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="newsId">
+				IGN_NewsId = #newsId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				IGN_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="url">
+				IGN_Url = #url#
+			</isNotNull>
+			<isNotNull prepend="and" property="brief">
+				IGN_Brief = #brief#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				IGN_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				IGN_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="time">
+				IGN_Time = #time#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<!--<CustomFileTag>-->
+</sqlMap>

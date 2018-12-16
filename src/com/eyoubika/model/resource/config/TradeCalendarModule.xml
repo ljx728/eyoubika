@@ -1,0 +1,43 @@
+<modules>
+	<module id="1">
+		<name>TradeCalendar</name>
+		<package>com.eyoubika.sbc</package>
+		<action name="addTradeDay">
+		</action>
+		<action name="getTradeDay">
+		</action>
+		<action  name="deleteTradeDay">
+			<input>TradeCalendarDomain</input>
+		</action>
+		<action  name="modifyTradeDay">
+			<input>TradeCalendarDomain</input>
+		</action>
+		<vo voName="TradeCalendar">
+			<val valName="date">
+				<attrType>String</attrType>
+				<attrName>date</attrName>
+				<attrNote>日期</attrNote>
+			</val>
+			<val valName="week">
+				<attrType>String</attrType>
+				<attrName>week</attrName>
+				<attrNote>周次</attrNote>
+			</val>
+			<val valName="month">
+				<attrType>String</attrType>
+				<attrName>month</attrName>
+				<attrNote>月次</attrNote>
+			</val>
+			<val valName="type">
+				<attrType>String</attrType>
+				<attrName>type</attrName>
+				<attrNote>交易日类型</attrNote>
+			</val>
+			<val valName="status">
+				<attrType>String</attrType>
+				<attrName>status</attrName>
+				<attrNote>状态</attrNote>
+			</val>
+		</vo>
+	</module>
+</modules>

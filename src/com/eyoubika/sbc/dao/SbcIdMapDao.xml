@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-08-08 09:22:08
+  -==========================================================================================-->
+<sqlMap namespace="tp_SbcIdMap">
+	<typeAlias alias="SbcIdMapDomain" type="com.eyoubika.sbc.domain.SbcIdMapDomain"/>
+	<resultMap id="SbcIdMapResult" class="com.eyoubika.sbc.domain.SbcIdMapDomain">
+		<result column="SIM_MapId" property="mapId" jdbcType="INT" />
+		<result column="SIM_SbcId" property="sbcId" jdbcType="INT" />
+		<result column="SIM_EphId" property="ephId" jdbcType="VARCHAR" />
+		<result column="SIM_EphCode" property="ephCode" jdbcType="VARCHAR" />
+		<result column="SIM_Status" property="status" jdbcType="CHAR" />
+	</resultMap>
+	<insert id="insertSbcIdMap" parameterClass="com.eyoubika.sbc.domain.SbcIdMapDomain">
+		insert into tp_SbcIdMap(SIM_SbcId ,SIM_EphId ,SIM_EphCode ,SIM_Status) 
+		values (#sbcId# ,#ephId# ,#ephCode# ,#status#)
+		<selectKey resultClass="int" keyProperty="mapId">
+			SELECT LAST_INSERT_ID() as mapId
+		</selectKey>
+	</insert>
+	<select id="selectSbcIdMap" parameterClass="Integer" resultMap="SbcIdMapResult">
+		select * from tp_SbcIdMap where SIM_MapId= #mapId#
+	</select>
+	<select id="selectSbcIdMapByDomain" parameterClass="com.eyoubika.sbc.domain.SbcIdMapDomain" resultMap="SbcIdMapResult">
+		select * from tp_SbcIdMap
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="mapId">
+				SIM_MapId = #mapId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcId">
+				SIM_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="ephId">
+				SIM_EphId = #ephId#
+			</isNotNull>
+			<isNotNull prepend="and" property="ephCode">
+				SIM_EphCode = #ephCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				SIM_Status = #status#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectSbcIdMapList" parameterClass="com.eyoubika.sbc.domain.SbcIdMapDomain" resultMap="SbcIdMapResult">
+		select * from tp_SbcIdMap
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="mapId">
+				SIM_MapId = #mapId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcId">
+				SIM_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="ephId">
+				SIM_EphId = #ephId#
+			</isNotNull>
+			<isNotNull prepend="and" property="ephCode">
+				SIM_EphCode = #ephCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				SIM_Status = #status#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteSbcIdMap"  parameterClass="Integer">
+		delete from tp_SbcIdMap where SIM_MapId = #mapId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from tp_SbcIdMap
+	</delete>
+	<update id = "updateSbcIdMap" parameterClass="com.eyoubika.sbc.domain.SbcIdMapDomain">
+		update tp_SbcIdMap
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="sbcId">
+				SIM_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="," property="ephId">
+				SIM_EphId = #ephId#
+			</isNotNull>
+			<isNotNull prepend="," property="ephCode">
+				SIM_EphCode = #ephCode#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				SIM_Status = #status#
+			</isNotNull>
+		</dynamic>
+	where SIM_MapId = #mapId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.sbc.domain.SbcIdMapDomain" resultClass="String">
+		select 1 from tp_SbcIdMap
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="mapId">
+				SIM_MapId = #mapId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcId">
+				SIM_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="ephId">
+				SIM_EphId = #ephId#
+			</isNotNull>
+			<isNotNull prepend="and" property="ephCode">
+				SIM_EphCode = #ephCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				SIM_Status = #status#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<!--<CustomFileTag>-->
+</sqlMap>

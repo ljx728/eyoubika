@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="fetchVO" class="com.eyoubika.spider.web.VO.FetchVO">
+	</bean>
+	<bean id="sbcBasicDao" class="com.eyoubika.sbc.dao.SbcBasicDao">
+	</bean>
+	<bean id="sbcPriceDao" class="com.eyoubika.sbc.dao.SbcPriceDao">
+	</bean>
+	<bean id="newsArticleDao" class="com.eyoubika.spider.dao.NewsArticleDao">
+	</bean>
+	<bean id="breedArticleDao" class="com.eyoubika.spider.dao.BreedArticleDao">
+	</bean>
+	<bean id="breedBasicDao" class="com.eyoubika.spider.dao.BreedBasicDao">
+	</bean>
+	<bean id="quotesRedisDao" class="com.eyoubika.spider.dao.QuotesRedisDao">
+		<property name="shardedJedisPool" ref="shardedJedisPool" />
+		<property name="sbcBasicDao" ref="sbcBasicDao" />
+		<property name="sbcPriceDao" ref="sbcPriceDao" />
+	</bean>
+	<bean id="zongyihuiSpiderAL" class="com.eyoubika.spider.application.ZongyihuiSpiderAL">	 		
+		<property name="quotesRedisDao" ref="quotesRedisDao" />
+		<property name="sbcBasicDao" ref="sbcBasicDao" />
+	</bean>
+	<bean id="zongyihuiSpiderService" class="com.eyoubika.spider.service.impl.ZongyihuiSpiderServiceImpl">	 		
+		<property name="zongyihuiSpiderAL" ref="zongyihuiSpiderAL" />
+	</bean>
+	<bean id="sbcVolumeSpiderAL" class="com.eyoubika.spider.application.SbcVolumeSpiderAL">	 		
+		<property name="sbcBasicDao" ref="sbcBasicDao" />
+		<property name="sbcQuotationHistDao" ref="sbcQuotationHistDao" />
+		
+	</bean>
+
+	<bean id="quotationsSpiderAction" class="com.eyoubika.spider.web.action.QuotationsSpiderAction">
+  		<property name="zongyihuiSpiderService" ref="zongyihuiSpiderService" />
+  		<!-- <property name="fetchVO" ref="fetchVO" /> -->
+	</bean>
+	
+	<!-- <bean id="epianhongSpiderAL" class="com.eyoubika.spider.application.EpianhongSpiderAL">	 		
+		<property name="quotesRedisDao" ref="quotesRedisDao" />
+		<property name="sbcBasicDao" ref="sbcBasicDao" />
+		<property name="sbcIdMapDao" ref="sbcIdMapDao" />
+		<property name="sbcMapRedisDao" ref="sbcMapRedisDao" />
+	</bean>
+	<bean id="epianhongSpiderService" class="com.eyoubika.spider.service.impl.EpianhongSpiderServiceImpl">	 		
+		<property name="epianhongSpiderAL" ref="epianhongSpiderAL" />
+	</bean>
+
+	<bean id="epianhongSpiderAction" class="com.eyoubika.spider.web.action.EpianhongSpiderAction">
+  		<property name="epianhongSpiderService" ref="epianhongSpiderService" />
+  		<property name="fetchVO" ref="fetchVO" />
+	</bean> -->
+	
+	<bean id="njwjsSpiderAL" class="com.eyoubika.spider.application.NjwjsSpiderAL">	 		
+		<property name="quotesRedisDao" ref="quotesRedisDao" />
+		<property name="newsArticleDao" ref="newsArticleDao" />
+		<property name="breedArticleDao" ref="breedArticleDao" />
+		<property name="breedBasicDao" ref="breedBasicDao" />
+		<property name="sbcBasicDao" ref="sbcBasicDao" />
+	</bean>
+	<bean id="njwjsSpiderService" class="com.eyoubika.spider.service.impl.NjwjsSpiderServiceImpl">	 		
+		<property name="njwjsSpiderAL" ref="njwjsSpiderAL" />
+	</bean>
+
+	<bean id="njwjsSpiderAction" class="com.eyoubika.spider.web.action.NjwjsSpiderAction">
+  		<property name="njwjsSpiderService" ref="njwjsSpiderService" />
+	</bean>
+	<bean id="newsSpiderAction" class="com.eyoubika.spider.web.action.NewsSpiderAction">
+  		<property name="njwjsSpiderService" ref="njwjsSpiderService" />
+	</bean>
+	<bean id="breedsSpiderAction" class="com.eyoubika.spider.web.action.BreedsSpiderAction">
+  		<property name="njwjsSpiderService" ref="njwjsSpiderService" />
+	</bean>
+	
+	<bean id="investGamesNewsDao" class="com.eyoubika.spider.dao.InvestGamesNewsDao">
+	</bean>
+	<bean id="investGamesNewsSpiderAL" class="com.eyoubika.spider.application.InvestGamesNewsSpiderAL">
+  		<property name="investGamesNewsDao" ref="investGamesNewsDao" />
+	</bean>
+	
+	
+	<bean id="quotationsHistFetcherAL" class="com.eyoubika.spider.application.QuotationsHistFetcherAL">
+		<property name="quotesRedisDao" ref="quotesRedisDao" />
+		<property name="sbcQuotationHistDao" ref="sbcQuotationHistDao" />
+		<property name="tradeCalendarDao" ref="tradeCalendarDao" />
+	</bean>
+	
+</beans>

@@ -1,0 +1,8 @@
+SbcMeanDeal com.eyoubika.info ts_SbcMeanDeal date
+String date 		varchar(16)	true 时间
+String 	mean 		varchar(16) 	true 均值
+String 	pricechangeratio 	varchar(16) 	true 价格波动比率
+String 	transactioncount		varchar(16)	true  数量
+String 	transactionprice 	varchar(16) 	true 价格
+
+

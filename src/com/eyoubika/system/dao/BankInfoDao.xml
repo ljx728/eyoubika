@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-07-14 22:24:06
+  -==========================================================================================-->
+<sqlMap namespace="ts_BankInfo">
+	<typeAlias alias="BankInfoDomain" type="com.eyoubika.system.domain.BankInfoDomain"/>
+	<resultMap id="BankInfoResult" class="com.eyoubika.system.domain.BankInfoDomain">
+		<result column="BI_BankId" property="bankId" jdbcType="VARCHAR" />
+		<result column="BI_BankName" property="bankName" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertBankInfo" parameterClass="com.eyoubika.system.domain.BankInfoDomain">
+		insert into ts_BankInfo(BI_BankId ,BI_BankName) 
+		values (#bankId# ,#bankName#)
+	</insert>
+	<select id="selectBankInfo" parameterClass="String" resultMap="BankInfoResult">
+		select * from ts_BankInfo where BI_BankId= #bankId#
+	</select>
+	<select id="selectBankInfoByDomain" parameterClass="com.eyoubika.system.domain.BankInfoDomain" resultMap="BankInfoResult">
+		select * from ts_BankInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="bankId">
+				BI_BankId = #bankId#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankName">
+				BI_BankName = #bankName#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectBankInfoList" parameterClass="com.eyoubika.system.domain.BankInfoDomain" resultMap="BankInfoResult">
+		select * from ts_BankInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="bankId">
+				BI_BankId = #bankId#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankName">
+				BI_BankName = #bankName#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteBankInfo"  parameterClass="String">
+		delete from ts_BankInfo where BI_BankId = #bankId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ts_BankInfo
+	</delete>
+	<update id = "updateBankInfo" parameterClass="com.eyoubika.system.domain.BankInfoDomain">
+		update ts_BankInfo
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="bankId">
+				BI_BankId = #bankId#
+			</isNotNull>
+			<isNotNull prepend="," property="bankName">
+				BI_BankName = #bankName#
+			</isNotNull>
+		</dynamic>
+	where BI_BankId = #bankId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.system.domain.BankInfoDomain" resultClass="String">
+		select 1 from ts_BankInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="bankId">
+				BI_BankId = #bankId#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankName">
+				BI_BankName = #bankName#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+</sqlMap>

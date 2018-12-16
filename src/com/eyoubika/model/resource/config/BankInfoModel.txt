@@ -1,0 +1,3 @@
+BankInfo com.eyoubika.system ts_BankInfo bankId
+String  bankId 		varchar(6) 	false 银行id
+String 	bankName 	varchar(64) 	false 银行名称

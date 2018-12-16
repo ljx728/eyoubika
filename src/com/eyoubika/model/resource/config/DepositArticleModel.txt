@@ -1,0 +1,12 @@
+DepositArticle com.eyoubika.spider ta_DepositArticle articleId auto
+Integer articleId 		int(10) 	false 文章id
+String 	title 		varchar(512) 	true 文章标题
+String 	subTitle 	varchar(512) 	true 文章副标题
+String 	issueTime 	varchar(32) 	true 发布时间
+String 	webTime 	varchar(32) 	true 网站时间
+String 	fetchTime 	varchar(32) 	true 抓取时间
+String 	exId 		varchar(32) 	true 抓取来源
+String 	article 	mediumtext 		true 新闻内容	
+String 	status 		char(2) 		true 状态
+String	haveImg		char(1)			true 有图
+String 	articleUrl	varchar(512)	true 文章URL

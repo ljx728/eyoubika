@@ -1,0 +1,4 @@
+CityInfo com.eyoubika.system ts_CityInfo cityId
+String  cityId 		varchar(6) 	false 城市id
+String 	cityName 	varchar(32) 	false 城市名称
+String  proId 		varchar(6) 	false 省份id

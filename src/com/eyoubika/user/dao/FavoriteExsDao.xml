@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-09-05 17:46:05
+  -==========================================================================================-->
+<sqlMap namespace="tu_FavoriteExList">
+	<typeAlias alias="FavoriteExsDomain" type="com.eyoubika.user.domain.FavoriteExsDomain"/>
+	<resultMap id="FavoriteExsResult" class="com.eyoubika.user.domain.FavoriteExsDomain">
+		<result column="FEL_UserId" property="userId" jdbcType="INT" />
+		<result column="FEL_ExId" property="exId" jdbcType="INT" />
+		<result column="FEL_Date" property="date" jdbcType="CHAR" />
+		<result column="FEL_Time" property="time" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertFavoriteExs" parameterClass="com.eyoubika.user.domain.FavoriteExsDomain">
+		insert into tu_FavoriteExList(FEL_UserId ,FEL_ExId ,FEL_Date ,FEL_Time) 
+		values (#userId# ,#exId# ,#date# ,#time#)
+	</insert>
+	<select id="selectFavoriteExs" parameterClass="Integer" resultMap="FavoriteExsResult">
+		select * from tu_FavoriteExList where FEL_UserId= #userId#
+	</select>
+	<select id="selectFavoriteExsByDomain" parameterClass="com.eyoubika.user.domain.FavoriteExsDomain" resultMap="FavoriteExsResult">
+		select * from tu_FavoriteExList
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userId">
+				FEL_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				FEL_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				FEL_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="time">
+				FEL_Time = #time#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectFavoriteExsList" parameterClass="com.eyoubika.user.domain.FavoriteExsDomain" resultMap="FavoriteExsResult">
+		select * from tu_FavoriteExList
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userId">
+				FEL_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				FEL_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				FEL_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="time">
+				FEL_Time = #time#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteFavoriteExs"  parameterClass="Integer">
+		delete from tu_FavoriteExList where FEL_UserId = #userId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from tu_FavoriteExList
+	</delete>
+	<update id = "updateFavoriteExs" parameterClass="com.eyoubika.user.domain.FavoriteExsDomain">
+		update tu_FavoriteExList
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="userId">
+				FEL_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="," property="exId">
+				FEL_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="," property="date">
+				FEL_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="," property="time">
+				FEL_Time = #time#
+			</isNotNull>
+		</dynamic>
+	where FEL_UserId = #userId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.user.domain.FavoriteExsDomain" resultClass="String">
+		select 1 from tu_FavoriteExList
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userId">
+				FEL_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				FEL_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				FEL_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="time">
+				FEL_Time = #time#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<select id="selectFavoriteExListByUserId" parameterClass="Integer" resultMap="FavoriteExsResult">
+		<!-- select * from (select * from tu_FavoriteExList where FEL_UserId = #userId# order by FEL_Date desc) as t order by FEL_Time desc; -->
+		select * from tu_FavoriteExList where FEL_UserId = #userId#  order by FEL_Time+0 asc ;
+	</select>
+	<delete id = "deleteFavoriteExListByDomain"  parameterClass="com.eyoubika.user.domain.FavoriteExsDomain" >
+		delete from tu_FavoriteExList where FEL_UserId = #userId# 
+			<isNotNull prepend="and" property="exId">
+				FEL_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				FEL_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="time">
+				FEL_Time = #time#
+			</isNotNull>
+	</delete>
+	<delete id="deleteFavoriteExListByExIdList" parameterClass="java.util.HashMap">
+		delete from tu_FavoriteExList where FEL_UserId = #userId#
+		<dynamic prepend="and FEL_ExId in "> 
+			<iterate property="exIdList" open="(" close=")" conjunction=",">
+				#exIdList[]#
+			</iterate>
+		</dynamic>
+	</delete>
+	<!--<CustomFileTag>-->
+</sqlMap>

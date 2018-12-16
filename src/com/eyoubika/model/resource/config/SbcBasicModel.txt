@@ -1,0 +1,15 @@
+SbcBasic com.eyoubika.sbc tp_SbcBasicInfo sbcId auto
+Integer sbcId 		int(10) 	false 品种id
+String sbcCode 		varchar(16)	true 品种编号
+String 	sbcName 	varchar(128) 	false 名称
+String sbcType		char(6)		true  类别
+String issueTime	varchar(32)	true 发行日期
+String issueOrg	varchar(64)	true 发行机构
+String issueVolume	varchar(64)	true 发行量
+String issuePrice	varchar(64)	true 发行价
+String faceValue	varchar(32) true 面值
+String texture	varchar(32) true 材质
+String volume	varchar(32)		true	库存量
+String exId		char(6)	true	交易所ID
+String status   char(2) true  状态
+String inputDate   char(8) true  录入时间

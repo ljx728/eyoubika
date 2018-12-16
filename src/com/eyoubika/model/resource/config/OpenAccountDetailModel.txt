@@ -1,0 +1,9 @@
+OpenAccountDetail com.eyoubika.user tu_OpenAccountDetail  openNo
+String	openNo 		char(16) 		false 开户业务编号
+Integer	batchNo 		int 		true 上传批次号	
+byte[] 	identifyFrontPic 	MediumBlob 			true 身份证正面照片
+byte[] 	identifyBackPic 	MediumBlob 			true 身份证反面照片		
+byte[] 	bankCardFrontPic 	MediumBlob 			true 银行卡正面照片
+byte[] 	bankCardBackPic 	MediumBlob 			true 银行卡反面照片	
+String 	uploadDate char(8)	true 上传日期
+String  status char(2) 	true 状态

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-07-14 22:25:03
+  -==========================================================================================-->
+<sqlMap namespace="ts_ProvinceInfo">
+	<typeAlias alias="ProvinceInfoDomain" type="com.eyoubika.system.domain.ProvinceInfoDomain"/>
+	<resultMap id="ProvinceInfoResult" class="com.eyoubika.system.domain.ProvinceInfoDomain">
+		<result column="PI_ProId" property="proId" jdbcType="VARCHAR" />
+		<result column="PI_ProName" property="proName" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertProvinceInfo" parameterClass="com.eyoubika.system.domain.ProvinceInfoDomain">
+		insert into ts_ProvinceInfo(PI_ProId ,PI_ProName) 
+		values (#proId# ,#proName#)
+	</insert>
+	<select id="selectProvinceInfo" parameterClass="String" resultMap="ProvinceInfoResult">
+		select * from ts_ProvinceInfo where PI_ProId= #proId#
+	</select>
+	<select id="selectProvinceInfoByDomain" parameterClass="com.eyoubika.system.domain.ProvinceInfoDomain" resultMap="ProvinceInfoResult">
+		select * from ts_ProvinceInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="proId">
+				PI_ProId = #proId#
+			</isNotNull>
+			<isNotNull prepend="and" property="proName">
+				PI_ProName = #proName#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectProvinceInfoList" parameterClass="com.eyoubika.system.domain.ProvinceInfoDomain" resultMap="ProvinceInfoResult">
+		select * from ts_ProvinceInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="proId">
+				PI_ProId = #proId#
+			</isNotNull>
+			<isNotNull prepend="and" property="proName">
+				PI_ProName = #proName#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteProvinceInfo"  parameterClass="String">
+		delete from ts_ProvinceInfo where PI_ProId = #proId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ts_ProvinceInfo
+	</delete>
+	<update id = "updateProvinceInfo" parameterClass="com.eyoubika.system.domain.ProvinceInfoDomain">
+		update ts_ProvinceInfo
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="proId">
+				PI_ProId = #proId#
+			</isNotNull>
+			<isNotNull prepend="," property="proName">
+				PI_ProName = #proName#
+			</isNotNull>
+		</dynamic>
+	where PI_ProId = #proId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.system.domain.ProvinceInfoDomain" resultClass="String">
+		select 1 from ts_ProvinceInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="proId">
+				PI_ProId = #proId#
+			</isNotNull>
+			<isNotNull prepend="and" property="proName">
+				PI_ProName = #proName#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+</sqlMap>

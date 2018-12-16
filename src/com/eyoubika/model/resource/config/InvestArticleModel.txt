@@ -1,0 +1,15 @@
+InvestArticle com.eyoubika.info tp_InvestArticle articleId auto
+Integer  articleId 	int 	false 文章id
+String 	title 	varchar(128) 	false 标题
+String 	url 	varchar(512) 	false url
+String 	brief 	varchar(1024) 	true 简介
+String 	content 	text	true 正文
+String  author 	varchar(128)	true 作者
+String  tag 	varchar(128)	true 标签
+String  exId 	varchar(128)	true 交易所
+String  type 		char(6) 	true 类别
+String  status 		char(2) 	true 状态
+String  genDate	 char(8)		true 添加日期
+String  genTime	 char(8)		true 添加时间
+String  modDate	 char(8)		true 最新修改日期
+String  modTime	 char(8)		true 最新修改时间

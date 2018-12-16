@@ -1,0 +1,17 @@
+Quotations com.eyoubika.info ts_Quotations sbcId
+Integer sbcId 		int(10) 	false 品种id
+String sbcCode 		varchar(32)	false 品种编号
+String 	sbcName 		varchar(128) 	true 名称
+String 	exId		char(6)	false  交易所编号
+String 	yesterClPrice 	varchar(16) 	true 昨日收盘价
+String 	openingPrice 	varchar(16) 	true 开盘价
+String 	currentPrice 	varchar(16) 	true 最新价
+String 	highestPrice 	varchar(16) 	true 最高价
+String 	lowestPrice 	varchar(16) 	true 最低价
+String 	averagePrice 	varchar(16) 	true 平均价
+String 	yesterAvPrice 	varchar(16) 	true 昨日平均价
+String	riseValue		varchar(16)		true 涨跌
+String 	dealVolume 	varchar(16)		true 成交量	
+String 	poq 	varchar(16)		true 订货量	
+String 	totalValue 		 varchar(16)	true 市值
+String	recordTime		varchar(16)		true 记录时间

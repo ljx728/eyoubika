@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-08-20 16:44:47
+  -==========================================================================================-->
+<sqlMap namespace="tp_SbcPriceInfo">
+	<typeAlias alias="SbcPriceDomain" type="com.eyoubika.sbc.domain.SbcPriceDomain"/>
+	<resultMap id="SbcPriceResult" class="com.eyoubika.sbc.domain.SbcPriceDomain">
+		<result column="SPI_SbcId" property="sbcId" jdbcType="int(10)" />
+		<result column="SPI_SbcCode" property="sbcCode" jdbcType="VARCHAR" />
+		<result column="SPI_SbcName" property="sbcName" jdbcType="VARCHAR" />
+		<result column="SPI_ExId" property="exId" jdbcType="CHAR" />
+		<result column="SPI_OpeningPrice" property="openingPrice" jdbcType="DECIMAL" />
+		<result column="SPI_ClosingPrice" property="closingPrice" jdbcType="DECIMAL" />
+		<result column="SPI_HighestPrice" property="highestPrice" jdbcType="DECIMAL" />
+		<result column="SPI_LowestPrice" property="lowestPrice" jdbcType="DECIMAL" />
+		<result column="SPI_AveragePrice" property="averagePrice" jdbcType="DECIMAL" />
+		<result column="SPI_CurrentPrice" property="currentPrice" jdbcType="DECIMAL" />
+		<result column="SPI_DealVolume" property="dealVolume" jdbcType="INT" />
+		<result column="SPI_Poq" property="poq" jdbcType="INT" />
+		<result column="SPI_RiseValue" property="riseValue" jdbcType="DECIMAL" />
+		<result column="SPI_TotalValue" property="totalValue" jdbcType="INT" />
+		<result column="SPI_RecordDate" property="recordDate" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertSbcPrice" parameterClass="com.eyoubika.sbc.domain.SbcPriceDomain">
+		insert into tp_SbcPriceInfo(SPI_SbcId ,SPI_SbcCode ,SPI_SbcName ,SPI_ExId ,SPI_OpeningPrice ,SPI_ClosingPrice ,SPI_HighestPrice ,SPI_LowestPrice ,SPI_AveragePrice ,SPI_CurrentPrice ,SPI_DealVolume ,SPI_Poq ,SPI_RiseValue ,SPI_TotalValue ,SPI_RecordDate) 
+		values (#sbcId# ,#sbcCode# ,#sbcName# ,#exId# ,#openingPrice# ,#closingPrice# ,#highestPrice# ,#lowestPrice# ,#averagePrice# ,#currentPrice# ,#dealVolume# ,#poq# ,#riseValue# ,#totalValue# ,#recordDate#)
+	</insert>
+	<select id="selectSbcPrice" parameterClass="Integer" resultMap="SbcPriceResult">
+		select * from tp_SbcPriceInfo where SPI_SbcId= #sbcId#
+	</select>
+	<select id="selectSbcPriceByDomain" parameterClass="com.eyoubika.sbc.domain.SbcPriceDomain" resultMap="SbcPriceResult">
+		select * from tp_SbcPriceInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sbcId">
+				SPI_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcCode">
+				SPI_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcName">
+				SPI_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				SPI_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="openingPrice">
+				SPI_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="closingPrice">
+				SPI_ClosingPrice = #closingPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="highestPrice">
+				SPI_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="lowestPrice">
+				SPI_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="averagePrice">
+				SPI_AveragePrice = #averagePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="currentPrice">
+				SPI_CurrentPrice = #currentPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="dealVolume">
+				SPI_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="poq">
+				SPI_Poq = #poq#
+			</isNotNull>
+			<isNotNull prepend="and" property="riseValue">
+				SPI_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="totalValue">
+				SPI_TotalValue = #totalValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="recordDate">
+				SPI_RecordDate = #recordDate#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectSbcPriceList" parameterClass="com.eyoubika.sbc.domain.SbcPriceDomain" resultMap="SbcPriceResult">
+		select * from tp_SbcPriceInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sbcId">
+				SPI_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcCode">
+				SPI_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcName">
+				SPI_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				SPI_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="openingPrice">
+				SPI_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="closingPrice">
+				SPI_ClosingPrice = #closingPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="highestPrice">
+				SPI_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="lowestPrice">
+				SPI_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="averagePrice">
+				SPI_AveragePrice = #averagePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="currentPrice">
+				SPI_CurrentPrice = #currentPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="dealVolume">
+				SPI_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="poq">
+				SPI_Poq = #poq#
+			</isNotNull>
+			<isNotNull prepend="and" property="riseValue">
+				SPI_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="totalValue">
+				SPI_TotalValue = #totalValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="recordDate">
+				SPI_RecordDate = #recordDate#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteSbcPrice"  parameterClass="Integer">
+		delete from tp_SbcPriceInfo where SPI_SbcId = #sbcId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from tp_SbcPriceInfo
+	</delete>
+	<update id = "updateSbcPrice" parameterClass="com.eyoubika.sbc.domain.SbcPriceDomain">
+		update tp_SbcPriceInfo
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="sbcId">
+				SPI_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="," property="sbcCode">
+				SPI_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="," property="sbcName">
+				SPI_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="," property="exId">
+				SPI_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="," property="openingPrice">
+				SPI_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="closingPrice">
+				SPI_ClosingPrice = #closingPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="highestPrice">
+				SPI_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="lowestPrice">
+				SPI_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="averagePrice">
+				SPI_AveragePrice = #averagePrice#
+			</isNotNull>
+			<isNotNull prepend="," property="currentPrice">
+				SPI_CurrentPrice = #currentPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="dealVolume">
+				SPI_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="," property="poq">
+				SPI_Poq = #poq#
+			</isNotNull>
+			<isNotNull prepend="," property="riseValue">
+				SPI_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="," property="totalValue">
+				SPI_TotalValue = #totalValue#
+			</isNotNull>
+			<isNotNull prepend="," property="recordDate">
+				SPI_RecordDate = #recordDate#
+			</isNotNull>
+		</dynamic>
+	where SPI_SbcId = #sbcId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.sbc.domain.SbcPriceDomain" resultClass="String">
+		select 1 from tp_SbcPriceInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sbcId">
+				SPI_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcCode">
+				SPI_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcName">
+				SPI_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				SPI_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="openingPrice">
+				SPI_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="closingPrice">
+				SPI_ClosingPrice = #closingPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="highestPrice">
+				SPI_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="lowestPrice">
+				SPI_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="averagePrice">
+				SPI_AveragePrice = #averagePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="currentPrice">
+				SPI_CurrentPrice = #currentPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="dealVolume">
+				SPI_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="poq">
+				SPI_Poq = #poq#
+			</isNotNull>
+			<isNotNull prepend="and" property="riseValue">
+				SPI_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="totalValue">
+				SPI_TotalValue = #totalValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="recordDate">
+				SPI_RecordDate = #recordDate#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<select id="selectSbcPriceBySbcList" parameterClass="java.util.HashMap" resultMap="SbcPriceResult">
+		select * from tp_SbcPriceInfo 
+		<dynamic prepend="where SPI_SbcId in "> 
+			<iterate property="sbcIdList" open="(" close=")" conjunction=",">
+				#sbcIdList[]#
+			</iterate>
+		</dynamic>
+	</select>
+	
+<!--<CustomFileTag>-->
+</sqlMap>

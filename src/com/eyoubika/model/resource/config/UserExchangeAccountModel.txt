@@ -1,0 +1,8 @@
+UserExAccount com.eyoubika.user tu_UserExchangeAccount  userId
+Integer	userId 		int(10) 		false 用户id
+String 	userName 		varchar(64) 	true 交易所登录名
+String 	exId 	char(6) 	false 交易所标识
+String 	loginToken 	varchar(32) 	true 登录授权
+String 	tradeToken 	varchar(32) 	true 交易授权
+String 	pnumber 	varchar(32) 	true 手机号
+String 	status 	char(6) 	true 状态

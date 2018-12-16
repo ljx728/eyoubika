@@ -1,0 +1,6 @@
+TradeCalendar com.eyoubika.sbc tp_TradeCalendar date
+String  date 	char(8)	false 日期
+String 	week 	char(2) true 名称
+String 	month 	char(2) true 名称
+String  type   char(2) true  类型
+String  status   char(2) true  状态

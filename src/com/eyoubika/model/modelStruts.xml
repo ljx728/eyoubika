@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<!-- 指定Struts 2配置文件的根元素 -->
+<struts>
+	<package name="com.eyoubika.model" extends="json-default" namespace="/model">
+		<interceptors>
+			<interceptor name="errorInterceptor" class="com.eyoubika.common.ErrorInterceptor"></interceptor>
+			<interceptor name="authInterceptor" class="com.eyoubika.common.AuthInterceptor"></interceptor>
+			<interceptor-stack name="myErrorInterceptor">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="errorInterceptor" />
+			</interceptor-stack>
+
+		</interceptors>
+		<default-interceptor-ref name="myErrorInterceptor" />
+		<global-results>
+			<result name="YbkException" type="json">
+				<param name="root">jsonData</param>
+			</result>
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</global-results>
+
+		<action name="autoCode" class="autoCoderAction" method="autoCode">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+	</package>
+</struts>

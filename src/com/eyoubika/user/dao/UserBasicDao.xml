@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-07-17 15:22:56
+  -==========================================================================================-->
+<sqlMap namespace="tu_UserBasicInfo">
+	<typeAlias alias="UserBasicDomain" type="com.eyoubika.user.domain.UserBasicDomain"/>
+	<resultMap id="UserBasicResult" class="com.eyoubika.user.domain.UserBasicDomain">
+		<result column="UBI_UserId" property="userId" jdbcType="int(10)" />
+		<result column="UBI_NickName" property="nickName" jdbcType="VARCHAR" />
+		<result column="UBI_Password" property="password" jdbcType="VARCHAR" />
+		<result column="UBI_Token" property="token" jdbcType="VARCHAR" />
+		<result column="UBI_Salt" property="salt" jdbcType="VARCHAR" />
+		<result column="UBI_Pnumber" property="pnumber" jdbcType="VARCHAR" />
+		<result column="UBI_Status" property="status" jdbcType="CHAR" />
+		<result column="UBI_Email" property="email" jdbcType="VARCHAR" />
+		<result column="UBI_RegiTime" property="regiTime" jdbcType="VARCHAR" />
+		<result column="UBI_TradePassword" property="tradePassword" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertUserBasic" parameterClass="com.eyoubika.user.domain.UserBasicDomain">
+		insert into tu_UserBasicInfo(UBI_NickName ,UBI_Password ,UBI_Token ,UBI_Salt ,UBI_Pnumber ,UBI_Status ,UBI_Email ,UBI_RegiTime ,UBI_TradePassword) 
+		values (#nickName# ,#password# ,#token# ,#salt# ,#pnumber# ,#status# ,#email# ,#regiTime# ,#tradePassword#)
+		<selectKey resultClass="int" keyProperty="userId">
+			SELECT LAST_INSERT_ID() as userId
+		</selectKey>
+	</insert>
+	<select id="selectUserBasic" parameterClass="Integer" resultMap="UserBasicResult">
+		select * from tu_UserBasicInfo where UBI_UserId= #userId#
+	</select>
+	<select id="selectUserBasicByDomain" parameterClass="com.eyoubika.user.domain.UserBasicDomain" resultMap="UserBasicResult">
+		select * from tu_UserBasicInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userId">
+				UBI_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="nickName">
+				UBI_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="and" property="password">
+				UBI_Password = #password#
+			</isNotNull>
+			<isNotNull prepend="and" property="token">
+				UBI_Token = #token#
+			</isNotNull>
+			<isNotNull prepend="and" property="salt">
+				UBI_Salt = #salt#
+			</isNotNull>
+			<isNotNull prepend="and" property="pnumber">
+				UBI_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				UBI_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="email">
+				UBI_Email = #email#
+			</isNotNull>
+			<isNotNull prepend="and" property="regiTime">
+				UBI_RegiTime = #regiTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="tradePassword">
+				UBI_TradePassword = #tradePassword#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectUserBasicList" parameterClass="com.eyoubika.user.domain.UserBasicDomain" resultMap="UserBasicResult">
+		select * from tu_UserBasicInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userId">
+				UBI_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="nickName">
+				UBI_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="and" property="password">
+				UBI_Password = #password#
+			</isNotNull>
+			<isNotNull prepend="and" property="token">
+				UBI_Token = #token#
+			</isNotNull>
+			<isNotNull prepend="and" property="salt">
+				UBI_Salt = #salt#
+			</isNotNull>
+			<isNotNull prepend="and" property="pnumber">
+				UBI_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				UBI_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="email">
+				UBI_Email = #email#
+			</isNotNull>
+			<isNotNull prepend="and" property="regiTime">
+				UBI_RegiTime = #regiTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="tradePassword">
+				UBI_TradePassword = #tradePassword#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteUserBasic"  parameterClass="Integer">
+		delete from tu_UserBasicInfo where UBI_UserId = #userId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from tu_UserBasicInfo
+	</delete>
+	<update id = "updateUserBasic" parameterClass="com.eyoubika.user.domain.UserBasicDomain">
+		update tu_UserBasicInfo
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="nickName">
+				UBI_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="," property="password">
+				UBI_Password = #password#
+			</isNotNull>
+			<isNotNull prepend="," property="token">
+				UBI_Token = #token#
+			</isNotNull>
+			<isNotNull prepend="," property="salt">
+				UBI_Salt = #salt#
+			</isNotNull>
+			<isNotNull prepend="," property="pnumber">
+				UBI_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				UBI_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="email">
+				UBI_Email = #email#
+			</isNotNull>
+			<isNotNull prepend="," property="regiTime">
+				UBI_RegiTime = #regiTime#
+			</isNotNull>
+			<isNotNull prepend="," property="tradePassword">
+				UBI_TradePassword = #tradePassword#
+			</isNotNull>
+		</dynamic>
+	where UBI_UserId = #userId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.user.domain.UserBasicDomain" resultClass="String">
+		select 1 from tu_UserBasicInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userId">
+				UBI_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="nickName">
+				UBI_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="and" property="password">
+				UBI_Password = #password#
+			</isNotNull>
+			<isNotNull prepend="and" property="token">
+				UBI_Token = #token#
+			</isNotNull>
+			<isNotNull prepend="and" property="salt">
+				UBI_Salt = #salt#
+			</isNotNull>
+			<isNotNull prepend="and" property="pnumber">
+				UBI_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				UBI_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="email">
+				UBI_Email = #email#
+			</isNotNull>
+			<isNotNull prepend="and" property="regiTime">
+				UBI_RegiTime = #regiTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="tradePassword">
+				UBI_TradePassword = #tradePassword#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<resultMap id="UserInfoResult" class="com.eyoubika.user.domain.UserInfoDomain" >
+   		<result column="UBI_UserId" property="userId" jdbcType="int" /> 
+    	<result column="UBI_Pnumber" property="pnumber" jdbcType="VARCHAR" />
+    	<result column="UBI_NickName" property="nickName" jdbcType="VARCHAR" />
+    	<result column="UBI_Status" property="status" jdbcType="VARCHAR" />
+    	<result column="UBI_RegiTime" property="regiTime" jdbcType="VARCHAR" />
+		<result column="UDI_UserName" property="userName" jdbcType="VARCHAR" />
+		<result column="UDI_IdentifyNo" property="identifyNo" jdbcType="VARCHAR" />
+		<result column="UDI_Sex" property="sex" jdbcType="CHAR" />
+		<result column="UDI_Telephone" property="telephone" jdbcType="VARCHAR" />
+		<result column="UDI_City" property="city" jdbcType="CHAR" />
+		<result column="UDI_Address" property="address" jdbcType="VARCHAR" />
+		<result column="UDI_Postcode" property="postcode" jdbcType="CHAR" />
+		<result column="UDI_Icon" property="icon" jdbcType="BLOB" />
+		<result column="UDI_VipLevel" property="vipLevel" jdbcType="CHAR" />
+		<result column="UDI_SocialLevel" property="socialLevel" jdbcType="CHAR" />
+		<result column="UDI_Species" property="species" jdbcType="INT" />
+		<result column="UDI_Duration" property="duration" jdbcType="FLOAT" />
+  	</resultMap>
+  	<select id="isExistPnumber" parameterClass="String" resultClass="String">
+		select 1 from tu_UserBasicInfo
+		where UBI_Pnumber = #pnumber# limit 1
+	</select>
+	<select id="selectUserSalt" parameterClass="Integer" resultClass="String">
+		select UBI_Salt from tu_UserBasicInfo where UBI_UserId= #userId#
+	</select>
+	<select id="selectUserToken" parameterClass="Integer" resultClass="String">
+		select UBI_Token from tu_UserBasicInfo where UBI_UserId= #userId#
+	</select>
+	<select id="selectUserInfo" parameterClass="Integer" resultMap="UserInfoResult">
+		select UBI_UserId , UBI_Pnumber, UBI_NickName, UBI_Status, UBI_RegiTime, UDI_UserName ,UDI_IdentifyNo ,UDI_Sex ,UDI_Telephone ,UDI_City ,UDI_Address ,UDI_Postcode ,UDI_Icon ,UDI_VipLevel ,UDI_SocialLevel ,UDI_Species ,UDI_Duration
+		 from tu_UserBasicInfo, tu_UserDetailInfo where UBI_UserId= #userId# and UBI_UserId = UDI_UserId
+	</select>
+	<select id="selectUserBasicByPnumber" parameterClass="String" resultMap="UserBasicResult">
+		select * from tu_UserBasicInfo where UBI_Pnumber= #pnumber#
+	</select>
+	<select id="selectUserBasicByNickName" parameterClass="String" resultMap="UserBasicResult">
+		select * from tu_UserBasicInfo where UBI_NickName= #nickName#
+	</select>
+	<select id="selectUserBasicByEmail" parameterClass="String" resultMap="UserBasicResult">
+		select * from tu_UserBasicInfo where UBI_Email= #email#
+	</select>
+  	<!--<CustomFileTag>-->
+</sqlMap>

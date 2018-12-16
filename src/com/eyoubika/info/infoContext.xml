@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<bean id="investGamesNewsDao" class="com.eyoubika.spider.dao.InvestGamesNewsDao">
+	</bean>
+	<bean id="investGamesNewsDomain" class="com.eyoubika.spider.domain.InvestGamesNewsDomain">		
+	</bean>
+	<bean id="newsVO" class="com.eyoubika.info.web.VO.NewsVO">	 
+	</bean>
+	<bean id="articleVO" class="com.eyoubika.info.web.VO.ArticleVO">	 
+	</bean>
+	<bean id="newsArticleDao" class="com.eyoubika.spider.dao.NewsArticleDao">	 
+	</bean>
+	<bean id="newsArticleDomain" class="com.eyoubika.spider.domain.NewsArticleDomain">	 	
+	</bean>
+	<bean id="articleDomain" class="com.eyoubika.spider.domain.ArticleDomain">	 	
+	</bean>
+	<bean id="newsBasicDomain" class="com.eyoubika.spider.domain.NewsBasicDomain">	 	
+	</bean>
+	<bean id="newsAL" class="com.eyoubika.info.application.NewsAL">	 
+		<property name="newsArticleDao" ref="newsArticleDao" />		
+	</bean>
+	
+	<bean id="subscribeArticleAL" class="com.eyoubika.info.application.SubscribeArticleAL">	 
+		<property name="subscribeArticleDao" ref="subscribeArticleDao" />		
+	</bean>
+	
+	<bean id="subscribeArticleDomain" class="com.eyoubika.spider.domain.SubscribeArticleDomain">	 	
+	</bean>
+	<bean id="newsService" class="com.eyoubika.info.service.impl.NewsServiceImpl">	 
+		<property name="newsAL" ref="newsAL" />
+		<property name="newsArticleDomain" ref="newsArticleDomain" />
+		<property name="subscribeArticleAL" ref="subscribeArticleAL" />
+		<property name="subscribeArticleDomain" ref="subscribeArticleDomain" />	
+	</bean>
+	<bean id="newsAction" class="com.eyoubika.info.web.action.NewsAction">
+	  <property name="newsVO" ref="newsVO" />
+	  <property name="newsService" ref="newsService" />
+	</bean>	
+
+	<bean id="subscribeArticleDao" class="com.eyoubika.spider.dao.SubscribeArticleDao">	 
+	</bean>
+	<bean id="noticeArticleDao" class="com.eyoubika.spider.dao.NoticeArticleDao">	 
+	</bean>
+	<bean id="depositArticleDao" class="com.eyoubika.spider.dao.DepositArticleDao">	 
+	</bean>
+	<bean id="articleAL" class="com.eyoubika.info.application.ArticleAL">	 
+		<property name="subscribeArticleDao" ref="subscribeArticleDao" />	
+		<property name="noticeArticleDao" ref="noticeArticleDao" />	
+		<property name="depositArticleDao" ref="depositArticleDao" />	
+	</bean>
+	<bean id="articleService" class="com.eyoubika.info.service.impl.ArticleServiceImpl">	 
+		<property name="articleAL" ref="articleAL" />
+		<property name="articleDomain" ref="articleDomain" />	
+	</bean>
+	<bean id="articleAction" class="com.eyoubika.info.web.action.ArticleAction">
+	  <property name="articleVO" ref="articleVO" />
+	  <property name="articleService" ref="articleService" />
+	</bean>	
+
+	<bean id="sbcQuotationHistDomain" class="com.eyoubika.sbc.domain.SbcQuotationHistDomain">	 	
+	</bean>
+	<bean id="quotationsVO" class="com.eyoubika.info.web.VO.QuotationsVO">	 	
+	</bean>
+	<bean id="quotationsDomain" class="com.eyoubika.info.domain.QuotationsDomain">	 	
+	</bean>
+	<bean id="sbcBasicDao" class="com.eyoubika.sbc.dao.SbcBasicDao">	 	
+	</bean>
+	<bean id="exchangeBasicDao" class="com.eyoubika.sbc.dao.ExchangeBasicDao">	 	
+	</bean>
+	<bean id="sbcPriceDao" class="com.eyoubika.sbc.dao.SbcPriceDao">
+	</bean>
+
+	<bean id="sbcQuotationHistDao" class="com.eyoubika.sbc.dao.SbcQuotationHistDao">
+	</bean>	
+	<bean id="quotationsAL" class="com.eyoubika.info.application.QuotationsAL">	 
+		<property name="quotesRedisDao" ref="quotesRedisDao" />	
+		<property name="sbcBasicDao" ref="sbcBasicDao" />		
+		<property name="exchangeBasicDao" ref="exchangeBasicDao" />	
+		<property name="sbcQuotationHistDao" ref="sbcQuotationHistDao" />	
+	</bean>
+	<bean id="quotationsService" class="com.eyoubika.info.service.impl.QuotationsServiceImpl">	 
+		<property name="quotationsAL" ref="quotationsAL" />		
+		<property name="quotationsDomain" ref="quotationsDomain" />
+		<property name="sbcQuotationHistDomain" ref="sbcQuotationHistDomain" />
+	</bean>
+	<bean id="quotationsAction" class="com.eyoubika.info.web.action.QuotationsAction">
+	  <property name="quotationsService" ref="quotationsService" />
+	</bean>	
+	
+	<bean id="investArticleVO" class="com.eyoubika.info.web.VO.InvestArticleVO">
+	</bean>
+	<bean id="investArticleDao" class="com.eyoubika.info.dao.InvestArticleDao">
+	</bean>
+	
+	<bean id="investArticleDomain" class="com.eyoubika.info.domain.InvestArticleDomain">
+	</bean>
+	<bean id="investArticleAL" class="com.eyoubika.info.application.InvestArticleAL">
+		<property name="investArticleDao" ref="investArticleDao" />
+	</bean>
+	<bean id="investArticleService" class="com.eyoubika.info.service.impl.InvestArticleServiceImpl">
+		<property name="investArticleDomain" ref="investArticleDomain" />
+		<property name="investArticleAL" ref="investArticleAL" />
+	</bean>
+	<bean id="investArticleAction" class="com.eyoubika.info.web.action.InvestArticleAction">
+		<property name="investArticleVO" ref="investArticleVO" />
+		<property name="investArticleService" ref="investArticleService" />
+	</bean>
+</beans>

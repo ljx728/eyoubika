@@ -1,0 +1,37 @@
+<modules>
+	<module id="1">
+		<name>Sbc</name>
+		<package>com.eyoubika.sbc</package>
+		<action name="addSbcBasic">
+		</action>
+		<action name="getSbcBasic">
+		</action>
+		<action name="getAllSbcs">
+		</action>
+		<action  name="addSbcBasic">
+			<input>SbcBasicDomain</input>
+		</action>
+		<vo voName="SbcQuery">
+			<val valName="sbcId">
+				<attrType>String</attrType>
+				<attrName>sbcId</attrName>
+				<attrNote>邮币卡Id</attrNote>
+			</val>
+			<val valName="sbcName">
+				<attrType>String</attrType>
+				<attrName>sbcName</attrName>
+				<attrNote>邮币卡名称</attrNote>
+			</val>
+			<val valName="exId">
+				<attrType>String</attrType>
+				<attrName>exId</attrName>
+				<attrNote>交易所ID</attrNote>
+			</val>
+			<val valName="sbcType">
+				<attrType>String</attrType>
+				<attrName>sbcType</attrName>
+				<attrNote>邮币卡类型</attrNote>
+			</val>
+		</vo>
+	</module>
+</modules>

@@ -1,0 +1,5 @@
+FavoriteExs com.eyoubika.user tu_FavoriteExList userId
+Integer  userId 		int 	false 	用户id
+String exId 			char(6)	 false 	exId
+String date		char(8) false 添加日期
+String time	varchar(12) false 添加时间

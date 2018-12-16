@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-11-24 11:23:47
+  -==========================================================================================-->
+<sqlMap namespace="tp_TradeCalendar">
+	<typeAlias alias="TradeCalendarDomain" type="com.eyoubika.sbc.domain.TradeCalendarDomain"/>
+	<resultMap id="TradeCalendarResult" class="com.eyoubika.sbc.domain.TradeCalendarDomain">
+		<result column="TC_Date" property="date" jdbcType="CHAR" />
+		<result column="TC_Week" property="week" jdbcType="CHAR" />
+		<result column="TC_Month" property="month" jdbcType="CHAR" />
+		<result column="TC_Type" property="type" jdbcType="CHAR" />
+		<result column="TC_Status" property="status" jdbcType="CHAR" />
+	</resultMap>
+	<insert id="insertTradeCalendar" parameterClass="com.eyoubika.sbc.domain.TradeCalendarDomain">
+		insert into tp_TradeCalendar(TC_Date ,TC_Week ,TC_Month ,TC_Type ,TC_Status) 
+		values (#date# ,#week# ,#month# ,#type# ,#status#)
+	</insert>
+	<select id="selectTradeCalendar" parameterClass="String" resultMap="TradeCalendarResult">
+		select * from tp_TradeCalendar where TC_Date= #date#
+	</select>
+	<select id="selectTradeCalendarByDomain" parameterClass="com.eyoubika.sbc.domain.TradeCalendarDomain" resultMap="TradeCalendarResult">
+		select * from tp_TradeCalendar
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="date">
+				TC_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="week">
+				TC_Week = #week#
+			</isNotNull>
+			<isNotNull prepend="and" property="month">
+				TC_Month = #month#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				TC_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				TC_Status = #status#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectTradeCalendarList" parameterClass="com.eyoubika.sbc.domain.TradeCalendarDomain" resultMap="TradeCalendarResult">
+		select * from tp_TradeCalendar
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="date">
+				TC_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="week">
+				TC_Week = #week#
+			</isNotNull>
+			<isNotNull prepend="and" property="month">
+				TC_Month = #month#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				TC_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				TC_Status = #status#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteTradeCalendar"  parameterClass="String">
+		delete from tp_TradeCalendar where TC_Date = #date#
+	</delete>
+	<delete id = "deleteAll">
+		delete from tp_TradeCalendar
+	</delete>
+	<update id = "updateTradeCalendar" parameterClass="com.eyoubika.sbc.domain.TradeCalendarDomain">
+		update tp_TradeCalendar
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="date">
+				TC_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="," property="week">
+				TC_Week = #week#
+			</isNotNull>
+			<isNotNull prepend="," property="month">
+				TC_Month = #month#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+				TC_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				TC_Status = #status#
+			</isNotNull>
+		</dynamic>
+	where TC_Date = #date#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.sbc.domain.TradeCalendarDomain" resultClass="String">
+		select 1 from tp_TradeCalendar
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="date">
+				TC_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="week">
+				TC_Week = #week#
+			</isNotNull>
+			<isNotNull prepend="and" property="month">
+				TC_Month = #month#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				TC_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				TC_Status = #status#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<select id="selectWeekFirstDay" parameterClass="java.util.HashMap"  resultClass="String">
+		SELECT TC_Date FROM tp_TradeCalendar where (TC_Status = '04' or  TC_Status = '02') and TC_Date &lt;= #date# order by TC_Date desc limit 1
+	</select>
+	<select id="selectLastWeekDay" parameterClass="java.util.HashMap"  resultClass="String">
+		select TC_Date 
+		from  tp_TradeCalendar 
+		where TC_Date  &lt; (	<!-- 找到本周第一日 -->
+			SELECT TC_Date 
+			FROM tp_TradeCalendar 
+			where (TC_Status = '04' or  TC_Status = '02') 
+			and TC_Date  &lt;= #date# 
+			order by TC_Date desc limit 1) 
+		<dynamic prepend="and TC_Type in "> 
+			<iterate property="typeList" open="(" close=")" conjunction=",">
+				#typeList[]#
+			</iterate>
+		</dynamic>
+		order by TC_Date desc limit 1
+	</select>
+	<select id="selectLastMonthDay" parameterClass="java.util.HashMap"  resultClass="String">
+		select TC_Date 
+		from  tp_TradeCalendar 
+		where TC_Date  &lt; (	<!-- 找到本月第一日 -->
+			SELECT TC_Date 
+			FROM tp_TradeCalendar 
+			where (TC_Status = '04' or  TC_Status = '03') 
+			and TC_Date  &lt;= #date#
+			order by TC_Date desc limit 1) 
+		<dynamic prepend="and TC_Type in "> 
+			<iterate property="typeList" open="(" close=")" conjunction=",">
+				#typeList[]#
+			</iterate>
+		</dynamic>
+		order by TC_Date desc limit 1
+	</select>
+	
+	<select id="selectMonthFirstDay" parameterClass="java.util.HashMap"  resultClass="String">
+		SELECT TC_Date FROM tp_TradeCalendar where ( TC_Status = '04' or  TC_Status = '03') and TC_Date &lt;= #date# order by TC_Date desc limit 1
+	</select>
+	<select id="selectYesterday" parameterClass="java.util.HashMap"  resultClass="String">
+		SELECT TC_Date 
+		FROM tp_TradeCalendar 
+		where TC_Date &lt; #date# 
+		<dynamic prepend="and TC_Type in "> 
+			<iterate property="typeList" open="(" close=")" conjunction=",">
+				#typeList[]#
+			</iterate>
+		</dynamic>
+		order by TC_Date desc limit 1
+	</select>
+		
+	
+	
+	<!--<CustomFileTag>-->
+</sqlMap>

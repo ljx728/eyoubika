@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-07-14 22:25:10
+  -==========================================================================================-->
+<sqlMap namespace="ts_CityInfo">
+	<typeAlias alias="CityInfoDomain" type="com.eyoubika.system.domain.CityInfoDomain"/>
+	<resultMap id="CityInfoResult" class="com.eyoubika.system.domain.CityInfoDomain">
+		<result column="CI_CityId" property="cityId" jdbcType="VARCHAR" />
+		<result column="CI_CityName" property="cityName" jdbcType="VARCHAR" />
+		<result column="CI_ProId" property="proId" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertCityInfo" parameterClass="com.eyoubika.system.domain.CityInfoDomain">
+		insert into ts_CityInfo(CI_CityId ,CI_CityName ,CI_ProId) 
+		values (#cityId# ,#cityName# ,#proId#)
+	</insert>
+	<select id="selectCityInfo" parameterClass="String" resultMap="CityInfoResult">
+		select * from ts_CityInfo where CI_CityId= #cityId#
+	</select>
+	<select id="selectCityInfoByDomain" parameterClass="com.eyoubika.system.domain.CityInfoDomain" resultMap="CityInfoResult">
+		select * from ts_CityInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="cityId">
+				CI_CityId = #cityId#
+			</isNotNull>
+			<isNotNull prepend="and" property="cityName">
+				CI_CityName = #cityName#
+			</isNotNull>
+			<isNotNull prepend="and" property="proId">
+				CI_ProId = #proId#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectCityInfoList" parameterClass="com.eyoubika.system.domain.CityInfoDomain" resultMap="CityInfoResult">
+		select * from ts_CityInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="cityId">
+				CI_CityId = #cityId#
+			</isNotNull>
+			<isNotNull prepend="and" property="cityName">
+				CI_CityName = #cityName#
+			</isNotNull>
+			<isNotNull prepend="and" property="proId">
+				CI_ProId = #proId#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteCityInfo"  parameterClass="String">
+		delete from ts_CityInfo where CI_CityId = #cityId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ts_CityInfo
+	</delete>
+	<update id = "updateCityInfo" parameterClass="com.eyoubika.system.domain.CityInfoDomain">
+		update ts_CityInfo
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="cityId">
+				CI_CityId = #cityId#
+			</isNotNull>
+			<isNotNull prepend="," property="cityName">
+				CI_CityName = #cityName#
+			</isNotNull>
+			<isNotNull prepend="," property="proId">
+				CI_ProId = #proId#
+			</isNotNull>
+		</dynamic>
+	where CI_CityId = #cityId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.system.domain.CityInfoDomain" resultClass="String">
+		select 1 from ts_CityInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="cityId">
+				CI_CityId = #cityId#
+			</isNotNull>
+			<isNotNull prepend="and" property="cityName">
+				CI_CityName = #cityName#
+			</isNotNull>
+			<isNotNull prepend="and" property="proId">
+				CI_ProId = #proId#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+</sqlMap>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2016-01-14 09:31:50
+  -==========================================================================================-->
+<sqlMap namespace="ts_UserFeedback">
+	<typeAlias alias="UserFeedbackDomain" type="com.eyoubika.system.domain.UserFeedbackDomain"/>
+	<resultMap id="UserFeedbackResult" class="com.eyoubika.system.domain.UserFeedbackDomain">
+		<result column="UF_UfId" property="ufId" jdbcType="INT" />
+		<result column="UF_FeederId" property="feederId" jdbcType="INT" />
+		<result column="UF_NickName" property="nickName" jdbcType="VARCHAR" />
+		<result column="UF_Contact" property="contact" jdbcType="VARCHAR" />
+		<result column="UF_Content" property="content" jdbcType="text" />
+		<result column="UF_Status" property="status" jdbcType="VARCHAR" />
+		<result column="UF_Date" property="date" jdbcType="CHAR" />
+		<result column="UF_Time" property="time" jdbcType="CHAR" />
+	</resultMap>
+	<insert id="insertUserFeedback" parameterClass="com.eyoubika.system.domain.UserFeedbackDomain">
+		insert into ts_UserFeedback(UF_FeederId ,UF_NickName ,UF_Contact ,UF_Content ,UF_Status ,UF_Date ,UF_Time) 
+		values (#feederId# ,#nickName# ,#contact# ,#content# ,#status# ,#date# ,#time#)
+		<selectKey resultClass="int" keyProperty="ufId">
+			SELECT LAST_INSERT_ID() as ufId
+		</selectKey>
+	</insert>
+	<select id="selectUserFeedback" parameterClass="Integer" resultMap="UserFeedbackResult">
+		select * from ts_UserFeedback where UF_UfId= #ufId#
+	</select>
+	<select id="selectUserFeedbackByDomain" parameterClass="com.eyoubika.system.domain.UserFeedbackDomain" resultMap="UserFeedbackResult">
+		select * from ts_UserFeedback
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="ufId">
+				UF_UfId = #ufId#
+			</isNotNull>
+			<isNotNull prepend="and" property="feederId">
+				UF_FeederId = #feederId#
+			</isNotNull>
+			<isNotNull prepend="and" property="nickName">
+				UF_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="and" property="contact">
+				UF_Contact = #contact#
+			</isNotNull>
+			<isNotNull prepend="and" property="content">
+				UF_Content = #content#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				UF_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				UF_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="time">
+				UF_Time = #time#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectUserFeedbackList" parameterClass="com.eyoubika.system.domain.UserFeedbackDomain" resultMap="UserFeedbackResult">
+		select * from ts_UserFeedback
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="ufId">
+				UF_UfId = #ufId#
+			</isNotNull>
+			<isNotNull prepend="and" property="feederId">
+				UF_FeederId = #feederId#
+			</isNotNull>
+			<isNotNull prepend="and" property="nickName">
+				UF_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="and" property="contact">
+				UF_Contact = #contact#
+			</isNotNull>
+			<isNotNull prepend="and" property="content">
+				UF_Content = #content#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				UF_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				UF_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="time">
+				UF_Time = #time#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteUserFeedback"  parameterClass="Integer">
+		delete from ts_UserFeedback where UF_UfId = #ufId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ts_UserFeedback
+	</delete>
+	<update id = "updateUserFeedback" parameterClass="com.eyoubika.system.domain.UserFeedbackDomain">
+		update ts_UserFeedback
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="feederId">
+				UF_FeederId = #feederId#
+			</isNotNull>
+			<isNotNull prepend="," property="nickName">
+				UF_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="," property="contact">
+				UF_Contact = #contact#
+			</isNotNull>
+			<isNotNull prepend="," property="content">
+				UF_Content = #content#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				UF_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="date">
+				UF_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="," property="time">
+				UF_Time = #time#
+			</isNotNull>
+		</dynamic>
+	where UF_UfId = #ufId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.system.domain.UserFeedbackDomain" resultClass="String">
+		select 1 from ts_UserFeedback
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="ufId">
+				UF_UfId = #ufId#
+			</isNotNull>
+			<isNotNull prepend="and" property="feederId">
+				UF_FeederId = #feederId#
+			</isNotNull>
+			<isNotNull prepend="and" property="nickName">
+				UF_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="and" property="contact">
+				UF_Contact = #contact#
+			</isNotNull>
+			<isNotNull prepend="and" property="content">
+				UF_Content = #content#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				UF_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				UF_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="time">
+				UF_Time = #time#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<sql id="sql_count"> 
+		select count(1) 
+    </sql> 
+	<sql id="sql_select"> 
+		select *
+	</sql> 
+	
+	 <sql id="sql_where"> 
+		from ts_UserFeedback where 1=1 
+			<dynamic prepend="where">
+			<isNotNull prepend="and" property="ufId">
+				UF_UfId = #ufId#
+			</isNotNull>
+			<isNotNull prepend="and" property="feederId">
+				UF_FeederId = #feederId#
+			</isNotNull>
+			<isNotNull prepend="and" property="nickName">
+				UF_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="and" property="contact">
+				UF_Contact = #contact#
+			</isNotNull>
+			<isNotNull prepend="and" property="content">
+				UF_Content = #content#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				UF_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				UF_Date = #date#
+			</isNotNull>
+			<isNotNull prepend="and" property="time">
+				UF_Time = #time#
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotNull property="ff">
+				$ff$
+			</isNotNull>	
+			<isNotNull property="rank">
+				$rank$
+			</isNotNull>	
+		</dynamic>
+		<dynamic prepend="limit">
+			<isNotNull property="limit">
+				#start#, #limit#
+			</isNotNull>		
+		</dynamic>
+	</sql>
+	<select id="selectUserFeedbackDomainListCount" parameterClass="java.util.HashMap" resultClass="int"> 
+                <include refid="sql_count"/> 
+                <include refid="sql_where"/> 
+    </select> 
+	 <select id="selectUserFeedbackDomainInPage" parameterClass="java.util.HashMap" resultMap="UserFeedbackResult"> 
+         <include refid="sql_select"/> 
+         <include refid="sql_where"/> 
+    </select>
+	<!--<CustomFileTag>-->
+</sqlMap>

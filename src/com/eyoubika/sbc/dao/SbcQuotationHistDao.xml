@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-08-31 17:48:53
+  -==========================================================================================-->
+<sqlMap namespace="tp_SbcQuotationHist">
+	<typeAlias alias="SbcQuotationHistDomain" type="com.eyoubika.sbc.domain.SbcQuotationHistDomain"/>
+	<resultMap id="SbcQuotationHistResult" class="com.eyoubika.sbc.domain.SbcQuotationHistDomain">
+		<result column="SQH_SbcId" property="sbcId" jdbcType="INT" />
+		<result column="SQH_OpeningPrice" property="openingPrice" jdbcType="VARCHAR" />
+		<result column="SQH_ClosePrice" property="closePrice" jdbcType="VARCHAR" />
+		<result column="SQH_HighestPrice" property="highestPrice" jdbcType="VARCHAR" />
+		<result column="SQH_LowestPrice" property="lowestPrice" jdbcType="VARCHAR" />
+		<result column="SQH_RiseValue" property="riseValue" jdbcType="VARCHAR" />
+		<result column="SQH_DealVolume" property="dealVolume" jdbcType="VARCHAR" />
+		<result column="SQH_DealValue" property="dealValue" jdbcType="VARCHAR" />
+		<result column="SQH_RiseScope" property="riseScope" jdbcType="VARCHAR" />
+		<result column="SQH_Type" property="type" jdbcType="CHAR" />
+		<result column="SQH_Date" property="date" jdbcType="CHAR" />
+	</resultMap>
+	<insert id="insertSbcQuotationHist" parameterClass="java.util.HashMap">
+		insert into $table$(SQH_SbcId ,SQH_OpeningPrice ,SQH_ClosePrice ,SQH_HighestPrice ,SQH_LowestPrice ,SQH_RiseValue ,SQH_DealVolume ,SQH_DealValue ,SQH_RiseScope ,SQH_Type ,SQH_Date) 
+		values (#sbcId# ,#openingPrice# ,#closePrice# ,#highestPrice# ,#lowestPrice# ,#riseValue# ,#dealVolume# ,#dealValue# ,#riseScope# ,#type# ,#date#)
+	</insert>
+	<select id="selectSbcQuotationHist" parameterClass="Integer" resultMap="SbcQuotationHistResult">
+		select * from tp_SbcQuotationHist where SQH_SbcId= #sbcId#
+	</select>
+	<select id="selectSbcQuotationHistByDomain" parameterClass="com.eyoubika.sbc.domain.SbcQuotationHistDomain" resultMap="SbcQuotationHistResult">
+		select * from tp_SbcQuotationHist
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sbcId">
+				SQH_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="openingPrice">
+				SQH_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="closePrice">
+				SQH_ClosePrice = #closePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="highestPrice">
+				SQH_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="lowestPrice">
+				SQH_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="riseValue">
+				SQH_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="dealVolume">
+				SQH_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="dealValue">
+				SQH_DealValue = #dealValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="riseScope">
+				SQH_RiseScope = #riseScope#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				SQH_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				SQH_Date = #date#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectSbcQuotationHistList" parameterClass="com.eyoubika.sbc.domain.SbcQuotationHistDomain" resultMap="SbcQuotationHistResult">
+		select * from tp_SbcQuotationHist
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sbcId">
+				SQH_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="openingPrice">
+				SQH_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="closePrice">
+				SQH_ClosePrice = #closePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="highestPrice">
+				SQH_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="lowestPrice">
+				SQH_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="riseValue">
+				SQH_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="dealVolume">
+				SQH_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="dealValue">
+				SQH_DealValue = #dealValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="riseScope">
+				SQH_RiseScope = #riseScope#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				SQH_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				SQH_Date = #date#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteSbcQuotationHistByParams"  parameterClass="java.util.HashMap">
+		delete from  $table$ where SQH_Type = #type#
+		<isNotNull prepend="and" property="sbcId">
+				SQH_SbcId = #sbcId#
+		</isNotNull>
+		<isNotNull prepend="and" property="date">
+				SQH_Date = #date#
+		</isNotNull>
+	</delete>
+	
+	<delete id = "deleteSbcQuotationHist"  parameterClass="Integer">
+		delete from tp_SbcQuotationHist where SQH_SbcId = #sbcId#
+	</delete>
+	
+	
+	<delete id = "deleteAll">
+		delete from tp_SbcQuotationHist
+	</delete>
+	<update id = "updateSbcQuotationHistByParams" parameterClass="java.util.HashMap">
+		update  $table$
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="sbcId">
+				SQH_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="," property="openingPrice">
+				SQH_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="closePrice">
+				SQH_ClosePrice = #closePrice#
+			</isNotNull>
+			<isNotNull prepend="," property="highestPrice">
+				SQH_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="lowestPrice">
+				SQH_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="riseValue">
+				SQH_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="," property="dealVolume">
+				SQH_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="," property="dealValue">
+				SQH_DealValue = #dealValue#
+			</isNotNull>
+			<isNotNull prepend="," property="riseScope">
+				SQH_RiseScope = #riseScope#
+			</isNotNull>
+		</dynamic>
+	where SQH_SbcId = #sbcId#
+	and SQH_Type = #type# 
+	and SQH_Date = #date#
+	
+	</update>
+	
+	<update id = "updateSbcQuotationHist" parameterClass="com.eyoubika.sbc.domain.SbcQuotationHistDomain">
+		update tp_SbcQuotationHist
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="sbcId">
+				SQH_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="," property="openingPrice">
+				SQH_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="closePrice">
+				SQH_ClosePrice = #closePrice#
+			</isNotNull>
+			<isNotNull prepend="," property="highestPrice">
+				SQH_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="lowestPrice">
+				SQH_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="riseValue">
+				SQH_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="," property="dealVolume">
+				SQH_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="," property="dealValue">
+				SQH_DealValue = #dealValue#
+			</isNotNull>
+			<isNotNull prepend="," property="riseScope">
+				SQH_RiseScope = #riseScope#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+				SQH_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="date">
+				SQH_Date = #date#
+			</isNotNull>
+		</dynamic>
+	where SQH_SbcId = #sbcId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.sbc.domain.SbcQuotationHistDomain" resultClass="String">
+		select 1 from tp_SbcQuotationHist
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sbcId">
+				SQH_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="openingPrice">
+				SQH_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="closePrice">
+				SQH_ClosePrice = #closePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="highestPrice">
+				SQH_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="lowestPrice">
+				SQH_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="riseValue">
+				SQH_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="dealVolume">
+				SQH_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="dealValue">
+				SQH_DealValue = #dealValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="riseScope">
+				SQH_RiseScope = #riseScope#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				SQH_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				SQH_Date = #date#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<select id="selectSbcQuotationHistory" parameterClass="java.util.HashMap"  resultMap="SbcQuotationHistResult">
+		select * 
+		from $table$ 
+		where SQH_Type = #type#
+		<isNotNull prepend="and" property="sbcId">
+			SQH_SbcId = #sbcId#
+		</isNotNull>
+		<isNotNull prepend="and" property="date">
+			SQH_Date = #date#
+		</isNotNull>
+	</select>
+	<select id="selectSbcQuotationHistoryLimit" parameterClass="java.util.HashMap"  resultMap="SbcQuotationHistResult">
+		select * 
+		from $table$ 
+		where SQH_Type = #type#
+		<isNotNull prepend="and" property="sbcId">
+			SQH_SbcId = #sbcId#
+		</isNotNull>
+		<isNotNull prepend="and" property="date">
+			SQH_Date = #date#
+		</isNotNull>
+		order by SQH_Date desc limit 59;
+	</select>
+	<select id="selectLastIntvalSbcQuotation" parameterClass="java.util.HashMap" resultMap="SbcQuotationHistResult">		
+		select * from $table$  where SQH_Type = #type# and SQH_SbcId = #sbcId# order by SQH_Date desc limit 1;
+	</select>
+	<select id="selectLastNIntvalSbcQuotation" parameterClass="java.util.HashMap" resultMap="SbcQuotationHistResult">		
+		select * from $table$  where SQH_Type = #type# and SQH_SbcId = #sbcId# order by SQH_Date desc limit $num$, 1;
+	</select>
+	<select id="selectSbcQuotationAfterDate" parameterClass="java.util.HashMap" resultMap="SbcQuotationHistResult">		
+		select * from $table$  where SQH_Type = #type# and SQH_SbcId = #sbcId# and  SQH_Date > #date#;
+	</select>
+	<select id="selectSbcQuotationBetweenDate" parameterClass="java.util.HashMap" resultMap="SbcQuotationHistResult">		
+		select * from $table$  where SQH_Type = #type# and SQH_SbcId = #sbcId# and  SQH_Date > #startDate#  and #endDate# >= SQH_Date;
+	</select>
+	
+	<select id="selectSbcQuotationByParam" parameterClass="java.util.HashMap" resultMap="SbcQuotationHistResult">		
+		select * from $table$  where SQH_Type = #type# and SQH_SbcId = #sbcId# and  SQH_Date = #date#;
+	</select>
+
+	
+	
+	<!--<CustomFileTag>-->
+</sqlMap>

@@ -1,0 +1,16 @@
+SbcPrice com.eyoubika.sbc tp_SbcPriceInfo sbcId
+Integer sbcId 		int(10) 	false 品种id
+String sbcCode 		varchar(16)	true 品种编号
+String 	sbcName 	varchar(128) 	false 名称
+String exId			char(6)			true  交易所ID	
+Double openingPrice		decimal(18,2)		true  开盘价
+Double closingPrice	decimal(18,2)	true 收盘价
+Double highestPrice		decimal(18,2)	true	最高价
+Double lowestPrice		decimal(18,2)		true	最低价
+Double 	averagePrice 	decimal(18,2)	true 平均价
+Double currentPrice	decimal(18,2)	true 最新价
+Integer dealVolume	int	true 成交量
+Integer 	poq 	int		true 订货量	
+Double riseValue	decimal(18,2) true 涨跌
+Integer 	totalValue 		 int	true 市值
+String	recordDate		varchar(16)		true 记录日期

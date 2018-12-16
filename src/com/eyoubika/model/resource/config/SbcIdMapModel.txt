@@ -1,0 +1,6 @@
+SbcIdMap com.eyoubika.sbc tp_SbcIdMap mapId auto
+Integer  mapId 	int 	false 映射键id
+Integer sbcId 	int 	false 品种id
+String  ephId 	varchar(16) 	false 一片红商品id
+String  ephCode 	varchar(16) 	false 一片红商品编码
+String  status 		char(2) 	false 状态

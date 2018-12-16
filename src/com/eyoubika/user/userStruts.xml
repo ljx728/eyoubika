@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+
+	<package name="com.eyoubika.user" extends="json-default" namespace="/user">
+		<interceptors>
+			<interceptor name="errorInterceptor" class="com.eyoubika.common.ErrorInterceptor"></interceptor>
+			<interceptor name="authInterceptor" class="com.eyoubika.common.AuthInterceptor"></interceptor>
+			<interceptor-stack name="myErrorInterceptor">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="errorInterceptor" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myErrorInterceptor" />
+		<global-results>
+			<result name="YbkException" type="json">
+				<param name="root">jsonData</param>
+			</result>
+			<result type="json">
+		<param name="root">jsonData</param>
+			</result>
+		</global-results>
+		<!--<CustomFileTag>-->
+		<action name="addOpenAccount" class="openAccountAction" method="addOpenAccount">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getOpenAccount" class="openAccountAction" method="getOpenAccount">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="modifyOpenAccount" class="openAccountAction" method="modifyOpenAccount">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getOpenAccountList" class="openAccountAction" method="getOpenAccountList">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="modifyAccountDetail" class="openAccountAction" method="modifyAccountDetail">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="uploadAccountDetail" class="openAccountAction" method="uploadAccountDetail">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="modifyOpenAccount" class="openAccountAction" method="modifyOpenAccount">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+	
+		<action name="register" class="userAction" method="register">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="login" class="userAction" method="login">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="modifyPhone" class="userAction" method="modifyPhone">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="modifyPassword" class="userAction" method="modifyPassword">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="resetPassword" class="userAction" method="resetPassword">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="modifyUserDetail" class="userAction" method="modifyUserDetail">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="modifyUser" class="userAction" method="modifyUser">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="logout" class="userAction" method="logout">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getUserInfo" class="userAction" method="getUserInfo">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="isUserExist" class="userAction" method="isUserExist">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		
+		
+		<action name="getFavoriteSbcList" class="favorListAction" method="getFavoriteSbcList">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="deleteFavoriteSbcs" class="favorListAction" method="deleteFavoriteSbcs">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="deleteFavoriteSbc" class="favorListAction" method="deleteFavoriteSbc">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="addFavoriteSbc" class="favorListAction" method="addFavoriteSbc">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="addFavoriteSbcs" class="favorListAction" method="addFavoriteSbcs">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		
+		<action name="getFavoriteExList" class="favorListAction" method="getFavoriteExList">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="deleteFavoriteExs" class="favorListAction" method="deleteFavoriteExs">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="deleteFavoriteEx" class="favorListAction" method="deleteFavoriteEx">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="addFavoriteEx" class="favorListAction" method="addFavoriteEx">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="addFavoriteExs" class="favorListAction" method="addFavoriteExs">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		
+		<action name="uploadAccountImage" class="openAccountAction" method="uploadAccountImage">
+	           <interceptor-ref name ="fileUpload" > 
+	               <param name="allowedTypes">
+						image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/x-png, image/pjpeg
+					</param>
+	            </interceptor-ref > 
+	            <interceptor-ref name ="defaultStack" />
+		</action>	
+		
+	</package>
+	<package name="struts-download" extends="struts-default" namespace="/user">
+		<interceptors>
+			<interceptor name="errorInterceptor" class="com.eyoubika.common.ErrorInterceptor"></interceptor>
+			<interceptor name="authInterceptor" class="com.eyoubika.common.AuthInterceptor"></interceptor>
+			<interceptor-stack name="myErrorInterceptor">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="errorInterceptor" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myErrorInterceptor" />
+		<action name="getAccountReport" class="openAccountAction" >
+			<result name="success" type="stream">
+				<param name="contentType">text/plain</param>  
+               <param name="contentDisposition">attachment;fileName="${fileName}"</param>  
+
+               <param name="bufferSize">1024</param> 
+				<param name="inputName">accountReport</param>
+			</result>
+			<result name="YbkException">
+				/WEB-INF/error.jsp
+			</result>
+		</action>
+		<action name="getAccountZip" class="openAccountAction" >
+			<result name="success" type="stream">
+				<param name="contentType">text/plain</param>  
+               <param name="contentDisposition">attachment;fileName="${fileName}"</param>  
+
+               <param name="bufferSize">1024</param> 
+				<param name="inputName">accountZip</param>
+			</result>
+			<result name="YbkException">
+				/WEB-INF/error.jsp
+			</result>
+		</action>	
+		
+		<!--<CustomFileTag>-->
+	</package>
+</struts>

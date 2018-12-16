@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-07-23 20:09:44
+  -==========================================================================================-->
+<sqlMap namespace="tp_ExchangeBasicInfo">
+	<typeAlias alias="ExchangeBasicDomain" type="com.eyoubika.sbc.domain.ExchangeBasicDomain"/>
+	<resultMap id="ExchangeBasicResult" class="com.eyoubika.sbc.domain.ExchangeBasicDomain">
+		<result column="EBI_ExId" property="exId" jdbcType="VARCHAR" />
+		<result column="EBI_ExName" property="exName" jdbcType="VARCHAR" />
+		<result column="EBI_Website" property="website" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertExchangeBasic" parameterClass="com.eyoubika.sbc.domain.ExchangeBasicDomain">
+		insert into tp_ExchangeBasicInfo(EBI_ExId ,EBI_ExName ,EBI_Website) 
+		values (#exId# ,#exName# ,#website#)
+	</insert>
+	<select id="selectExchangeBasic" parameterClass="String" resultMap="ExchangeBasicResult">
+		select * from tp_ExchangeBasicInfo where EBI_ExId= #exId#
+	</select>
+	<select id="selectExchangeBasicByDomain" parameterClass="com.eyoubika.sbc.domain.ExchangeBasicDomain" resultMap="ExchangeBasicResult">
+		select * from tp_ExchangeBasicInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="exId">
+				EBI_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="exName">
+				EBI_ExName = #exName#
+			</isNotNull>
+			<isNotNull prepend="and" property="website">
+				EBI_Website = #website#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectExchangeBasicList" parameterClass="com.eyoubika.sbc.domain.ExchangeBasicDomain" resultMap="ExchangeBasicResult">
+		select * from tp_ExchangeBasicInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="exId">
+				EBI_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="exName">
+				EBI_ExName = #exName#
+			</isNotNull>
+			<isNotNull prepend="and" property="website">
+				EBI_Website = #website#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteExchangeBasic"  parameterClass="String">
+		delete from tp_ExchangeBasicInfo where EBI_ExId = #exId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from tp_ExchangeBasicInfo
+	</delete>
+	<update id = "updateExchangeBasic" parameterClass="com.eyoubika.sbc.domain.ExchangeBasicDomain">
+		update tp_ExchangeBasicInfo
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="exId">
+				EBI_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="," property="exName">
+				EBI_ExName = #exName#
+			</isNotNull>
+			<isNotNull prepend="," property="website">
+				EBI_Website = #website#
+			</isNotNull>
+		</dynamic>
+	where EBI_ExId = #exId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.sbc.domain.ExchangeBasicDomain" resultClass="String">
+		select 1 from tp_ExchangeBasicInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="exId">
+				EBI_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="exName">
+				EBI_ExName = #exName#
+			</isNotNull>
+			<isNotNull prepend="and" property="website">
+				EBI_Website = #website#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<select id="selectAllExchangeBasicList"  resultMap="ExchangeBasicResult">
+		select * from tp_ExchangeBasicInfo
+	</select>
+	<!--<CustomFileTag>-->
+</sqlMap>

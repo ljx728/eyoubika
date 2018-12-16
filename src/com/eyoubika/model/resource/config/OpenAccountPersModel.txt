@@ -1,0 +1,24 @@
+OpenAccountPers com.eyoubika.user tu_OpenAccountPers  openNo
+String	openNo 		char(16) 		false 开户业务编号 
+Integer	userId 		int(10) 		true 用户id
+String 	clientName 		varchar(64) 	true 客户姓名
+String 	identifyType 	char(2) 	true 证件号类型
+String 	identifyNumber 	varchar(32) 	true 证件号码
+String 	pnumber 	varchar(32) 	false 手机号码
+String 	email 	varchar(32) 	true 客户邮箱
+String  province varchar(6)	true 省份
+String city	varchar(32)	true 城市
+String street	varchar(128)	true 街道
+String 	status 	char(2) 	false 状态
+String 	exId  	varchar(128) 	true 交易所ID
+String 	bankId 	varchar(128) 	true 开户银行
+String 	bankPlace 	varchar(128) 	true 开户银行所在地
+String 	bankAccount 	varchar(256) 	true 银行账号
+String 	emerName 		varchar(64) 	true 紧急联系人
+String 	emerPnumber 	varchar(32) 	true 紧急联系人手机号码
+String 	applyDate char(8)	false 申请日期
+String 	applyTime varchar(16)	false 申请时间
+String 	operDate char(8)	true 处理日期
+String 	operTime varchar(16)	true 处理时间
+String 	operName varchar(64)	true 处理人
+

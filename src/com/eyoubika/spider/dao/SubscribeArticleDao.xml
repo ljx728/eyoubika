@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-10-06 15:02:48
+  -==========================================================================================-->
+<sqlMap namespace="ta_SubscribeArticle">
+	<typeAlias alias="ArticleDomain" type="com.eyoubika.spider.domain.ArticleDomain"/>
+	<resultMap id="SubscribeArticleResult" class="com.eyoubika.spider.domain.ArticleDomain">
+		<result column="SA_ArticleId" property="articleId" jdbcType="int(10)" />
+		<result column="SA_Title" property="title" jdbcType="VARCHAR" />
+		<result column="SA_SubTitle" property="subTitle" jdbcType="VARCHAR" />
+		<result column="SA_IssueTime" property="issueTime" jdbcType="VARCHAR" />
+		<result column="SA_WebTime" property="webTime" jdbcType="VARCHAR" />
+		<result column="SA_FetchTime" property="fetchTime" jdbcType="VARCHAR" />
+		<result column="SA_ExId" property="exId" jdbcType="VARCHAR" />
+		<result column="SA_Article" property="article" jdbcType="MEDIUMTEXT" />
+		<result column="SA_Type" property="type" jdbcType="CHAR" />
+		<result column="SA_Status" property="status" jdbcType="CHAR" />
+		<result column="SA_HaveImg" property="haveImg" jdbcType="CHAR" />
+		<result column="SA_ArticleUrl" property="articleUrl" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertSubscribeArticle" parameterClass="com.eyoubika.spider.domain.ArticleDomain">
+		insert into ta_SubscribeArticle(SA_Title ,SA_SubTitle ,SA_IssueTime ,SA_WebTime ,SA_FetchTime ,SA_ExId ,SA_Article ,SA_Type ,SA_Status ,SA_HaveImg ,SA_ArticleUrl) 
+		values (#title# ,#subTitle# ,#issueTime# ,#webTime# ,#fetchTime# ,#exId# ,#article#,#type# ,#status# ,#haveImg# ,#articleUrl#)
+		<selectKey resultClass="int" keyProperty="articleId">
+			SELECT LAST_INSERT_ID() as articleId
+		</selectKey>
+	</insert>
+	<select id="selectSubscribeArticle" parameterClass="Integer" resultMap="SubscribeArticleResult">
+		select * from ta_SubscribeArticle where SA_ArticleId= #articleId#
+	</select>
+	<select id="selectSubscribeArticleByDomain" parameterClass="com.eyoubika.spider.domain.ArticleDomain" resultMap="SubscribeArticleResult">
+		select * from ta_SubscribeArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				SA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				SA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				SA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				SA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				SA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				SA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				SA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				SA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				SA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				SA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				SA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				SA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectSubscribeArticleList" parameterClass="com.eyoubika.spider.domain.ArticleDomain" resultMap="SubscribeArticleResult">
+		select * from ta_SubscribeArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				SA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				SA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				SA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				SA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				SA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				SA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				SA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				SA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				SA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				SA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				SA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				SA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteSubscribeArticle"  parameterClass="Integer">
+		delete from ta_SubscribeArticle where SA_ArticleId = #articleId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ta_SubscribeArticle
+	</delete>
+	<update id = "updateSubscribeArticle" parameterClass="com.eyoubika.spider.domain.ArticleDomain">
+		update ta_SubscribeArticle
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="title">
+				SA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="," property="subTitle">
+				SA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="," property="issueTime">
+				SA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="," property="webTime">
+				SA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="," property="fetchTime">
+				SA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="," property="from">
+				SA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="," property="article">
+				SA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+				SA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				SA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="haveImg">
+				SA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="," property="articleUrl">
+				SA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	where SA_ArticleId = #articleId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.spider.domain.ArticleDomain" resultClass="String">
+		select 1 from ta_SubscribeArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				SA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				SA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				SA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				SA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				SA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				SA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				SA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				SA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				SA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				SA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				SA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				SA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<sql id="sql_count"> 
+		select count(1) 
+    </sql> 
+	<sql id="sql_select"> 
+		select *
+	</sql> 
+	
+	 <sql id="sql_where"> 
+		from ta_SubscribeArticle where 1=1 
+			<isNotNull prepend="and" property="articleId">
+				SA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				SA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				SA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				SA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				SA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				SA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				SA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				SA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				SA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				SA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				SA_ArticleUrl = #articleUrl#
+			</isNotNull>			
+		<dynamic prepend="and">
+			<isNotNull property="exIds"> 
+			SA_ExId in
+			<iterate property="exIds" open="(" close=")" conjunction=",">
+				#exIds[]#
+			</iterate>
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotNull property="ff">
+				$ff$
+			</isNotNull>	
+			<isNotNull property="rank">
+				$rank$
+			</isNotNull>	
+		</dynamic>
+		<dynamic prepend="limit">
+			<isNotNull property="limit">
+				#start#, #limit#
+			</isNotNull>		
+		</dynamic>
+	</sql>
+	<select id="selectSubscribeArticleListCount" parameterClass="java.util.HashMap" resultClass="int"> 
+                <include refid="sql_count"/> 
+                <include refid="sql_where"/> 
+    </select> 
+    <select id="selectSubscribeArticleListInPage" parameterClass="java.util.HashMap" resultMap="SubscribeArticleResult"> 
+                <include refid="sql_select"/> 
+                <include refid="sql_where"/> 
+    </select>
+    <select id="selectMaxDateByExId" parameterClass="String" resultClass="String">
+		select max(SA_WebTime) from ta_SubscribeArticle where SA_ExId= #exId#
+	</select>
+    
+	<!--<CustomFileTag>-->
+</sqlMap>

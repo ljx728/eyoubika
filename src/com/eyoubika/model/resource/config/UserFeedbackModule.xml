@@ -1,0 +1,56 @@
+<modules>
+	<module id="1">
+		<name>UserFeedback</name>
+		<package>com.eyoubika.system</package>
+		<action name="addUserFeedback">
+			<input>UserFeedbackDomain</input>
+		</action>
+		<action name="getUserFeedback">
+		</action>
+		<action name="getUserFeedbackList">
+		</action>
+		<action  name="deleteUserFeedback">
+			<input>UserFeedbackDomain</input>
+		</action>
+		<action  name="modifyUserFeedback">
+			<input>UserFeedbackDomain</input>
+		</action>
+		<vo voName="UserFeedback">
+			<val valName="ufId">
+				<attrType>Integer</attrType>
+				<attrName>ufId</attrName>
+				<attrNote>留言信息id</attrNote>
+			</val>
+			<val valName="nickName">
+				<attrType>String</attrType>
+				<attrName>nickName</attrName>
+				<attrNote>用户昵称</attrNote>
+			</val>
+			<val valName="contact">
+				<attrType>String</attrType>
+				<attrName>contact</attrName>
+				<attrNote>联系方式</attrNote>
+			</val>
+			<val valName="content">
+				<attrType>String</attrType>
+				<attrName>content</attrName>
+				<attrNote>反馈内容</attrNote>
+			</val>
+			<val valName="status">
+				<attrType>String</attrType>
+				<attrName>status</attrName>
+				<attrNote>状态</attrNote>
+			</val>
+			<val valName="date">
+				<attrType>String</attrType>
+				<attrName>date</attrName>
+				<attrNote>添加日期</attrNote>
+			</val>
+			<val valName="time">
+				<attrType>String</attrType>
+				<attrName>time</attrName>
+				<attrNote>添加时间</attrNote>
+			</val>
+		</vo>
+	</module>
+</modules>

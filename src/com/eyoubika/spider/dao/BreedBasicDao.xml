@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-07-31 17:30:06
+  -==========================================================================================-->
+<sqlMap namespace="ta_FetchBreedBasic">
+	<typeAlias alias="BreedBasicDomain" type="com.eyoubika.spider.domain.BreedBasicDomain"/>
+	<resultMap id="BreedBasicResult" class="com.eyoubika.spider.domain.BreedBasicDomain">
+		<result column="FBB_BreedId" property="breedId" jdbcType="int(10)" />
+		<result column="FBB_BreedNo" property="breedNo" jdbcType="VARCHAR" />
+		<result column="FBB_Name" property="name" jdbcType="VARCHAR" />
+		<result column="FBB_ShortName" property="shortName" jdbcType="VARCHAR" />
+		<result column="FBB_IssueTime" property="issueTime" jdbcType="VARCHAR" />
+		<result column="FBB_IssueVolumn" property="issueVolumn" jdbcType="VARCHAR" />
+		<result column="FBB_IssuePrice" property="issuePrice" jdbcType="VARCHAR" />
+		<result column="FBB_IssueStyle" property="issueStyle" jdbcType="VARCHAR" />
+		<result column="FBB_IssueUnit" property="issueUnit" jdbcType="VARCHAR" />
+		<result column="FBB_IssuePlace" property="issuePlace" jdbcType="VARCHAR" />
+		<result column="FBB_InitUnit" property="initUnit" jdbcType="VARCHAR" />
+		<result column="FBB_Price" property="price" jdbcType="VARCHAR" />
+		<result column="FBB_Picture" property="picture" jdbcType="VARCHAR" />
+		<result column="FBB_SerialNumber" property="serialNumber" jdbcType="VARCHAR" />
+		<result column="FBB_FaceValue" property="faceValue" jdbcType="VARCHAR" />
+		<result column="FBB_FullSetNumber" property="fullSetNumber" jdbcType="VARCHAR" />
+		<result column="FBB_FullSetPrice" property="fullSetPrice" jdbcType="VARCHAR" />
+		<result column="FBB_FullSetFaceValue" property="fullSetFaceValue" jdbcType="VARCHAR" />
+		<result column="FBB_FullSetMember" property="fullSetMember" jdbcType="VARCHAR" />
+		<result column="FBB_Specification" property="specification" jdbcType="VARCHAR" />
+		<result column="FBB_Quality" property="quality" jdbcType="VARCHAR" />
+		<result column="FBB_Finess" property="finess" jdbcType="VARCHAR" />
+		<result column="FBB_Category" property="category" jdbcType="VARCHAR" />
+		<result column="FBB_Weight" property="weight" jdbcType="VARCHAR" />
+		<result column="FBB_FrontPic" property="frontPic" jdbcType="VARCHAR" />
+		<result column="FBB_BackPic" property="backPic" jdbcType="VARCHAR" />
+		<result column="FBB_Manufacturer" property="manufacturer" jdbcType="VARCHAR" />
+		<result column="FBB_Printing" property="printing" jdbcType="VARCHAR" />
+		<result column="FBB_Designer" property="designer" jdbcType="VARCHAR" />
+		<result column="FBB_AntiCounterfeiting" property="antiCounterfeiting" jdbcType="VARCHAR" />
+		<result column="FBB_PerforationDegree" property="perforationDegree" jdbcType="VARCHAR" />
+		<result column="FBB_WholeNumber" property="wholeNumber" jdbcType="VARCHAR" />
+		<result column="FBB_WholeSpecif" property="wholeSpecif" jdbcType="VARCHAR" />
+		<result column="FBB_PostImg" property="postImg" jdbcType="VARCHAR" />
+		<result column="FBB_PostImgSepcif" property="postImgSepcif" jdbcType="VARCHAR" />
+		<result column="FBB_Gum" property="gum" jdbcType="VARCHAR" />
+		<result column="FBB_FrontCover" property="frontCover" jdbcType="VARCHAR" />
+		<result column="FBB_BackCover" property="backCover" jdbcType="VARCHAR" />
+		<result column="FBB_Photographer" property="photographer" jdbcType="VARCHAR" />
+		<result column="FBB_Texture" property="texture" jdbcType="VARCHAR" />
+		<result column="FBB_System" property="system" jdbcType="VARCHAR" />
+		<result column="FBB_Theme" property="theme" jdbcType="VARCHAR" />
+		<result column="FBB_Editor" property="editor" jdbcType="VARCHAR" />
+		<result column="FBB_BreedType" property="breedType" jdbcType="VARCHAR" />
+		<result column="FBB_From" property="from" jdbcType="VARCHAR" />
+		<result column="FBB_Unit" property="unit" jdbcType="VARCHAR" />
+		<result column="FBB_Status" property="status" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertBreedBasic" parameterClass="com.eyoubika.spider.domain.BreedBasicDomain">
+		insert into ta_FetchBreedBasic(FBB_BreedId ,FBB_BreedNo ,FBB_Name ,FBB_ShortName ,FBB_IssueTime ,FBB_IssueVolumn ,FBB_IssuePrice ,FBB_IssueStyle ,FBB_IssueUnit ,FBB_IssuePlace ,FBB_InitUnit ,FBB_Price ,FBB_Picture ,FBB_SerialNumber ,FBB_FaceValue ,FBB_FullSetNumber ,FBB_FullSetPrice ,FBB_FullSetFaceValue ,FBB_FullSetMember ,FBB_Specification ,FBB_Quality ,FBB_Finess ,FBB_Category ,FBB_Weight ,FBB_FrontPic ,FBB_BackPic ,FBB_Manufacturer ,FBB_Printing ,FBB_Designer ,FBB_AntiCounterfeiting ,FBB_PerforationDegree ,FBB_WholeNumber ,FBB_WholeSpecif ,FBB_PostImg ,FBB_PostImgSepcif ,FBB_Gum ,FBB_FrontCover ,FBB_BackCover ,FBB_Photographer ,FBB_Texture ,FBB_System ,FBB_Theme ,FBB_Editor ,FBB_BreedType ,FBB_From ,FBB_Unit ,FBB_Status) 
+		values (#breedId# ,#breedNo# ,#name# ,#shortName# ,#issueTime# ,#issueVolumn# ,#issuePrice# ,#issueStyle# ,#issueUnit# ,#issuePlace# ,#initUnit# ,#price# ,#picture# ,#serialNumber# ,#faceValue# ,#fullSetNumber# ,#fullSetPrice# ,#fullSetFaceValue# ,#fullSetMember# ,#specification# ,#quality# ,#finess# ,#category# ,#weight# ,#frontPic# ,#backPic# ,#manufacturer# ,#printing# ,#designer# ,#antiCounterfeiting# ,#perforationDegree# ,#wholeNumber# ,#wholeSpecif# ,#postImg# ,#postImgSepcif# ,#gum# ,#frontCover# ,#backCover# ,#photographer# ,#texture# ,#system# ,#theme# ,#editor# ,#breedType# ,#from# ,#unit# ,#status#)
+	</insert>
+	<select id="selectBreedBasic" parameterClass="Integer" resultMap="BreedBasicResult">
+		select * from ta_FetchBreedBasic where FBB_BreedId= #breedId#
+	</select>
+	<select id="selectBreedBasicByDomain" parameterClass="com.eyoubika.spider.domain.BreedBasicDomain" resultMap="BreedBasicResult">
+		select * from ta_FetchBreedBasic
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="breedId">
+				FBB_BreedId = #breedId#
+			</isNotNull>
+			<isNotNull prepend="and" property="breedNo">
+				FBB_BreedNo = #breedNo#
+			</isNotNull>
+			<isNotNull prepend="and" property="name">
+				FBB_Name = #name#
+			</isNotNull>
+			<isNotNull prepend="and" property="shortName">
+				FBB_ShortName = #shortName#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				FBB_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueVolumn">
+				FBB_IssueVolumn = #issueVolumn#
+			</isNotNull>
+			<isNotNull prepend="and" property="issuePrice">
+				FBB_IssuePrice = #issuePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueStyle">
+				FBB_IssueStyle = #issueStyle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueUnit">
+				FBB_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="issuePlace">
+				FBB_IssuePlace = #issuePlace#
+			</isNotNull>
+			<isNotNull prepend="and" property="initUnit">
+				FBB_InitUnit = #initUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="price">
+				FBB_Price = #price#
+			</isNotNull>
+			<isNotNull prepend="and" property="picture">
+				FBB_Picture = #picture#
+			</isNotNull>
+			<isNotNull prepend="and" property="serialNumber">
+				FBB_SerialNumber = #serialNumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="faceValue">
+				FBB_FaceValue = #faceValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="fullSetNumber">
+				FBB_FullSetNumber = #fullSetNumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="fullSetPrice">
+				FBB_FullSetPrice = #fullSetPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="fullSetFaceValue">
+				FBB_FullSetFaceValue = #fullSetFaceValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="fullSetMember">
+				FBB_FullSetMember = #fullSetMember#
+			</isNotNull>
+			<isNotNull prepend="and" property="specification">
+				FBB_Specification = #specification#
+			</isNotNull>
+			<isNotNull prepend="and" property="quality">
+				FBB_Quality = #quality#
+			</isNotNull>
+			<isNotNull prepend="and" property="finess">
+				FBB_Finess = #finess#
+			</isNotNull>
+			<isNotNull prepend="and" property="category">
+				FBB_Category = #category#
+			</isNotNull>
+			<isNotNull prepend="and" property="weight">
+				FBB_Weight = #weight#
+			</isNotNull>
+			<isNotNull prepend="and" property="frontPic">
+				FBB_FrontPic = #frontPic#
+			</isNotNull>
+			<isNotNull prepend="and" property="backPic">
+				FBB_BackPic = #backPic#
+			</isNotNull>
+			<isNotNull prepend="and" property="manufacturer">
+				FBB_Manufacturer = #manufacturer#
+			</isNotNull>
+			<isNotNull prepend="and" property="printing">
+				FBB_Printing = #printing#
+			</isNotNull>
+			<isNotNull prepend="and" property="designer">
+				FBB_Designer = #designer#
+			</isNotNull>
+			<isNotNull prepend="and" property="antiCounterfeiting">
+				FBB_AntiCounterfeiting = #antiCounterfeiting#
+			</isNotNull>
+			<isNotNull prepend="and" property="perforationDegree">
+				FBB_PerforationDegree = #perforationDegree#
+			</isNotNull>
+			<isNotNull prepend="and" property="wholeNumber">
+				FBB_WholeNumber = #wholeNumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="wholeSpecif">
+				FBB_WholeSpecif = #wholeSpecif#
+			</isNotNull>
+			<isNotNull prepend="and" property="postImg">
+				FBB_PostImg = #postImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="postImgSepcif">
+				FBB_PostImgSepcif = #postImgSepcif#
+			</isNotNull>
+			<isNotNull prepend="and" property="gum">
+				FBB_Gum = #gum#
+			</isNotNull>
+			<isNotNull prepend="and" property="frontCover">
+				FBB_FrontCover = #frontCover#
+			</isNotNull>
+			<isNotNull prepend="and" property="backCover">
+				FBB_BackCover = #backCover#
+			</isNotNull>
+			<isNotNull prepend="and" property="photographer">
+				FBB_Photographer = #photographer#
+			</isNotNull>
+			<isNotNull prepend="and" property="texture">
+				FBB_Texture = #texture#
+			</isNotNull>
+			<isNotNull prepend="and" property="system">
+				FBB_System = #system#
+			</isNotNull>
+			<isNotNull prepend="and" property="theme">
+				FBB_Theme = #theme#
+			</isNotNull>
+			<isNotNull prepend="and" property="editor">
+				FBB_Editor = #editor#
+			</isNotNull>
+			<isNotNull prepend="and" property="breedType">
+				FBB_BreedType = #breedType#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				FBB_From = #from#
+			</isNotNull>
+			<isNotNull prepend="and" property="unit">
+				FBB_Unit = #unit#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				FBB_Status = #status#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectBreedBasicList" parameterClass="com.eyoubika.spider.domain.BreedBasicDomain" resultMap="BreedBasicResult">
+		select * from ta_FetchBreedBasic
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="breedId">
+				FBB_BreedId = #breedId#
+			</isNotNull>
+			<isNotNull prepend="and" property="breedNo">
+				FBB_BreedNo = #breedNo#
+			</isNotNull>
+			<isNotNull prepend="and" property="name">
+				FBB_Name = #name#
+			</isNotNull>
+			<isNotNull prepend="and" property="shortName">
+				FBB_ShortName = #shortName#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				FBB_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueVolumn">
+				FBB_IssueVolumn = #issueVolumn#
+			</isNotNull>
+			<isNotNull prepend="and" property="issuePrice">
+				FBB_IssuePrice = #issuePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueStyle">
+				FBB_IssueStyle = #issueStyle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueUnit">
+				FBB_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="issuePlace">
+				FBB_IssuePlace = #issuePlace#
+			</isNotNull>
+			<isNotNull prepend="and" property="initUnit">
+				FBB_InitUnit = #initUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="price">
+				FBB_Price = #price#
+			</isNotNull>
+			<isNotNull prepend="and" property="picture">
+				FBB_Picture = #picture#
+			</isNotNull>
+			<isNotNull prepend="and" property="serialNumber">
+				FBB_SerialNumber = #serialNumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="faceValue">
+				FBB_FaceValue = #faceValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="fullSetNumber">
+				FBB_FullSetNumber = #fullSetNumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="fullSetPrice">
+				FBB_FullSetPrice = #fullSetPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="fullSetFaceValue">
+				FBB_FullSetFaceValue = #fullSetFaceValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="fullSetMember">
+				FBB_FullSetMember = #fullSetMember#
+			</isNotNull>
+			<isNotNull prepend="and" property="specification">
+				FBB_Specification = #specification#
+			</isNotNull>
+			<isNotNull prepend="and" property="quality">
+				FBB_Quality = #quality#
+			</isNotNull>
+			<isNotNull prepend="and" property="finess">
+				FBB_Finess = #finess#
+			</isNotNull>
+			<isNotNull prepend="and" property="category">
+				FBB_Category = #category#
+			</isNotNull>
+			<isNotNull prepend="and" property="weight">
+				FBB_Weight = #weight#
+			</isNotNull>
+			<isNotNull prepend="and" property="frontPic">
+				FBB_FrontPic = #frontPic#
+			</isNotNull>
+			<isNotNull prepend="and" property="backPic">
+				FBB_BackPic = #backPic#
+			</isNotNull>
+			<isNotNull prepend="and" property="manufacturer">
+				FBB_Manufacturer = #manufacturer#
+			</isNotNull>
+			<isNotNull prepend="and" property="printing">
+				FBB_Printing = #printing#
+			</isNotNull>
+			<isNotNull prepend="and" property="designer">
+				FBB_Designer = #designer#
+			</isNotNull>
+			<isNotNull prepend="and" property="antiCounterfeiting">
+				FBB_AntiCounterfeiting = #antiCounterfeiting#
+			</isNotNull>
+			<isNotNull prepend="and" property="perforationDegree">
+				FBB_PerforationDegree = #perforationDegree#
+			</isNotNull>
+			<isNotNull prepend="and" property="wholeNumber">
+				FBB_WholeNumber = #wholeNumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="wholeSpecif">
+				FBB_WholeSpecif = #wholeSpecif#
+			</isNotNull>
+			<isNotNull prepend="and" property="postImg">
+				FBB_PostImg = #postImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="postImgSepcif">
+				FBB_PostImgSepcif = #postImgSepcif#
+			</isNotNull>
+			<isNotNull prepend="and" property="gum">
+				FBB_Gum = #gum#
+			</isNotNull>
+			<isNotNull prepend="and" property="frontCover">
+				FBB_FrontCover = #frontCover#
+			</isNotNull>
+			<isNotNull prepend="and" property="backCover">
+				FBB_BackCover = #backCover#
+			</isNotNull>
+			<isNotNull prepend="and" property="photographer">
+				FBB_Photographer = #photographer#
+			</isNotNull>
+			<isNotNull prepend="and" property="texture">
+				FBB_Texture = #texture#
+			</isNotNull>
+			<isNotNull prepend="and" property="system">
+				FBB_System = #system#
+			</isNotNull>
+			<isNotNull prepend="and" property="theme">
+				FBB_Theme = #theme#
+			</isNotNull>
+			<isNotNull prepend="and" property="editor">
+				FBB_Editor = #editor#
+			</isNotNull>
+			<isNotNull prepend="and" property="breedType">
+				FBB_BreedType = #breedType#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				FBB_From = #from#
+			</isNotNull>
+			<isNotNull prepend="and" property="unit">
+				FBB_Unit = #unit#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				FBB_Status = #status#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteBreedBasic"  parameterClass="Integer">
+		delete from ta_FetchBreedBasic where FBB_BreedId = #breedId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ta_FetchBreedBasic
+	</delete>
+	<update id = "updateBreedBasic" parameterClass="com.eyoubika.spider.domain.BreedBasicDomain">
+		update ta_FetchBreedBasic
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="breedId">
+				FBB_BreedId = #breedId#
+			</isNotNull>
+			<isNotNull prepend="," property="breedNo">
+				FBB_BreedNo = #breedNo#
+			</isNotNull>
+			<isNotNull prepend="," property="name">
+				FBB_Name = #name#
+			</isNotNull>
+			<isNotNull prepend="," property="shortName">
+				FBB_ShortName = #shortName#
+			</isNotNull>
+			<isNotNull prepend="," property="issueTime">
+				FBB_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="," property="issueVolumn">
+				FBB_IssueVolumn = #issueVolumn#
+			</isNotNull>
+			<isNotNull prepend="," property="issuePrice">
+				FBB_IssuePrice = #issuePrice#
+			</isNotNull>
+			<isNotNull prepend="," property="issueStyle">
+				FBB_IssueStyle = #issueStyle#
+			</isNotNull>
+			<isNotNull prepend="," property="issueUnit">
+				FBB_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="," property="issuePlace">
+				FBB_IssuePlace = #issuePlace#
+			</isNotNull>
+			<isNotNull prepend="," property="initUnit">
+				FBB_InitUnit = #initUnit#
+			</isNotNull>
+			<isNotNull prepend="," property="price">
+				FBB_Price = #price#
+			</isNotNull>
+			<isNotNull prepend="," property="picture">
+				FBB_Picture = #picture#
+			</isNotNull>
+			<isNotNull prepend="," property="serialNumber">
+				FBB_SerialNumber = #serialNumber#
+			</isNotNull>
+			<isNotNull prepend="," property="faceValue">
+				FBB_FaceValue = #faceValue#
+			</isNotNull>
+			<isNotNull prepend="," property="fullSetNumber">
+				FBB_FullSetNumber = #fullSetNumber#
+			</isNotNull>
+			<isNotNull prepend="," property="fullSetPrice">
+				FBB_FullSetPrice = #fullSetPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="fullSetFaceValue">
+				FBB_FullSetFaceValue = #fullSetFaceValue#
+			</isNotNull>
+			<isNotNull prepend="," property="fullSetMember">
+				FBB_FullSetMember = #fullSetMember#
+			</isNotNull>
+			<isNotNull prepend="," property="specification">
+				FBB_Specification = #specification#
+			</isNotNull>
+			<isNotNull prepend="," property="quality">
+				FBB_Quality = #quality#
+			</isNotNull>
+			<isNotNull prepend="," property="finess">
+				FBB_Finess = #finess#
+			</isNotNull>
+			<isNotNull prepend="," property="category">
+				FBB_Category = #category#
+			</isNotNull>
+			<isNotNull prepend="," property="weight">
+				FBB_Weight = #weight#
+			</isNotNull>
+			<isNotNull prepend="," property="frontPic">
+				FBB_FrontPic = #frontPic#
+			</isNotNull>
+			<isNotNull prepend="," property="backPic">
+				FBB_BackPic = #backPic#
+			</isNotNull>
+			<isNotNull prepend="," property="manufacturer">
+				FBB_Manufacturer = #manufacturer#
+			</isNotNull>
+			<isNotNull prepend="," property="printing">
+				FBB_Printing = #printing#
+			</isNotNull>
+			<isNotNull prepend="," property="designer">
+				FBB_Designer = #designer#
+			</isNotNull>
+			<isNotNull prepend="," property="antiCounterfeiting">
+				FBB_AntiCounterfeiting = #antiCounterfeiting#
+			</isNotNull>
+			<isNotNull prepend="," property="perforationDegree">
+				FBB_PerforationDegree = #perforationDegree#
+			</isNotNull>
+			<isNotNull prepend="," property="wholeNumber">
+				FBB_WholeNumber = #wholeNumber#
+			</isNotNull>
+			<isNotNull prepend="," property="wholeSpecif">
+				FBB_WholeSpecif = #wholeSpecif#
+			</isNotNull>
+			<isNotNull prepend="," property="postImg">
+				FBB_PostImg = #postImg#
+			</isNotNull>
+			<isNotNull prepend="," property="postImgSepcif">
+				FBB_PostImgSepcif = #postImgSepcif#
+			</isNotNull>
+			<isNotNull prepend="," property="gum">
+				FBB_Gum = #gum#
+			</isNotNull>
+			<isNotNull prepend="," property="frontCover">
+				FBB_FrontCover = #frontCover#
+			</isNotNull>
+			<isNotNull prepend="," property="backCover">
+				FBB_BackCover = #backCover#
+			</isNotNull>
+			<isNotNull prepend="," property="photographer">
+				FBB_Photographer = #photographer#
+			</isNotNull>
+			<isNotNull prepend="," property="texture">
+				FBB_Texture = #texture#
+			</isNotNull>
+			<isNotNull prepend="," property="system">
+				FBB_System = #system#
+			</isNotNull>
+			<isNotNull prepend="," property="theme">
+				FBB_Theme = #theme#
+			</isNotNull>
+			<isNotNull prepend="," property="editor">
+				FBB_Editor = #editor#
+			</isNotNull>
+			<isNotNull prepend="," property="breedType">
+				FBB_BreedType = #breedType#
+			</isNotNull>
+			<isNotNull prepend="," property="from">
+				FBB_From = #from#
+			</isNotNull>
+			<isNotNull prepend="," property="unit">
+				FBB_Unit = #unit#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				FBB_Status = #status#
+			</isNotNull>
+		</dynamic>
+	where FBB_BreedId = #breedId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.spider.domain.BreedBasicDomain" resultClass="String">
+		select 1 from ta_FetchBreedBasic
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="breedId">
+				FBB_BreedId = #breedId#
+			</isNotNull>
+			<isNotNull prepend="and" property="breedNo">
+				FBB_BreedNo = #breedNo#
+			</isNotNull>
+			<isNotNull prepend="and" property="name">
+				FBB_Name = #name#
+			</isNotNull>
+			<isNotNull prepend="and" property="shortName">
+				FBB_ShortName = #shortName#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				FBB_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueVolumn">
+				FBB_IssueVolumn = #issueVolumn#
+			</isNotNull>
+			<isNotNull prepend="and" property="issuePrice">
+				FBB_IssuePrice = #issuePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueStyle">
+				FBB_IssueStyle = #issueStyle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueUnit">
+				FBB_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="issuePlace">
+				FBB_IssuePlace = #issuePlace#
+			</isNotNull>
+			<isNotNull prepend="and" property="initUnit">
+				FBB_InitUnit = #initUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="price">
+				FBB_Price = #price#
+			</isNotNull>
+			<isNotNull prepend="and" property="picture">
+				FBB_Picture = #picture#
+			</isNotNull>
+			<isNotNull prepend="and" property="serialNumber">
+				FBB_SerialNumber = #serialNumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="faceValue">
+				FBB_FaceValue = #faceValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="fullSetNumber">
+				FBB_FullSetNumber = #fullSetNumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="fullSetPrice">
+				FBB_FullSetPrice = #fullSetPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="fullSetFaceValue">
+				FBB_FullSetFaceValue = #fullSetFaceValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="fullSetMember">
+				FBB_FullSetMember = #fullSetMember#
+			</isNotNull>
+			<isNotNull prepend="and" property="specification">
+				FBB_Specification = #specification#
+			</isNotNull>
+			<isNotNull prepend="and" property="quality">
+				FBB_Quality = #quality#
+			</isNotNull>
+			<isNotNull prepend="and" property="finess">
+				FBB_Finess = #finess#
+			</isNotNull>
+			<isNotNull prepend="and" property="category">
+				FBB_Category = #category#
+			</isNotNull>
+			<isNotNull prepend="and" property="weight">
+				FBB_Weight = #weight#
+			</isNotNull>
+			<isNotNull prepend="and" property="frontPic">
+				FBB_FrontPic = #frontPic#
+			</isNotNull>
+			<isNotNull prepend="and" property="backPic">
+				FBB_BackPic = #backPic#
+			</isNotNull>
+			<isNotNull prepend="and" property="manufacturer">
+				FBB_Manufacturer = #manufacturer#
+			</isNotNull>
+			<isNotNull prepend="and" property="printing">
+				FBB_Printing = #printing#
+			</isNotNull>
+			<isNotNull prepend="and" property="designer">
+				FBB_Designer = #designer#
+			</isNotNull>
+			<isNotNull prepend="and" property="antiCounterfeiting">
+				FBB_AntiCounterfeiting = #antiCounterfeiting#
+			</isNotNull>
+			<isNotNull prepend="and" property="perforationDegree">
+				FBB_PerforationDegree = #perforationDegree#
+			</isNotNull>
+			<isNotNull prepend="and" property="wholeNumber">
+				FBB_WholeNumber = #wholeNumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="wholeSpecif">
+				FBB_WholeSpecif = #wholeSpecif#
+			</isNotNull>
+			<isNotNull prepend="and" property="postImg">
+				FBB_PostImg = #postImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="postImgSepcif">
+				FBB_PostImgSepcif = #postImgSepcif#
+			</isNotNull>
+			<isNotNull prepend="and" property="gum">
+				FBB_Gum = #gum#
+			</isNotNull>
+			<isNotNull prepend="and" property="frontCover">
+				FBB_FrontCover = #frontCover#
+			</isNotNull>
+			<isNotNull prepend="and" property="backCover">
+				FBB_BackCover = #backCover#
+			</isNotNull>
+			<isNotNull prepend="and" property="photographer">
+				FBB_Photographer = #photographer#
+			</isNotNull>
+			<isNotNull prepend="and" property="texture">
+				FBB_Texture = #texture#
+			</isNotNull>
+			<isNotNull prepend="and" property="system">
+				FBB_System = #system#
+			</isNotNull>
+			<isNotNull prepend="and" property="theme">
+				FBB_Theme = #theme#
+			</isNotNull>
+			<isNotNull prepend="and" property="editor">
+				FBB_Editor = #editor#
+			</isNotNull>
+			<isNotNull prepend="and" property="breedType">
+				FBB_BreedType = #breedType#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				FBB_From = #from#
+			</isNotNull>
+			<isNotNull prepend="and" property="unit">
+				FBB_Unit = #unit#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				FBB_Status = #status#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+</sqlMap>

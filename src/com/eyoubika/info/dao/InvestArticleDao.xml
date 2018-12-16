@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-11-23 19:17:01
+  -==========================================================================================-->
+<sqlMap namespace="tp_InvestArticle">
+	<typeAlias alias="InvestArticleDomain" type="com.eyoubika.info.domain.InvestArticleDomain"/>
+	<resultMap id="InvestArticleResult" class="com.eyoubika.info.domain.InvestArticleDomain">
+		<result column="IA_ArticleId" property="articleId" jdbcType="INT" />
+		<result column="IA_Title" property="title" jdbcType="VARCHAR" />
+		<result column="IA_Url" property="url" jdbcType="VARCHAR" />
+		<result column="IA_Source" property="source" jdbcType="VARCHAR" />
+		<result column="IA_Brief" property="brief" jdbcType="VARCHAR" />
+		<result column="IA_Content" property="content" jdbcType="text" />
+		<result column="IA_Author" property="author" jdbcType="VARCHAR" />
+		<result column="IA_Tag" property="tag" jdbcType="VARCHAR" />
+		<result column="IA_ExId" property="exId" jdbcType="CHAR" />
+		<result column="IA_Type" property="type" jdbcType="CHAR" />
+		<result column="IA_Status" property="status" jdbcType="CHAR" />
+		<result column="IA_GenDate" property="genDate" jdbcType="CHAR" />
+		<result column="IA_GenTime" property="genTime" jdbcType="CHAR" />
+		<result column="IA_ModDate" property="modDate" jdbcType="CHAR" />
+		<result column="IA_ModTime" property="modTime" jdbcType="CHAR" />
+	</resultMap>
+	<resultMap id="ArticleSimpleResult" class="com.eyoubika.info.domain.ArticleSimpleDomain">
+		<result column="IA_ArticleId" property="articleId" jdbcType="INT" />
+		<result column="IA_Title" property="title" jdbcType="VARCHAR" />
+		<result column="IA_Url" property="url" jdbcType="VARCHAR" />
+		<result column="IA_Brief" property="brief" jdbcType="VARCHAR" />
+		<result column="IA_Author" property="author" jdbcType="VARCHAR" />
+		<result column="IA_ExId" property="exId" jdbcType="CHAR" />
+		<result column="IA_Type" property="type" jdbcType="CHAR" />
+		<result column="IA_Status" property="status" jdbcType="CHAR" />
+		<result column="IA_GenDate" property="genDate" jdbcType="CHAR" />
+		<result column="IA_GenTime" property="genTime" jdbcType="CHAR" />
+	</resultMap>
+	
+	<insert id="insertInvestArticle" parameterClass="com.eyoubika.info.domain.InvestArticleDomain">
+		insert into tp_InvestArticle(IA_Title ,IA_Url ,IA_Source ,IA_Brief ,IA_Content ,IA_Author ,IA_Tag ,IA_ExId ,IA_Type ,IA_Status ,IA_GenDate ,IA_GenTime ,IA_ModDate ,IA_ModTime) 
+		values (#title# ,#url# ,#source#, #brief# ,#content# ,#author# ,#tag# ,#exId# ,#type# ,#status# ,#genDate# ,#genTime# ,#modDate# ,#modTime#)
+		<selectKey resultClass="int" keyProperty="articleId">
+			SELECT LAST_INSERT_ID() as articleId
+		</selectKey>
+	</insert>
+	<select id="selectInvestArticle" parameterClass="Integer" resultMap="InvestArticleResult">
+		select * from tp_InvestArticle where IA_ArticleId= #articleId#
+	</select>
+	<select id="selectInvestArticleByDomain" parameterClass="com.eyoubika.info.domain.InvestArticleDomain" resultMap="InvestArticleResult">
+		select * from tp_InvestArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				IA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				IA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="url">
+				IA_Url = #url#
+			</isNotNull>
+			<isNotNull prepend="and" property="source">
+				IA_Source = #source#
+			</isNotNull>
+			<isNotNull prepend="and" property="brief">
+				IA_Brief = #brief#
+			</isNotNull>
+			<isNotNull prepend="and" property="content">
+				IA_Content = #content#
+			</isNotNull>
+			<isNotNull prepend="and" property="author">
+				IA_Author = #author#
+			</isNotNull>
+			<isNotNull prepend="and" property="tag">
+				IA_Tag = #tag#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				IA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				IA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				IA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="genDate">
+				IA_GenDate = #genDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="genTime">
+				IA_GenTime = #genTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="modDate">
+				IA_ModDate = #modDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="modTime">
+				IA_ModTime = #modTime#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectInvestArticleList" parameterClass="com.eyoubika.info.domain.InvestArticleDomain" resultMap="InvestArticleResult">
+		select * from tp_InvestArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				IA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				IA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="url">
+				IA_Url = #url#
+			</isNotNull>
+			<isNotNull prepend="and" property="source">
+				IA_Source = #source#
+			</isNotNull>
+			<isNotNull prepend="and" property="brief">
+				IA_Brief = #brief#
+			</isNotNull>
+			<isNotNull prepend="and" property="content">
+				IA_Content = #content#
+			</isNotNull>
+			<isNotNull prepend="and" property="author">
+				IA_Author = #author#
+			</isNotNull>
+			<isNotNull prepend="and" property="tag">
+				IA_Tag = #tag#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				IA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				IA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				IA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="genDate">
+				IA_GenDate = #genDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="genTime">
+				IA_GenTime = #genTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="modDate">
+				IA_ModDate = #modDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="modTime">
+				IA_ModTime = #modTime#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteInvestArticle"  parameterClass="Integer">
+		delete from tp_InvestArticle where IA_ArticleId = #articleId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from tp_InvestArticle
+	</delete>
+	<update id = "updateInvestArticle" parameterClass="com.eyoubika.info.domain.InvestArticleDomain">
+		update tp_InvestArticle
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="title">
+				IA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="," property="url">
+				IA_Url = #url#
+			</isNotNull>
+			<isNotNull prepend="," property="source">
+				IA_Source = #source#
+			</isNotNull>
+			<isNotNull prepend="," property="brief">
+				IA_Brief = #brief#
+			</isNotNull>
+			<isNotNull prepend="," property="content">
+				IA_Content = #content#
+			</isNotNull>
+			<isNotNull prepend="," property="author">
+				IA_Author = #author#
+			</isNotNull>
+			<isNotNull prepend="," property="tag">
+				IA_Tag = #tag#
+			</isNotNull>
+			<isNotNull prepend="," property="exId">
+				IA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+				IA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				IA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="genDate">
+				IA_GenDate = #genDate#
+			</isNotNull>
+			<isNotNull prepend="," property="genTime">
+				IA_GenTime = #genTime#
+			</isNotNull>
+			<isNotNull prepend="," property="modDate">
+				IA_ModDate = #modDate#
+			</isNotNull>
+			<isNotNull prepend="," property="modTime">
+				IA_ModTime = #modTime#
+			</isNotNull>
+		</dynamic>
+	where IA_ArticleId = #articleId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.info.domain.InvestArticleDomain" resultClass="String">
+		select 1 from tp_InvestArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				IA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				IA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="url">
+				IA_Url = #url#
+			</isNotNull>
+			<isNotNull prepend="and" property="source">
+				IA_Source = #source#
+			</isNotNull>
+			<isNotNull prepend="and" property="brief">
+				IA_Brief = #brief#
+			</isNotNull>
+			<isNotNull prepend="and" property="content">
+				IA_Content = #content#
+			</isNotNull>
+			<isNotNull prepend="and" property="author">
+				IA_Author = #author#
+			</isNotNull>
+			<isNotNull prepend="and" property="tag">
+				IA_Tag = #tag#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				IA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				IA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				IA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="genDate">
+				IA_GenDate = #genDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="genTime">
+				IA_GenTime = #genTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="modDate">
+				IA_ModDate = #modDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="modTime">
+				IA_ModTime = #modTime#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<sql id="sql_count"> 
+		select count(1) 
+    </sql> 
+	<sql id="sql_select"> 
+		select *
+	</sql> 
+	
+	 <sql id="sql_where"> 
+		from tp_InvestArticle where 1=1 
+			<isNotNull prepend="and" property="articleId">
+				IA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				IA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="url">
+				IA_Url = #url#
+			</isNotNull>
+			<isNotNull prepend="and" property="source">
+				IA_Source = #source#
+			</isNotNull>
+			<isNotNull prepend="and" property="brief">
+				IA_Brief = #brief#
+			</isNotNull>
+			<isNotNull prepend="and" property="content">
+				IA_Content = #content#
+			</isNotNull>
+			<isNotNull prepend="and" property="author">
+				IA_Author = #author#
+			</isNotNull>
+			<isNotNull prepend="and" property="tag">
+				IA_Tag = #tag#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				IA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="genDate">
+				IA_GenDate = #genDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="genTime">
+				IA_GenTime = #genTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="modDate">
+				IA_ModDate = #modDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="modTime">
+				IA_ModTime = #modTime#
+			</isNotNull>		
+		<dynamic prepend="and">
+			<isNotNull property="exIds"> 
+			IA_ExId in
+			<iterate property="exIds" open="(" close=")" conjunction=",">
+				#exIds[]#
+			</iterate>
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="and">
+			<isNotNull property="statusIds"> 
+			IA_Status in
+			<iterate property="statusIds" open="(" close=")" conjunction=",">
+				#statusIds[]#
+			</iterate>
+			</isNotNull>
+		</dynamic>
+		
+		<dynamic prepend="order by">
+			<isNotNull property="ff">
+				$ff$
+			</isNotNull>	
+			<isNotNull property="rank">
+				$rank$
+			</isNotNull>	
+		</dynamic>
+		<dynamic prepend="limit">
+			<isNotNull property="limit">
+				#start#, #limit#
+			</isNotNull>		
+		</dynamic>
+	</sql>
+	<select id="selectInvestArticleListCount" parameterClass="java.util.HashMap" resultClass="int"> 
+                <include refid="sql_count"/> 
+                <include refid="sql_where"/> 
+    </select> 
+    <select id="selectInvestArticleListInPage" parameterClass="java.util.HashMap" resultMap="InvestArticleResult"> 
+              <!--   <include refid="sql_select"/> 
+                <include refid="sql_where"/>  -->
+    	select * 
+    	from tp_InvestArticle where 1=1 
+			<isNotNull prepend="and" property="articleId">
+				IA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				IA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="url">
+				IA_Url = #url#
+			</isNotNull>
+			<isNotNull prepend="and" property="source">
+				IA_Source = #source#
+			</isNotNull>
+			<isNotNull prepend="and" property="brief">
+				IA_Brief = #brief#
+			</isNotNull>
+			<isNotNull prepend="and" property="content">
+				IA_Content = #content#
+			</isNotNull>
+			<isNotNull prepend="and" property="author">
+				IA_Author = #author#
+			</isNotNull>
+			<isNotNull prepend="and" property="tag">
+				IA_Tag = #tag#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				IA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="genDate">
+				IA_GenDate = #genDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="genTime">
+				IA_GenTime = #genTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="modDate">
+				IA_ModDate = #modDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="modTime">
+				IA_ModTime = #modTime#
+			</isNotNull>		
+		<dynamic prepend="and">
+			<isNotNull property="exIds"> 
+			IA_ExId in
+			<iterate property="exIds" open="(" close=")" conjunction=",">
+				#exIds[]#
+			</iterate>
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="and">
+			<isNotNull property="statusIds"> 
+			IA_Status in
+			<iterate property="statusIds" open="(" close=")" conjunction=",">
+				#statusIds[]#
+			</iterate>
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotNull property="ff">
+				$ff$
+			</isNotNull>	
+			<isNotNull property="rank">
+				$rank$, IA_GenTime desc
+			</isNotNull>		
+		</dynamic>
+		<dynamic prepend="limit">
+			<isNotNull property="limit">
+				#start#, #limit#
+			</isNotNull>		
+		</dynamic>
+    </select>
+     <select id="selectInvestArticleSimple" parameterClass="java.util.HashMap" resultMap="ArticleSimpleResult">      
+    	select IA_ArticleId, IA_Title ,IA_Url  ,IA_Brief  ,IA_Author  ,IA_ExId ,IA_Type ,IA_Status ,IA_GenDate ,IA_GenTime
+    	from tp_InvestArticle where 1=1 
+    	<dynamic prepend="and">
+			<isNotNull property="articleIds"> 
+			IA_ArticleId in
+			<iterate property="articleIds" open="(" close=")" conjunction=",">
+				#articleIds[]#
+			</iterate>
+			</isNotNull>
+		</dynamic>
+    </select>
+	<!--<CustomFileTag>-->
+</sqlMap>

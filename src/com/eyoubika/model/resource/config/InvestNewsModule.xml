@@ -1,0 +1,40 @@
+<modules>
+	<module id="1">
+		<name>InvestNews</name>
+		<package>com.eyoubika.info</package>
+		<action name="addInvestNews">
+		</action>
+		<action name="getInvestNews">
+		</action>
+		<action  name="deleteInvestNews">
+			<input>InvestGamesNewsDomain</input>
+		</action>
+		<vo voName="InvestNews">
+			<val valName="newsId">
+				<attrType>String</attrType>
+				<attrName>newsId</attrName>
+				<attrNote>NewsId</attrNote>
+			</val>
+			<val valName="title">
+				<attrType>String</attrType>
+				<attrName>title</attrName>
+				<attrNote>标题</attrNote>
+			</val>
+			<val valName="url">
+				<attrType>String</attrType>
+				<attrName>url</attrName>
+				<attrNote>URL</attrNote>
+			</val>
+			<val valName="brief">
+				<attrType>String</attrType>
+				<attrName>brief</attrName>
+				<attrNote>简介</attrNote>
+			</val>
+			<val valName="type">
+				<attrType>String</attrType>
+				<attrName>type</attrName>
+				<attrNote>类型</attrNote>
+			</val>
+		</vo>
+	</module>
+</modules>

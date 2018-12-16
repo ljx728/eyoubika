@@ -1,0 +1,115 @@
+<modules>
+	<module id="1">
+		<name>OpenAccount</name>
+		<package>com.eyoubika.user</package>
+		<action name="addOpenAccount">
+		</action>
+		<action name="getOpenAccount">
+		</action>
+		<action name="modifyOpenAccount">
+		</action>
+		<action name="getAllOpenAccount">
+		</action>
+		<action  name="addPersAccount">
+			<input>OpenAccountPersDomain</input>
+		</action>
+		<action name="addCorpAccount">
+			<input>OpenAccountCorpDomain</input>
+		</action>
+		<action  name="getPersAccountByDomain">
+			<input>OpenAccountPersDomain</input>
+		</action>
+		<action  name="getCorpAccountByDomain">
+			<input>OpenAccountCorpDomain</input>
+		</action>
+		<action name="modifyCorpAccount">
+			<input>OpenAccountCorpDomain</input>
+		</action>
+		<action name="modifyPersAccount">
+			<input>OpenAccountPersDomain</input>
+		</action>
+		<action name="modifyAccountDetail">
+			<input>OpenAccountDetailDomain</input>
+		</action>
+		<action name="uploadAccountDetail">
+			<input>OpenAccountDetailDomain</input>
+		</action>
+		<vo voName="OpenAccount">
+			<val valName="openNo">
+				<attrType>String</attrType>
+				<attrName>openNo</attrName>
+				<attrNote>开户业务编号</attrNote>
+			</val>
+			<val valName="clientName">
+				<attrType>String</attrType>
+				<attrName>clientName</attrName>
+				<attrNote>客户姓名</attrNote>
+			</val>
+			<val valName="identifyType">
+				<attrType>String</attrType>
+				<attrName>identifyType</attrName>
+				<attrNote>证件号类型</attrNote>
+			</val>
+			<val valName="identifyNumber">
+				<attrType>String</attrType>
+				<attrName>identifyNumber</attrName>
+				<attrNote>证件号码</attrNote>
+			</val>
+			<val valName="pnumber">
+				<attrType>String</attrType>
+				<attrName>pnumber</attrName>
+				<attrNote>手机号码</attrNote>
+			</val>
+			<val valName="exId">
+				<attrType>String</attrType>
+				<attrName>exId</attrName>
+				<attrNote>交易所ID</attrNote>
+			</val>
+			<val valName="email">
+				<attrType>String</attrType>
+				<attrName>email</attrName>
+				<attrNote>客户邮箱</attrNote>
+			</val>
+			<val valName="bankId">
+				<attrType>String</attrType>
+				<attrName>bankId</attrName>
+				<attrNote>开户银行</attrNote>
+			</val>
+			<val valName="status">
+				<attrType>String</attrType>
+				<attrName>status</attrName>
+				<attrNote>状态</attrNote>
+			</val>
+			<val valName="bankAccount">
+				<attrType>String</attrType>
+				<attrName>bankAccount</attrName>
+				<attrNote>银行账号</attrNote>
+			</val>
+			<val valName="emerName">
+				<attrType>String</attrType>
+				<attrName>emerName</attrName>
+				<attrNote>紧急联系人</attrNote>
+			</val>
+			<val valName="emerPnumber">
+				<attrType>String</attrType>
+				<attrName>emerPnumber</attrName>
+				<attrNote>紧急联系人手机号码</attrNote>
+			</val>
+			<val valName="userName">
+				<attrType>String</attrType>
+				<attrName>userName</attrName>
+				<attrNote>联系人姓名</attrNote>
+			</val>
+			<val valName="batchNo">
+				<attrType>String</attrType>
+				<attrName>batchNo</attrName>
+				<attrNote>批次号</attrNote>
+			</val>
+			<val valName="openType">
+				<attrType>String</attrType>
+				<attrName>openType</attrName>
+				<attrNote>开户类型</attrNote>
+			</val>
+		</vo>
+	</module>
+</modules>

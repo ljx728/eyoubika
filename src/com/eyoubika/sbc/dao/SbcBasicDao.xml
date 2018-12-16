@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-08-06 16:14:07
+  -==========================================================================================-->
+<sqlMap namespace="tp_SbcBasicInfo">
+	<typeAlias alias="SbcBasicDomain" type="com.eyoubika.sbc.domain.SbcBasicDomain"/>
+	<resultMap id="SbcBasicResult" class="com.eyoubika.sbc.domain.SbcBasicDomain">
+		<result column="SBI_SbcId" property="sbcId" jdbcType="int(10)" />
+		<result column="SBI_SbcCode" property="sbcCode" jdbcType="VARCHAR" />
+		<result column="SBI_SbcName" property="sbcName" jdbcType="VARCHAR" />
+		<result column="SBI_SbcType" property="sbcType" jdbcType="CHAR" />
+		<result column="SBI_IssueTime" property="issueTime" jdbcType="VARCHAR" />
+		<result column="SBI_IssueOrg" property="issueOrg" jdbcType="VARCHAR" />
+		<result column="SBI_IssueVolume" property="issueVolume" jdbcType="VARCHAR" />
+		<result column="SBI_IssuePrice" property="issuePrice" jdbcType="VARCHAR" />
+		<result column="SBI_FaceValue" property="faceValue" jdbcType="VARCHAR" />
+		<result column="SBI_Texture" property="texture" jdbcType="VARCHAR" />
+		<result column="SBI_Volume" property="volume" jdbcType="VARCHAR" />
+		<result column="SBI_ExId" property="exId" jdbcType="CHAR" />
+		<result column="SBI_Status" property="status" jdbcType="CHAR" />
+		<result column="SBI_InputDate" property="inputDate" jdbcType="CHAR" />
+	</resultMap>
+	<insert id="insertSbcBasic" parameterClass="com.eyoubika.sbc.domain.SbcBasicDomain">
+		insert into tp_SbcBasicInfo(SBI_SbcCode ,SBI_SbcName ,SBI_SbcType ,SBI_IssueTime ,SBI_IssueOrg ,SBI_IssueVolume ,SBI_IssuePrice ,SBI_FaceValue ,SBI_Texture ,SBI_Volume ,SBI_ExId ,SBI_Status ,SBI_InputDate) 
+		values (#sbcCode# ,#sbcName# ,#sbcType# ,#issueTime# ,#issueOrg# ,#issueVolume# ,#issuePrice# ,#faceValue# ,#texture# ,#volume# ,#exId# ,#status# ,#inputDate#)
+		<selectKey resultClass="int" keyProperty="sbcId">
+			SELECT LAST_INSERT_ID() as sbcId
+		</selectKey>
+	</insert>
+	<select id="selectSbcBasic" parameterClass="Integer" resultMap="SbcBasicResult">
+		select * from tp_SbcBasicInfo where SBI_SbcId= #sbcId#
+	</select>
+	<select id="selectSbcBasicByDomain" parameterClass="com.eyoubika.sbc.domain.SbcBasicDomain" resultMap="SbcBasicResult">
+		select * from tp_SbcBasicInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sbcId">
+				SBI_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcCode">
+				SBI_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcName">
+				SBI_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcType">
+				SBI_SbcType = #sbcType#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				SBI_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueOrg">
+				SBI_IssueOrg = #issueOrg#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueVolume">
+				SBI_IssueVolume = #issueVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="issuePrice">
+				SBI_IssuePrice = #issuePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="faceValue">
+				SBI_FaceValue = #faceValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="texture">
+				SBI_Texture = #texture#
+			</isNotNull>
+			<isNotNull prepend="and" property="volume">
+				SBI_Volume = #volume#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				SBI_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				SBI_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="inputDate">
+				SBI_InputDate = #inputDate#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectSbcBasicList" parameterClass="com.eyoubika.sbc.domain.SbcBasicDomain" resultMap="SbcBasicResult">
+		select * from tp_SbcBasicInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sbcId">
+				SBI_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcCode">
+				SBI_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcName">
+				SBI_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcType">
+				SBI_SbcType = #sbcType#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				SBI_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueOrg">
+				SBI_IssueOrg = #issueOrg#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueVolume">
+				SBI_IssueVolume = #issueVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="issuePrice">
+				SBI_IssuePrice = #issuePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="faceValue">
+				SBI_FaceValue = #faceValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="texture">
+				SBI_Texture = #texture#
+			</isNotNull>
+			<isNotNull prepend="and" property="volume">
+				SBI_Volume = #volume#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				SBI_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				SBI_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="inputDate">
+				SBI_InputDate = #inputDate#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteSbcBasic"  parameterClass="Integer">
+		delete from tp_SbcBasicInfo where SBI_SbcId = #sbcId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from tp_SbcBasicInfo
+	</delete>
+	<update id = "updateSbcBasic" parameterClass="com.eyoubika.sbc.domain.SbcBasicDomain">
+		update tp_SbcBasicInfo
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="sbcCode">
+				SBI_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="," property="sbcName">
+				SBI_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="," property="sbcType">
+				SBI_SbcType = #sbcType#
+			</isNotNull>
+			<isNotNull prepend="," property="issueTime">
+				SBI_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="," property="issueOrg">
+				SBI_IssueOrg = #issueOrg#
+			</isNotNull>
+			<isNotNull prepend="," property="issueVolume">
+				SBI_IssueVolume = #issueVolume#
+			</isNotNull>
+			<isNotNull prepend="," property="issuePrice">
+				SBI_IssuePrice = #issuePrice#
+			</isNotNull>
+			<isNotNull prepend="," property="faceValue">
+				SBI_FaceValue = #faceValue#
+			</isNotNull>
+			<isNotNull prepend="," property="texture">
+				SBI_Texture = #texture#
+			</isNotNull>
+			<isNotNull prepend="," property="volume">
+				SBI_Volume = #volume#
+			</isNotNull>
+			<isNotNull prepend="," property="exId">
+				SBI_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				SBI_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="inputDate">
+				SBI_InputDate = #inputDate#
+			</isNotNull>
+		</dynamic>
+	where SBI_SbcId = #sbcId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.sbc.domain.SbcBasicDomain" resultClass="String">
+		select 1 from tp_SbcBasicInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sbcId">
+				SBI_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcCode">
+				SBI_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcName">
+				SBI_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcType">
+				SBI_SbcType = #sbcType#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				SBI_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueOrg">
+				SBI_IssueOrg = #issueOrg#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueVolume">
+				SBI_IssueVolume = #issueVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="issuePrice">
+				SBI_IssuePrice = #issuePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="faceValue">
+				SBI_FaceValue = #faceValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="texture">
+				SBI_Texture = #texture#
+			</isNotNull>
+			<isNotNull prepend="and" property="volume">
+				SBI_Volume = #volume#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				SBI_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				SBI_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="inputDate">
+				SBI_InputDate = #inputDate#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<typeAlias alias="SbcSimpleDomain" type="com.eyoubika.sbc.domain.SbcSimpleDomain"/>
+	<resultMap id="SbcSimpleResult" class="com.eyoubika.sbc.domain.SbcSimpleDomain">
+		<result column="SBI_SbcId" property="sbcId" jdbcType="int(10)" />
+		<result column="SBI_SbcCode" property="sbcCode" jdbcType="VARCHAR" />
+		<result column="SBI_SbcName" property="sbcName" jdbcType="VARCHAR" />
+		<result column="SBI_SbcType" property="sbcType" jdbcType="CHAR" />
+		<result column="SBI_ExId" property="exId" jdbcType="CHAR" />
+		<result column="SBI_Status" property="status" jdbcType="CHAR" />
+	</resultMap>
+	
+	<select id="selectSbcIdBySbcCode" parameterClass="String" resultClass="Integer">
+		select SBI_SbcId from tp_SbcBasicInfo where SBI_SbcCode= #sbcCode#
+	</select>
+	<select id="fuzzyQueryBySbcName" parameterClass="String" resultMap="SbcSimpleResult">
+		select * from tp_SbcBasicInfo where SBI_SbcName like concat('%', #sbcName#, '%')	
+	</select>
+	<select id="fuzzyQueryBySbcCode" parameterClass="String" resultMap="SbcSimpleResult">
+		select * from tp_SbcBasicInfo where SBI_SbcCode like concat('%', #sbcCode#, '%')
+	</select>
+	<select id="selectAllSbcIdList" resultClass="Integer">
+		select SBI_SbcId from tp_SbcBasicInfo
+	</select>
+	<select id="findSbcIdByName" parameterClass="java.util.HashMap" resultClass="Integer">
+		select SBI_SbcId from tp_SbcBasicInfo where SBI_SbcName = #sbcName# and SBI_ExId = #exId#
+	</select>
+	<select id="findSbcIdByCode" parameterClass="java.util.HashMap" resultClass="Integer">
+		select SBI_SbcId from tp_SbcBasicInfo where SBI_SbcCode = #sbcCode# and SBI_ExId = #exId#
+	</select>
+	
+		<sql id="sql_count"> 
+		select count(1) 
+    </sql> 
+	<sql id="sql_select"> 
+		select *
+	</sql> 
+	
+	 <sql id="sql_where"> 
+		from tp_SbcBasicInfo where 1=1 
+			<isNotNull prepend="and" property="sbcId">
+				SBI_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcCode">
+				SBI_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcName">
+				SBI_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcType">
+				SBI_SbcType = #sbcType#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				SBI_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueOrg">
+				SBI_IssueOrg = #issueOrg#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueVolume">
+				SBI_IssueVolume = #issueVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="issuePrice">
+				SBI_IssuePrice = #issuePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="faceValue">
+				SBI_FaceValue = #faceValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="texture">
+				SBI_Texture = #texture#
+			</isNotNull>
+			<isNotNull prepend="and" property="volume">
+				SBI_Volume = #volume#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				SBI_Status = #status#
+			</isNotNull>	
+			<isNotNull prepend="and" property="inputDate">
+				SBI_InputDate = #inputDate#
+			</isNotNull>		
+		<dynamic prepend="and">
+			<isNotNull property="exIds"> 
+			SBI_ExId in
+			<iterate property="exIds" open="(" close=")" conjunction=",">
+				#exIds[]#
+			</iterate>
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotNull property="ff">
+				$ff$
+			</isNotNull>	
+			<isNotNull property="rank">
+				$rank$
+			</isNotNull>	
+		</dynamic>
+		<dynamic prepend="limit">
+			<isNotNull property="limit">
+				#start#, #limit#
+			</isNotNull>		
+		</dynamic>
+	</sql>
+	<select id="selectSbcBasicListCount" parameterClass="java.util.HashMap" resultClass="int"> 
+                <include refid="sql_count"/> 
+                <include refid="sql_where"/> 
+    </select> 
+	 <select id="selectSbcBasicInPage" parameterClass="java.util.HashMap" resultMap="SbcBasicResult"> 
+         <include refid="sql_select"/> 
+         <include refid="sql_where"/> 
+    </select>
+	<!--<CustomFileTag>-->
+</sqlMap>

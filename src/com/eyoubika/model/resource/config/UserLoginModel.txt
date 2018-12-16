@@ -1,0 +1,10 @@
+UserLogin com.eyoubika.user tu_UserLoginInfo userId
+Integer	userId 		int(10) 		false 用户id
+String 	UUID 	varchar(128) 	true UUID
+String  termType char(6)		true 终端类型
+String 	firstLogiTime varchar(32)	true 首次登录时间
+String 	lastLogiTime varchar(32)	true 上次登录时间
+String  logiTime	 varchar(32)	true 登录时间
+String  logiIp		varchar(32)		true 登录IP
+String  version 		varchar(32)	true	客户端版本
+

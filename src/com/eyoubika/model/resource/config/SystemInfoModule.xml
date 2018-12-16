@@ -1,0 +1,43 @@
+<modules>
+	<module id="1">
+		<name>SystemInfo</name>
+		<package>com.eyoubika.system</package>
+		<action name="addSystemInfo">
+			<input>SystemInfoDomain</input>
+		</action>
+		<action name="getSystemInfo">
+		</action>
+		<action  name="deleteSystemInfo">
+		</action>
+		<action  name="modifySystemInfo">
+			<input>SystemInfoDomain</input>
+		</action>
+		<vo voName="SystemInfo">
+			<val valName="sysId">
+				<attrType>String</attrType>
+				<attrName>sysId</attrName>
+				<attrNote>系统信息ID</attrNote>
+			</val>
+			<val valName="name">
+				<attrType>String</attrType>
+				<attrName>name</attrName>
+				<attrNote>名称</attrNote>
+			</val>
+			<val valName="value">
+				<attrType>String</attrType>
+				<attrName>value</attrName>
+				<attrNote>值</attrNote>
+			</val>
+			<val valName="type">
+				<attrType>String</attrType>
+				<attrName>type</attrName>
+				<attrNote>类型</attrNote>
+			</val>
+			<val valName="date">
+				<attrType>String</attrType>
+				<attrName>date</attrName>
+				<attrNote>时间</attrNote>
+			</val>
+		</vo>
+	</module>
+</modules>

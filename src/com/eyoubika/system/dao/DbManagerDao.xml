@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-08-20 17:13:17
+  -==========================================================================================-->
+<sqlMap namespace="ts_DbManager">
+	<typeAlias alias="DbManagerDomain" type="com.eyoubika.system.domain.DbManagerDomain"/>
+	<resultMap id="DbManagerResult" class="com.eyoubika.system.domain.DbManagerDomain">
+		<result column="DM_CId" property="cId" jdbcType="VARCHAR" />
+		<result column="DM_Host" property="host" jdbcType="VARCHAR" />
+		<result column="DM_Port" property="port" jdbcType="VARCHAR" />
+		<result column="DM_Database" property="database" jdbcType="VARCHAR" />
+		<result column="DM_Table" property="table" jdbcType="VARCHAR" />
+		<result column="DM_Type" property="type" jdbcType="VARCHAR" />
+		<result column="DM_User" property="user" jdbcType="VARCHAR" />
+		<result column="DM_Password" property="password" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertDbManager" parameterClass="com.eyoubika.system.domain.DbManagerDomain">
+		insert into ts_DbManager(DM_CId ,DM_Host ,DM_Port ,DM_Database ,DM_Table ,DM_Type ,DM_User ,DM_Password) 
+		values (#cId# ,#host# ,#port# ,#database# ,#table# ,#type# ,#user# ,#password#)
+	</insert>
+	<select id="selectDbManager" parameterClass="String" resultMap="DbManagerResult">
+		select * from ts_DbManager where DM_CId= #cId#
+	</select>
+	<select id="selectDbManagerByDomain" parameterClass="com.eyoubika.system.domain.DbManagerDomain" resultMap="DbManagerResult">
+		select * from ts_DbManager
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="cId">
+				DM_CId = #cId#
+			</isNotNull>
+			<isNotNull prepend="and" property="host">
+				DM_Host = #host#
+			</isNotNull>
+			<isNotNull prepend="and" property="port">
+				DM_Port = #port#
+			</isNotNull>
+			<isNotNull prepend="and" property="database">
+				DM_Database = #database#
+			</isNotNull>
+			<isNotNull prepend="and" property="table">
+				DM_Table = #table#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				DM_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="user">
+				DM_User = #user#
+			</isNotNull>
+			<isNotNull prepend="and" property="password">
+				DM_Password = #password#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectDbManagerList" parameterClass="com.eyoubika.system.domain.DbManagerDomain" resultMap="DbManagerResult">
+		select * from ts_DbManager
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="cId">
+				DM_CId = #cId#
+			</isNotNull>
+			<isNotNull prepend="and" property="host">
+				DM_Host = #host#
+			</isNotNull>
+			<isNotNull prepend="and" property="port">
+				DM_Port = #port#
+			</isNotNull>
+			<isNotNull prepend="and" property="database">
+				DM_Database = #database#
+			</isNotNull>
+			<isNotNull prepend="and" property="table">
+				DM_Table = #table#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				DM_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="user">
+				DM_User = #user#
+			</isNotNull>
+			<isNotNull prepend="and" property="password">
+				DM_Password = #password#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteDbManager"  parameterClass="String">
+		delete from ts_DbManager where DM_CId = #cId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ts_DbManager
+	</delete>
+	<update id = "updateDbManager" parameterClass="com.eyoubika.system.domain.DbManagerDomain">
+		update ts_DbManager
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="cId">
+				DM_CId = #cId#
+			</isNotNull>
+			<isNotNull prepend="," property="host">
+				DM_Host = #host#
+			</isNotNull>
+			<isNotNull prepend="," property="port">
+				DM_Port = #port#
+			</isNotNull>
+			<isNotNull prepend="," property="database">
+				DM_Database = #database#
+			</isNotNull>
+			<isNotNull prepend="," property="table">
+				DM_Table = #table#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+				DM_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="user">
+				DM_User = #user#
+			</isNotNull>
+			<isNotNull prepend="," property="password">
+				DM_Password = #password#
+			</isNotNull>
+		</dynamic>
+	where DM_CId = #cId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.system.domain.DbManagerDomain" resultClass="String">
+		select 1 from ts_DbManager
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="cId">
+				DM_CId = #cId#
+			</isNotNull>
+			<isNotNull prepend="and" property="host">
+				DM_Host = #host#
+			</isNotNull>
+			<isNotNull prepend="and" property="port">
+				DM_Port = #port#
+			</isNotNull>
+			<isNotNull prepend="and" property="database">
+				DM_Database = #database#
+			</isNotNull>
+			<isNotNull prepend="and" property="table">
+				DM_Table = #table#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				DM_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="user">
+				DM_User = #user#
+			</isNotNull>
+			<isNotNull prepend="and" property="password">
+				DM_Password = #password#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<select id="isExistTable" parameterClass="String" resultClass="Integer">
+		SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_NAME=#tableName#;
+	</select>
+	<!--<CustomFileTag>-->
+</sqlMap>

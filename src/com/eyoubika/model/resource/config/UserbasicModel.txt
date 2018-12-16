@@ -1,0 +1,12 @@
+UserBasic com.eyoubika.user tu_UserBasicInfo userId auto
+Integer	userId 		int(10) 		false 用户id
+String 	nickName 		varchar(64) 	true 昵称
+String 	password 	varchar(32) 	false 密码
+String 	token 	varchar(32) 	true 令牌
+String 	salt 	varchar(32) 	true 盐值
+String 	pnumber 	varchar(32) 	true 手机号
+String 	status 	char(6) 	false 状态
+String 	email  	varchar(64) 	true 邮箱
+String 	regiTime varchar(32)	true 注册时间
+String 	tradePassword varchar(32)	true 交易密码
+

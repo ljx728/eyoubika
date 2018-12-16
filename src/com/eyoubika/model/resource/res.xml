@@ -1,0 +1,74 @@
+<!--1.> to: /Users/lijiaxuan/eyoubika/eybk_server/eyoubika/src/com/eyoubika/system/systemStruts.xml
+-->
+<struts>
+	<package name="com.eyoubika.system" extends="json-default" namespace="/system">
+		<interceptors>
+			<interceptor name="errorInterceptor" class="com.eyoubika.common.ErrorInterceptor"></interceptor>
+			<interceptor name="authInterceptor" class="com.eyoubika.common.AuthInterceptor"></interceptor>
+			<interceptor-stack name="myErrorInterceptor">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="errorInterceptor" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myErrorInterceptor" />
+		<global-results>
+			<result name="YbkException" type="json">
+				<param name="root">jsonData</param>
+			</result>
+			<result type="json">
+		<param name="root">jsonData</param>
+			</result>
+		</global-results>
+		<action name="addUserFeedback" class="userFeedbackAction" method="addUserFeedback">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getUserFeedback" class="userFeedbackAction" method="getUserFeedback">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getUserFeedbackList" class="userFeedbackAction" method="getUserFeedbackList">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="deleteUserFeedback" class="userFeedbackAction" method="deleteUserFeedback">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="modifyUserFeedback" class="userFeedbackAction" method="modifyUserFeedback">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+	</package>
+</struts>
+<!--2.> to: /Users/lijiaxuan/eyoubika/eybk_server/eyoubika/src/struts.xml
+-->
+<struts>
+	<include file="com/eyoubika/system/systemStruts.xml"/>
+</struts>
+<!--3.> to: /Users/lijiaxuan/eyoubika/eybk_server/eyoubika/src/com/eyoubika/system/systemContext.xml
+-->
+	<bean id="userFeedbackVO" class="com.eyoubika.system.web.VO.UserFeedbackVO">
+	</bean>
+	<bean id="userFeedbackDomain" class="com.eyoubika.system.domain.UserFeedbackDomain">
+	</bean>
+	<bean id="userFeedbackAL" class="com.eyoubika.system.application.UserFeedbackAL">
+	</bean>
+	<bean id="userFeedbackService" class="com.eyoubika.system.service.impl.UserFeedbackServiceImpl">
+		<property name="userFeedbackDomain" ref="userFeedbackDomain" />
+		<property name="userFeedbackAL" ref="userFeedbackAL" />
+	</bean>
+	<bean id="userFeedbackAction" class="com.eyoubika.system.web.action.UserFeedbackAction">
+		<property name="userFeedbackVO" ref="userFeedbackVO" />
+		<property name="userFeedbackService" ref="userFeedbackService" />
+	</bean>
+</beans>
+<!--4.> to: /Users/lijiaxuan/eyoubika/eybk_server/eyoubika/src/applicationContext.xml-->
+	 <import resource="classpath:com/eyoubika/system/systemContext.xml" />
+</beans>

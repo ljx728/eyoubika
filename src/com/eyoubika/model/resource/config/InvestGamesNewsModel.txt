@@ -1,0 +1,8 @@
+InvestGamesNews com.eyoubika.spider ta_InvestGamesNews newsId auto
+Integer  newsId 	int 	false 资讯id
+String 	title 	varchar(128) 	false 标题
+String 	url 	varchar(512) 	false url
+String 	brief 	varchar(1024) 	true 简介
+String  type 		char(2) 	true 类型
+String  date	 char(8)		false 添加日期
+String  time	 char(8)		false 添加时间

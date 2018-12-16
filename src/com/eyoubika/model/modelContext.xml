@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<bean id="daoCoderAL" class="com.eyoubika.model.application.DaoCoderAL">	 
+	</bean>
+	<bean id="pOJOCoderAL" class="com.eyoubika.model.application.POJOCoderAL">	 
+	</bean>
+	<bean id="sQLCoderAL" class="com.eyoubika.model.application.SQLCoderAL">	 
+	</bean>
+	<bean id="actionCoderAL" class="com.eyoubika.model.application.ActionCoderAL">	 
+	</bean>
+	<bean id="serviceCoderAL" class="com.eyoubika.model.application.ServiceCoderAL">	 
+	</bean>
+	<bean id="applicationCoderAL" class="com.eyoubika.model.application.ApplicationCoderAL">	 
+	</bean>
+	<bean id="autoCoderAL" class="com.eyoubika.model.application.AutoCoderAL">	 
+		<property name="daoCoderAL" ref="daoCoderAL" />		
+		<property name="pOJOCoderAL" ref="pOJOCoderAL" />	
+		<property name="sQLCoderAL" ref="sQLCoderAL" />	
+		<property name="actionCoderAL" ref="actionCoderAL" />		
+		<property name="serviceCoderAL" ref="serviceCoderAL" />	
+		<property name="applicationCoderAL" ref="applicationCoderAL" />	
+	</bean>
+	
+	<bean id="autoCoderService" class="com.eyoubika.model.service.impl.AutoCoderServiceImpl">	 
+		<property name="autoCoderAL" ref="autoCoderAL" />
+	</bean>
+	<bean id="autoCoderAction" class="com.eyoubika.model.web.action.AutoCoderAction">
+	  <property name="autoCoderService" ref="autoCoderService" />
+	</bean>	
+</beans>

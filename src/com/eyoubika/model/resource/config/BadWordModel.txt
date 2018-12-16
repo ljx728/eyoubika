@@ -1,0 +1,5 @@
+BadWord com.eyoubika.system ts_BadWordInfo wordId auto
+Integer  wordId 	int 	false 铭感次id
+String 	word 	varchar(128) 	false 敏感词
+String  type 		char(2) 	false 类型
+String  date	 char(8)		false 添加时间

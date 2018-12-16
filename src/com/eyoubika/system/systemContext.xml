@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<!--<CustomFileTag>-->
+	<bean id="imageAL" class="com.eyoubika.system.application.ImageAL">	 
+	</bean>
+	<bean id="smsService" class="com.eyoubika.system.service.impl.SmsServiceImpl">	 
+	</bean>
+	<bean id="imageService" class="com.eyoubika.system.service.impl.ImageServiceImpl">	
+		<property name="imageAL" ref="imageAL" /> 
+	</bean>
+
+	<bean id="smsAction" class="com.eyoubika.system.web.action.SmsAction">
+  		<property name="smsService" ref="smsService" />
+	</bean>
+
+	<bean id="imageAction" class="com.eyoubika.system.web.action.ImageAction">
+		<property name="imageService" ref="imageService" /> 
+	</bean>
+	<bean id="reportOuterAction" class="com.eyoubika.system.web.action.ReportOuterAction">
+
+	</bean>
+	
+	<bean id="systemInfoVO" class="com.eyoubika.system.web.VO.SystemInfoVO">
+	</bean>
+	<bean id="systemInfoDao" class="com.eyoubika.system.dao.SystemInfoDao">
+	</bean>
+	<bean id="systemInfoDomain" class="com.eyoubika.system.domain.SystemInfoDomain">
+	</bean>
+	<bean id="systemInfoAL" class="com.eyoubika.system.application.SystemInfoAL">	
+		<property name="systemInfoDao" ref="systemInfoDao" />
+	</bean>
+	<bean id="systemInfoService" class="com.eyoubika.system.service.impl.SystemInfoServiceImpl">
+		<property name="systemInfoDomain" ref="systemInfoDomain" />
+		<property name="systemInfoAL" ref="systemInfoAL" />
+	</bean>
+	<bean id="systemInfoAction" class="com.eyoubika.system.web.action.SystemInfoAction">
+		<property name="systemInfoVO" ref="systemInfoVO" />
+		<property name="systemInfoService" ref="systemInfoService" />
+	</bean>
+	
+	<bean id="userFeedbackDao" class="com.eyoubika.system.dao.UserFeedbackDao">
+	</bean>
+	<bean id="userFeedbackVO" class="com.eyoubika.system.web.VO.UserFeedbackVO">
+	</bean>
+	<bean id="userFeedbackDomain" class="com.eyoubika.system.domain.UserFeedbackDomain">
+	</bean>
+	<bean id="userFeedbackAL" class="com.eyoubika.system.application.UserFeedbackAL">
+		<property name="userFeedbackDao" ref="userFeedbackDao" />
+	</bean>
+	<bean id="userFeedbackService" class="com.eyoubika.system.service.impl.UserFeedbackServiceImpl">
+		<property name="userFeedbackDomain" ref="userFeedbackDomain" />
+		<property name="userFeedbackAL" ref="userFeedbackAL" />
+	</bean>
+	<bean id="userFeedbackAction" class="com.eyoubika.system.web.action.UserFeedbackAction">
+		<property name="userFeedbackVO" ref="userFeedbackVO" />
+		<property name="userFeedbackService" ref="userFeedbackService" />
+	</bean>
+	
+	<!--<CustomFileTag>-->
+</beans>

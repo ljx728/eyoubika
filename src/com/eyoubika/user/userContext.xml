@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<!--<CustomFileTag>-->
+	<bean id="sbcMapRedisDao" class="com.eyoubika.spider.dao.SbcMapRedisDao">
+	</bean>
+	<bean id="openAccountPersDomain" class="com.eyoubika.user.domain.OpenAccountPersDomain">
+	</bean>
+	<bean id="openAccountCorpDomain" class="com.eyoubika.user.domain.OpenAccountCorpDomain">
+	</bean>
+	<bean id="openAccountDetailDomain" class="com.eyoubika.user.domain.OpenAccountDetailDomain">
+	</bean>
+	<bean id="openAccountBriefDomain" class="com.eyoubika.user.domain.OpenAccountBriefDomain">
+	</bean>
+	<bean id="openAccountPersDao" class="com.eyoubika.user.dao.OpenAccountPersDao">
+	</bean>
+	<bean id="openAccountCorpDao" class="com.eyoubika.user.dao.OpenAccountCorpDao">
+	</bean>
+	<bean id="openAccountDetailDao" class="com.eyoubika.user.dao.OpenAccountDetailDao">
+	</bean>
+	<bean id="openAccountAL" class="com.eyoubika.user.application.OpenAccountAL">
+	<property name="openAccountPersDao" ref="openAccountPersDao" />
+	</bean>
+	<bean id="openAccountService" class="com.eyoubika.user.service.impl.OpenAccountServiceImpl">
+		<property name="openAccountPersDomain" ref="openAccountPersDomain" />
+		<property name="openAccountCorpDomain" ref="openAccountCorpDomain" />
+		<property name="openAccountDetailDomain" ref="openAccountDetailDomain" />
+		<property name="openAccountBriefDomain" ref="openAccountBriefDomain" />
+		<property name="openAccountAL" ref="openAccountAL" />
+	</bean>
+	<bean id="openAccountAction" class="com.eyoubika.user.web.action.OpenAccountAction">
+		<property name="openAccountService" ref="openAccountService" />
+	</bean>
+	
+	<bean id="userBasicVO" class="com.eyoubika.user.web.VO.UserBasicVO">	 
+	</bean>
+	<bean id="userDetailVO" class="com.eyoubika.user.web.VO.UserDetailVO">	 
+	</bean>
+	<bean id="userBasicDao" class="com.eyoubika.user.dao.UserBasicDao">	 
+	</bean>
+	<bean id="userDetailDao" class="com.eyoubika.user.dao.UserDetailDao">	 
+	</bean>
+	<bean id="badWordDao" class="com.eyoubika.system.dao.BadWordDao">	 
+	</bean>
+	<bean id="userLoginDao" class="com.eyoubika.user.dao.UserLoginDao">	 
+	</bean>
+	<bean id="userBasicDomain" class="com.eyoubika.user.domain.UserBasicDomain">	 	
+	</bean>
+	<bean id="userInfoDomain" class="com.eyoubika.user.domain.UserInfoDomain">	 	
+	</bean>
+	<bean id="userLoginDomain" class="com.eyoubika.user.domain.UserLoginDomain">	 	
+	</bean>
+	<bean id="userDetailDomain" class="com.eyoubika.user.domain.UserDetailDomain">	 	
+	</bean>
+	<bean id="userAL" class="com.eyoubika.user.application.UserAL">	 
+		<property name="userBasicDao" ref="userBasicDao" />
+		<property name="badWordDao" ref="badWordDao" />
+		<property name="userLoginDao" ref="userLoginDao" />	
+		<property name="userDetailDao" ref="userDetailDao" />
+		<property name="favorListAL" ref="favorListAL" />
+	</bean>
+	<bean id="userService" class="com.eyoubika.user.service.impl.UserServiceImpl">	 
+		<property name="userAL" ref="userAL" />
+		<property name="userBasicDomain" ref="userBasicDomain" />		
+		<property name="userInfoDomain" ref="userInfoDomain" />
+		<property name="userDetailDomain" ref="userDetailDomain" />
+		<property name="userLoginDomain" ref="userLoginDomain" />
+	</bean>
+	<bean id="userAction" class="com.eyoubika.user.web.action.UserAction">
+		<property name="userService" ref="userService" />
+		<property name="userBasicVO" ref="userBasicVO" />
+		<property name="userDetailVO" ref="userDetailVO" />
+	</bean>	
+	
+	<bean id="favoriteListVO" class="com.eyoubika.user.web.VO.FavoriteListVO">
+	</bean>
+	<bean id="favoriteSbcsDao" class="com.eyoubika.user.dao.FavoriteSbcsDao">	 
+	</bean>
+	<bean id="favoriteExsDao" class="com.eyoubika.user.dao.FavoriteExsDao">	 
+	</bean>
+	<bean id="quotesRedisDao" class="com.eyoubika.info.dao.QuotesRedisDao">	 
+	</bean>
+	<bean id="favoriteSbcsDomain" class="com.eyoubika.user.domain.FavoriteSbcsDomain">	 	
+	</bean>
+	<bean id="favoriteExsDomain" class="com.eyoubika.user.domain.FavoriteExsDomain">	 	
+	</bean>
+	<bean id="favorListAL" class="com.eyoubika.user.application.FavorListAL">	 
+		<property name="favoriteSbcsDao" ref="favoriteSbcsDao" />
+		<property name="favoriteExsDao" ref="favoriteExsDao" />
+		<property name="sbcMapRedisDao" ref="sbcMapRedisDao" />
+		<property name="quotesRedisDao" ref="quotesRedisDao" />
+	</bean>
+	<bean id="favorListService" class="com.eyoubika.user.service.impl.FavorListServiceImpl">	 
+		<property name="favorListAL" ref="favorListAL" />
+		<property name="favoriteSbcsDomain" ref="favoriteSbcsDomain" />		
+		<property name="favoriteExsDomain" ref="favoriteExsDomain" />		
+	</bean>
+	<bean id="favorListAction" class="com.eyoubika.user.web.action.FavorListAction">
+	  <property name="favorListService" ref="favorListService" />
+	   <property name="favoriteListVO" ref="favoriteListVO" />
+	</bean>
+	<!--<CustomFileTag>-->
+</beans>

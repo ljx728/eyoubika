@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<!-- 指定Struts 2配置文件的根元素 -->
+<struts>
+	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest" 
+		name="myRequestParser" class="com.eyoubika.common.MyRequestParser" 
+ 		scope="default" optional="true" /> 
+	<constant name="struts.multipart.handler" value="myRequestParser" /> 
+
+	<!-- <constant name="struts.custom.i18n.resources" value="mess"/>
+	<constant name="struts.i18n.resources" value="GBK"/> -->
+	
+	<package name="struts" extends="struts-default" namespace="/sys">
+		<action name="getDownloadFile" class="reportOuterAction" >
+			<result name="success" type="stream">
+				<param name="contentType">text/plain</param>  
+               <param name="contentDisposition">attachment;fileName="${fileName}"</param>  
+
+               <param name="bufferSize">1024</param> 
+				<param name="inputName">downloadFile</param>
+			</result>
+		</action>
+		
+	</package>
+	<package name="com.eyoubika.system" extends="json-default" namespace="/sys">
+		<interceptors>
+			<interceptor name="errorInterceptor" class="com.eyoubika.common.ErrorInterceptor"></interceptor>
+			<interceptor name="authInterceptor" class="com.eyoubika.common.AuthInterceptor"></interceptor>
+			<interceptor-stack name="myErrorInterceptor">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="errorInterceptor" />
+			</interceptor-stack>
+
+		</interceptors>
+		<default-interceptor-ref name="myErrorInterceptor" />
+		<global-results>
+			<result name="YbkException" type="json">
+				<param name="root">jsonData</param>
+			</result>
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</global-results>
+		<action name="addSystemInfo" class="systemInfoAction" method="addSystemInfo">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getSystemInfo" class="systemInfoAction" method="getSystemInfo">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getSystemInfoByName" class="systemInfoAction" method="getSystemInfoByName">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="deleteSystemInfo" class="systemInfoAction" method="deleteSystemInfo">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="modifySystemInfo" class="systemInfoAction" method="modifySystemInfo">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="checkAppVersion" class="systemInfoAction" method="checkAppVersion">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getAuthcode" class="smsAction" method="getAuthcode">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="checkAuthcode" class="smsAction" method="checkAuthcode">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		
+		
+		
+		<action name="getImage" class="imgAction" method="getImage">
+			
+		</action>
+		<action name="getThumbnail" class="imgAction" method="getThumbnail">
+			
+		</action>
+		<action name="uploads" class="imageAction" method="uploads">
+			
+		</action>
+		<action name="upload" class="imageAction" method="upload">
+			
+		</action>
+		<action name="outputExcel" class="reportOuterAction" method="outputExcel">
+			
+		</action>
+		
+		<action name="uploadImage" class="imageAction" method="uploadImage">
+	           <interceptor-ref name ="fileUpload" > 
+	                <param name ="allowedTypes" > 
+	                    image/bmp,image/png,image/gif,image/jpeg
+	                </param > 
+	            </interceptor-ref > 
+	            <interceptor-ref name ="defaultStack" />
+			<!-- <result name="success">./ShowUpload.jsp</result> -->
+		</action>
+		
+		
+		<action name="addUserFeedback" class="userFeedbackAction" method="addUserFeedback">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getUserFeedback" class="userFeedbackAction" method="getUserFeedback">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getUserFeedbackList" class="userFeedbackAction" method="getUserFeedbackList">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="deleteUserFeedback" class="userFeedbackAction" method="deleteUserFeedback">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="modifyUserFeedback" class="userFeedbackAction" method="modifyUserFeedback">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+	</package>
+	
+</struts>

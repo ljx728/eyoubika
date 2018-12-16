@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+<!-- <package name="default" extends="struts-default">
+<default-action-ref name="notFound" />
+<action name="notFound">
+<result>/404.jsp</result>
+</action>
+</package> -->
+	<!--<CustomFileTag>-->
+	<include file="com/eyoubika/sbc/sbcStruts.xml"/>	
+	<include file="com/eyoubika/user/userStruts.xml"/>
+	<include file="com/eyoubika/system/systemStruts.xml"/>
+	<include file="com/eyoubika/spider/spiderStruts.xml"/>
+	<include file="com/eyoubika/info/infoStruts.xml"/>
+	<include file="com/eyoubika/batch/batchStruts.xml"/>
+	<include file="com/eyoubika/model/modelStruts.xml"/>
+	<include file="com/eyoubika/platform/platformStruts.xml"/>
+	<!--<CustomFileTag>-->
+</struts>

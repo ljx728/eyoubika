@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-10-09 17:25:46
+  -==========================================================================================-->
+<sqlMap namespace="ta_NoticeArticle">
+	<typeAlias alias="ArticleDomain" type="com.eyoubika.spider.domain.ArticleDomain"/>
+	<resultMap id="NoticeArticleResult" class="com.eyoubika.spider.domain.ArticleDomain">
+		<result column="NA_ArticleId" property="articleId" jdbcType="int(10)" />
+		<result column="NA_Title" property="title" jdbcType="VARCHAR" />
+		<result column="NA_SubTitle" property="subTitle" jdbcType="VARCHAR" />
+		<result column="NA_IssueTime" property="issueTime" jdbcType="VARCHAR" />
+		<result column="NA_WebTime" property="webTime" jdbcType="VARCHAR" />
+		<result column="NA_FetchTime" property="fetchTime" jdbcType="VARCHAR" />
+		<result column="NA_ExId" property="exId" jdbcType="VARCHAR" />
+		<result column="NA_Article" property="article" jdbcType="mediumtext" />
+		<result column="NA_Type" property="type" jdbcType="CHAR" />
+		<result column="NA_Status" property="status" jdbcType="CHAR" />
+		<result column="NA_HaveImg" property="haveImg" jdbcType="CHAR" />
+		<result column="NA_ArticleUrl" property="articleUrl" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertNoticeArticle" parameterClass="com.eyoubika.spider.domain.ArticleDomain">
+		insert into ta_NoticeArticle(NA_Title ,NA_SubTitle ,NA_IssueTime ,NA_WebTime ,NA_FetchTime ,NA_ExId ,NA_Article,NA_Type ,NA_Status ,NA_HaveImg ,NA_ArticleUrl) 
+		values (#title# ,#subTitle# ,#issueTime# ,#webTime# ,#fetchTime# ,#exId# ,#article#,#type#  ,#status# ,#haveImg# ,#articleUrl#)
+		<selectKey resultClass="int" keyProperty="articleId">
+			SELECT LAST_INSERT_ID() as articleId
+		</selectKey>
+	</insert>
+	<select id="selectNoticeArticle" parameterClass="Integer" resultMap="NoticeArticleResult">
+		select * from ta_NoticeArticle where NA_ArticleId= #articleId#
+	</select>
+	<select id="selectNoticeArticleByDomain" parameterClass="com.eyoubika.spider.domain.ArticleDomain" resultMap="NoticeArticleResult">
+		select * from ta_NoticeArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				NA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				NA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				NA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				NA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				NA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				NA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				NA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				NA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				NA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				NA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				NA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				NA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectNoticeArticleList" parameterClass="com.eyoubika.spider.domain.ArticleDomain" resultMap="NoticeArticleResult">
+		select * from ta_NoticeArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				NA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				NA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				NA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				NA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				NA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				NA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				NA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				NA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				NA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				NA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				NA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				NA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteNoticeArticle"  parameterClass="Integer">
+		delete from ta_NoticeArticle where NA_ArticleId = #articleId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ta_NoticeArticle
+	</delete>
+	<update id = "updateNoticeArticle" parameterClass="com.eyoubika.spider.domain.ArticleDomain">
+		update ta_NoticeArticle
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="title">
+				NA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="," property="subTitle">
+				NA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="," property="issueTime">
+				NA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="," property="webTime">
+				NA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="," property="fetchTime">
+				NA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="," property="exId">
+				NA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="," property="article">
+				NA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+				NA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				NA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="haveImg">
+				NA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="," property="articleUrl">
+				NA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	where NA_ArticleId = #articleId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.spider.domain.ArticleDomain" resultClass="String">
+		select 1 from ta_NoticeArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				NA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				NA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				NA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				NA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				NA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				NA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				NA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				NA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				NA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				NA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				NA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				NA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<sql id="sql_count"> 
+		select count(1) 
+    </sql> 
+	<sql id="sql_select"> 
+		select *
+	</sql> 
+	
+	 <sql id="sql_where"> 
+		from ta_NoticeArticle where 1=1 
+			<isNotNull prepend="and" property="articleId">
+				NA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				NA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				NA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				NA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				NA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				NA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				NA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				NA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				NA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				NA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				NA_ArticleUrl = #articleUrl#
+			</isNotNull>			
+		<dynamic prepend="and">
+			<isNotNull property="exIds"> 
+			NA_ExId in
+			<iterate property="exIds" open="(" close=")" conjunction=",">
+				#exIds[]#
+			</iterate>
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotNull property="ff">
+				$ff$
+			</isNotNull>	
+			<isNotNull property="rank">
+				$rank$
+			</isNotNull>	
+		</dynamic>
+		<dynamic prepend="limit">
+			<isNotNull property="limit">
+				#start#, #limit#
+			</isNotNull>		
+		</dynamic>
+	</sql>
+	<select id="selectNoticeArticleListCount" parameterClass="java.util.HashMap" resultClass="int"> 
+                <include refid="sql_count"/> 
+                <include refid="sql_where"/> 
+    </select> 
+    <select id="selectNoticeArticleListInPage" parameterClass="java.util.HashMap" resultMap="NoticeArticleResult"> 
+                <include refid="sql_select"/> 
+                <include refid="sql_where"/> 
+    </select>
+    <select id="selectMaxDateByExId" parameterClass="String" resultClass="String">
+		select max(NA_WebTime) from ta_NoticeArticle where NA_ExId= #exId#
+	</select>
+	<!--<CustomFileTag>-->
+</sqlMap>

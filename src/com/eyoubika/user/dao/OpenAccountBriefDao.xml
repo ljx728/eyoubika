@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-07-22 20:53:33
+  -==========================================================================================-->
+<sqlMap namespace="tu_OpenAccountBrief">
+	<typeAlias alias="OpenAccountBriefDomain" type="com.eyoubika.user.domain.OpenAccountBriefDomain"/>
+	<resultMap id="OpenAccountBriefResult" class="com.eyoubika.user.domain.OpenAccountBriefDomain">
+		<result column="OAB_OpenNo" property="openNo" jdbcType="CHAR" />
+		<result column="OAB_UserId" property="userId" jdbcType="int(10)" />
+		<result column="OAB_ClientName" property="clientName" jdbcType="VARCHAR" />
+		<result column="OAB_Pnumber" property="pnumber" jdbcType="VARCHAR" />
+		<result column="OAB_ApplyDate" property="applyDate" jdbcType="CHAR" />
+		<result column="OAB_OpenType" property="openType" jdbcType="VARCHAR" />
+		<result column="OAB_Status" property="status" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertOpenAccountBrief" parameterClass="com.eyoubika.user.domain.OpenAccountBriefDomain">
+		insert into tu_OpenAccountBrief(OAB_OpenNo ,OAB_UserId ,OAB_ClientName ,OAB_Pnumber ,OAB_ApplyDate ,OAB_OpenType ,OAB_Status) 
+		values (#openNo# ,#userId# ,#clientName# ,#pnumber# ,#applyDate# ,#openType# ,#status#)
+	</insert>
+	<select id="selectOpenAccountBrief" parameterClass="String" resultMap="OpenAccountBriefResult">
+		select * from tu_OpenAccountBrief where OAB_OpenNo= #openNo#
+	</select>
+	<select id="selectOpenAccountBriefByDomain" parameterClass="com.eyoubika.user.domain.OpenAccountBriefDomain" resultMap="OpenAccountBriefResult">
+		select * from tu_OpenAccountBrief
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="openNo">
+				OAB_OpenNo = #openNo#
+			</isNotNull>
+			<isNotNull prepend="and" property="userId">
+				OAB_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="clientName">
+				OAB_ClientName = #clientName#
+			</isNotNull>
+			<isNotNull prepend="and" property="pnumber">
+				OAB_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="applyDate">
+				OAB_ApplyDate = #applyDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="openType">
+				OAB_OpenType = #openType#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				OAB_Status = #status#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectOpenAccountBriefList" parameterClass="com.eyoubika.user.domain.OpenAccountBriefDomain" resultMap="OpenAccountBriefResult">
+		select * from tu_OpenAccountBrief
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="openNo">
+				OAB_OpenNo = #openNo#
+			</isNotNull>
+			<isNotNull prepend="and" property="userId">
+				OAB_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="clientName">
+				OAB_ClientName = #clientName#
+			</isNotNull>
+			<isNotNull prepend="and" property="pnumber">
+				OAB_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="applyDate">
+				OAB_ApplyDate = #applyDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="openType">
+				OAB_OpenType = #openType#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				OAB_Status = #status#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteOpenAccountBrief"  parameterClass="String">
+		delete from tu_OpenAccountBrief where OAB_OpenNo = #openNo#
+	</delete>
+	<delete id = "deleteAll">
+		delete from tu_OpenAccountBrief
+	</delete>
+	<update id = "updateOpenAccountBrief" parameterClass="com.eyoubika.user.domain.OpenAccountBriefDomain">
+		update tu_OpenAccountBrief
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="openNo">
+				OAB_OpenNo = #openNo#
+			</isNotNull>
+			<isNotNull prepend="," property="userId">
+				OAB_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="," property="clientName">
+				OAB_ClientName = #clientName#
+			</isNotNull>
+			<isNotNull prepend="," property="pnumber">
+				OAB_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="," property="applyDate">
+				OAB_ApplyDate = #applyDate#
+			</isNotNull>
+			<isNotNull prepend="," property="openType">
+				OAB_OpenType = #openType#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				OAB_Status = #status#
+			</isNotNull>
+		</dynamic>
+	where OAB_OpenNo = #openNo#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.user.domain.OpenAccountBriefDomain" resultClass="String">
+		select 1 from tu_OpenAccountBrief
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="openNo">
+				OAB_OpenNo = #openNo#
+			</isNotNull>
+			<isNotNull prepend="and" property="userId">
+				OAB_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="clientName">
+				OAB_ClientName = #clientName#
+			</isNotNull>
+			<isNotNull prepend="and" property="pnumber">
+				OAB_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="applyDate">
+				OAB_ApplyDate = #applyDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="openType">
+				OAB_OpenType = #openType#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				OAB_Status = #status#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+</sqlMap>

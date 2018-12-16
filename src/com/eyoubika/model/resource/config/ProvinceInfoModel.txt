@@ -1,0 +1,3 @@
+ProvinceInfo com.eyoubika.system ts_ProvinceInfo proId
+String  proId 		varchar(6) 	false 省份id
+String 	proName 	varchar(32) 	false 省名

@@ -1,0 +1,9 @@
+Test com.eyoubika.model  ta_TestApp testId auto
+int testId int(10) false  自增id
+String modulePath varchar(32) true 模块路径
+String className varchar(32) 	 true 类名
+String packageName varchar(32)  false 包名
+String tableName 	varchar(32) true 表名 
+
+
+

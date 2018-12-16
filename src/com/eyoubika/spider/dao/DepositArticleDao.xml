@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================- 
+	- Description:__Description__ - Sql: __Sql__ - Author: lijiaxuan - Copyright:
+	CaiDan (c) 2015 jiaxuan.li@eyoubika.com - History: 1.0 created by lijiaxuan
+	at 2015-10-09 15:37:49 -========================================================================================== -->
+<sqlMap namespace="ta_DepositArticle">
+	<typeAlias alias="ArticleDomain" type="com.eyoubika.spider.domain.ArticleDomain" />
+	<resultMap id="DepositArticleResult" class="com.eyoubika.spider.domain.ArticleDomain">
+		<result column="DA_ArticleId" property="articleId" jdbcType="int(10)" />
+		<result column="DA_Title" property="title" jdbcType="VARCHAR" />
+		<result column="DA_SubTitle" property="subTitle" jdbcType="VARCHAR" />
+		<result column="DA_IssueTime" property="issueTime" jdbcType="VARCHAR" />
+		<result column="DA_WebTime" property="webTime" jdbcType="VARCHAR" />
+		<result column="DA_FetchTime" property="fetchTime" jdbcType="VARCHAR" />
+		<result column="DA_ExId" property="exId" jdbcType="VARCHAR" />
+		<result column="DA_Article" property="article" jdbcType="mediumtext" />
+		<result column="DA_Type" property="type" jdbcType="CHAR" />
+		<result column="DA_Status" property="status" jdbcType="CHAR" />
+		<result column="DA_HaveImg" property="haveImg" jdbcType="CHAR" />
+		<result column="DA_ArticleUrl" property="articleUrl" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertDepositArticle" parameterClass="com.eyoubika.spider.domain.ArticleDomain">
+		insert into ta_DepositArticle(DA_Title ,DA_SubTitle ,DA_IssueTime
+		,DA_WebTime ,DA_FetchTime ,DA_ExId ,DA_Article ,DA_Type,DA_Status
+		,DA_HaveImg ,DA_ArticleUrl)
+		values (#title# ,#subTitle# ,#issueTime# ,#webTime# ,#fetchTime# ,#exId#
+		,#article# ,#type# ,#status# ,#haveImg# ,#articleUrl#)
+		<selectKey resultClass="int" keyProperty="articleId">
+			SELECT
+			LAST_INSERT_ID() as articleId
+		</selectKey>
+	</insert>
+	<select id="selectDepositArticle" parameterClass="Integer"
+		resultMap="DepositArticleResult">
+		select * from ta_DepositArticle where DA_ArticleId=
+		#articleId#
+	</select>
+	<select id="selectDepositArticleByDomain" parameterClass="com.eyoubika.spider.domain.ArticleDomain"
+		resultMap="DepositArticleResult">
+		select * from ta_DepositArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				DA_ArticleId =
+				#articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				DA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				DA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				DA_IssueTime =
+				#issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				DA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				DA_FetchTime =
+				#fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				DA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				DA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				DA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				DA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				DA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				DA_ArticleUrl =
+				#articleUrl#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectDepositArticleList" parameterClass="com.eyoubika.spider.domain.ArticleDomain"
+		resultMap="DepositArticleResult">
+		select * from ta_DepositArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				DA_ArticleId =
+				#articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				DA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				DA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				DA_IssueTime =
+				#issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				DA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				DA_FetchTime =
+				#fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				DA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				DA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				DA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				DA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				DA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				DA_ArticleUrl =
+				#articleUrl#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id="deleteDepositArticle" parameterClass="Integer">
+		delete from
+		ta_DepositArticle where DA_ArticleId = #articleId#
+	</delete>
+	<delete id="deleteAll">
+		delete from ta_DepositArticle
+	</delete>
+	<update id="updateDepositArticle" parameterClass="com.eyoubika.spider.domain.ArticleDomain">
+		update ta_DepositArticle
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="title">
+				DA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="," property="subTitle">
+				DA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="," property="issueTime">
+				DA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="," property="webTime">
+				DA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="," property="fetchTime">
+				DA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="," property="exId">
+				DA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="," property="article">
+				DA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+				DA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				DA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="haveImg">
+				DA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="," property="articleUrl">
+				DA_ArticleUrl =
+				#articleUrl#
+			</isNotNull>
+		</dynamic>
+		where DA_ArticleId = #articleId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.spider.domain.ArticleDomain"
+		resultClass="String">
+		select 1 from ta_DepositArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				DA_ArticleId =
+				#articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				DA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				DA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				DA_IssueTime =
+				#issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				DA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				DA_FetchTime =
+				#fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				DA_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				DA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				DA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				DA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				DA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				DA_ArticleUrl =
+				#articleUrl#
+			</isNotNull>
+		</dynamic>
+		limit 1
+	</select>
+	<!--<CustomFileTag> -->
+	<sql id="sql_count">
+		select count(1)
+	</sql>
+	<sql id="sql_select">
+		select *
+	</sql>
+
+	<sql id="sql_where">
+		from ta_DepositArticle where 1=1
+		<isNotNull prepend="and" property="articleId">
+			DA_ArticleId = #articleId#
+		</isNotNull>
+		<isNotNull prepend="and" property="title">
+			DA_Title = #title#
+		</isNotNull>
+		<isNotNull prepend="and" property="subTitle">
+			DA_SubTitle = #subTitle#
+		</isNotNull>
+		<isNotNull prepend="and" property="issueTime">
+			DA_IssueTime = #issueTime#
+		</isNotNull>
+		<isNotNull prepend="and" property="webTime">
+			DA_WebTime = #webTime#
+		</isNotNull>
+		<isNotNull prepend="and" property="fetchTime">
+			DA_FetchTime = #fetchTime#
+		</isNotNull>
+		<isNotNull prepend="and" property="article">
+			DA_Article = #article#
+		</isNotNull>
+		<isNotNull prepend="and" property="type">
+			DA_Type = #type#
+		</isNotNull>
+		<isNotNull prepend="and" property="status">
+			DA_Status = #status#
+		</isNotNull>
+		<isNotNull prepend="and" property="haveImg">
+			DA_HaveImg = #haveImg#
+		</isNotNull>
+		<isNotNull prepend="and" property="articleUrl">
+			DA_ArticleUrl = #articleUrl#
+		</isNotNull>
+		<dynamic prepend="and">
+			<isNotNull property="exIds">
+				DA_ExId in
+				<iterate property="exIds" open="(" close=")" conjunction=",">
+					#exIds[]#
+				</iterate>
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotNull property="ff">
+				$ff$
+			</isNotNull>
+			<isNotNull property="rank">
+				$rank$
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="limit">
+			<isNotNull property="limit">
+				#start#, #limit#
+			</isNotNull>
+		</dynamic>
+	</sql>
+	<select id="selectDepositArticleListCount" parameterClass="java.util.HashMap"
+		resultClass="int">
+		<include refid="sql_count" />
+		<include refid="sql_where" />
+	</select>
+	<select id="selectDepositArticleListInPage" parameterClass="java.util.HashMap"
+		resultMap="DepositArticleResult">
+		<include refid="sql_select" />
+		<include refid="sql_where" />
+	</select>
+	<select id="selectMaxDateByExId" parameterClass="String"
+		resultClass="String">
+		select max(DA_WebTime) from ta_DepositArticle where
+		DA_ExId= #exId#
+	</select>
+	<!--<CustomFileTag> -->
+</sqlMap>

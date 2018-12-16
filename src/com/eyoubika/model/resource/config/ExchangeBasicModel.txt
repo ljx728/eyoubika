@@ -1,0 +1,4 @@
+ExchangeBasic com.eyoubika.sbc tp_ExchangeBasicInfo exId
+String  exId 	varchar(6) 	false 交易所编码
+String 	exName 	varchar(64) 	false 交易所名称
+String 	website 	varchar(64) 	false 交易所网址

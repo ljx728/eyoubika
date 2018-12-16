@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="sbcBasicDao" class="com.eyoubika.sbc.dao.SbcBasicDao">
+	</bean>
+	<bean id="exchangeBasicDao" class="com.eyoubika.sbc.dao.ExchangeBasicDao">
+	</bean>
+	
+	<bean id="subscribeArticleDao" class="com.eyoubika.spider.dao.SubscribeArticleDao">
+	</bean>
+
+	<bean id="quotationsFetcherAL" class="com.eyoubika.spider.application.QuotationsFetcherAL">
+		<property name="quotesRedisDao" ref="quotesRedisDao" />
+		<property name="sbcBasicDao" ref="sbcBasicDao" />
+	</bean>
+	
+
+	<bean id="quotationsIniterAL" class="com.eyoubika.spider.application.QuotationsIniterAL">
+		<property name="quotesRedisDao" ref="quotesRedisDao" />
+		<property name="sbcBasicDao" ref="sbcBasicDao" />
+	</bean>
+	<bean id="subscribeSpiderAL" class="com.eyoubika.spider.application.SubscribeSpiderAL">
+		<property name="subscribeArticleDao" ref="subscribeArticleDao" />
+	</bean>
+
+	<bean id="quotationsBatch" class="com.eyoubika.batch.QuotationsBatch">
+		<property name="quotationsFetcherAL" ref="quotationsFetcherAL" />
+		<property name="quotationsIniterAL" ref="quotationsIniterAL" />
+		<property name="sbcVolumeSpiderAL" ref="sbcVolumeSpiderAL" />	
+		<property name="quotationsHistFetcherAL" ref="quotationsHistFetcherAL" />	
+		<property name="tradeCalendarAL" ref="tradeCalendarAL" />
+		
+		<property name="quotationsBatchAL" ref="quotationsBatchAL" />
+		<property name="redisIniterBatchAL" ref="redisIniterBatchAL" />
+		<property name="sbcBatchAL" ref="sbcBatchAL" />	
+		
+	</bean>
+	
+	<bean id="quotationsBatchAL" class="com.eyoubika.batch.application.QuotationsBatchAL">
+		<property name="quotesRedisDao" ref="quotesRedisDao" />
+	</bean>
+	<bean id="redisIniterBatchAL" class="com.eyoubika.batch.application.RedisIniterBatchAL">
+		<property name="tradeCalendarAL" ref="tradeCalendarAL" />
+		<property name="quotesRedisDao" ref="quotesRedisDao" />
+		<property name="sbcBasicDao" ref="sbcBasicDao" />
+		<property name="sbcQuotationHistDao" ref="sbcQuotationHistDao" />		
+	</bean>
+	<bean id="sbcBatchAL" class="com.eyoubika.batch.application.SbcBatchAL">
+		<property name="exchangeBasicDao" ref="exchangeBasicDao" />
+		<property name="quotesRedisDao" ref="quotesRedisDao" />
+		<property name="sbcQuotationHistDao" ref="sbcQuotationHistDao" />	
+		<property name="tradeCalendarAL" ref="tradeCalendarAL" />			
+	</bean>
+
+	
+<!-- 	<bean id="inputTChartReminder" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		任务执行周期 2m 关于一些任务的参数请参考JDK doc文档和Spring相关文档
+		<property name="period">
+			<value>2000</value>
+		</property>
+		延时1m 执行任务
+		<property name="delay">
+			<value>1000</value>
+		</property>
+		指定触发器信息    
+        <property name="timerTask">    
+            <ref local="inputTChartTask" />    
+        </property> 
+	</bean>
+
+ 	<bean id="timerFactory"    
+        class="org.springframework.scheduling.timer.TimerFactoryBean">    
+        <property name="scheduledTimerTasks">    
+            <list>    
+                <ref local="inputTChartReminder" />                 
+            </list>    
+        </property>            
+    </bean>   -->  
+	<bean id="depositArticleDao" class="com.eyoubika.spider.dao.DepositArticleDao">
+	</bean>
+	<bean id="depositSpiderAL" class="com.eyoubika.spider.application.DepositSpiderAL">
+		<property name="depositArticleDao" ref="depositArticleDao" />
+	</bean>
+	<bean id="noticeArticleDao" class="com.eyoubika.spider.dao.NoticeArticleDao">
+	</bean>
+	<bean id="noticeSpiderAL" class="com.eyoubika.spider.application.NoticeSpiderAL">
+		<property name="noticeArticleDao" ref="noticeArticleDao" />
+	</bean>
+	<bean id="articleBatch" class="com.eyoubika.batch.ArticleBatch">
+		<property name="subscribeSpiderAL" ref="subscribeSpiderAL" />
+		<property name="depositSpiderAL" ref="depositSpiderAL" />
+		<property name="noticeSpiderAL" ref="noticeSpiderAL" />
+	</bean>
+	<bean id="sitemapAL" class="com.eyoubika.system.application.SitemapAL">
+		<property name="investArticleDao" ref="investArticleDao" />
+	</bean>
+	<bean id="utilBatch" class="com.eyoubika.batch.UtilBatch">
+		<property name="sitemapAL" ref="sitemapAL" />
+	</bean>
+</beans>

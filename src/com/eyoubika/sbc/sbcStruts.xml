@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<package name="com.eyoubika.sbc" extends="json-default" namespace="/sbc">
+		<interceptors>
+			<interceptor name="errorInterceptor" class="com.eyoubika.common.ErrorInterceptor"></interceptor>
+			<interceptor name="authInterceptor" class="com.eyoubika.common.AuthInterceptor"></interceptor>
+			<interceptor-stack name="myErrorInterceptor">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="errorInterceptor" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myErrorInterceptor" />
+		<global-results>
+			<result name="YbkException" type="json">
+				<param name="root">jsonData</param>
+			</result>
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+			<!-- <result name="notFound">/404.jsp</result> -->
+		</global-results>
+		<action name="addSbcBasic" class="sbcAction" method="addSbcBasic">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getSbcBasic" class="sbcAction" method="getSbcBasic">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getSbcBasicList" class="sbcAction" method="getSbcBasicList">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		
+		<action name="fuzzyQuerySbcs" class="sbcAction" method="fuzzyQuerySbcs">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+	<!--<CustomFileTag>-->
+		<action name="addTradeDay" class="tradeCalendarAction" method="addTradeDay">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getTradeDay" class="tradeCalendarAction" method="getTradeDay">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="deleteTradeDay" class="tradeCalendarAction" method="deleteTradeDay">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="modifyTradeDay" class="tradeCalendarAction" method="modifyTradeDay">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+	<!--<CustomFileTag>-->
+	</package>
+</struts>

@@ -1,0 +1,9 @@
+OpenAccountBrief com.eyoubika.user tu_OpenAccountBrief openNo
+String	openNo 		char(1) 		false 开户业务编号
+Integer	userId 		int(10) 		true 用户id
+String 	clientName 		varchar(128) 	true 企业名称
+String 	pnumber 	varchar(32) 	true 联系人手机号码
+String 	applyDate char(8)	false 申请日期
+String 	openType 	varchar(2) 	false 开户类型
+String 	status 	varchar(2) 	false 审核状态
+

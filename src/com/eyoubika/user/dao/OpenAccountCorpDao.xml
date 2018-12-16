@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-07-24 15:36:41
+  -==========================================================================================-->
+<sqlMap namespace="tu_OpenAccountCorp">
+	<typeAlias alias="OpenAccountCorpDomain" type="com.eyoubika.user.domain.OpenAccountCorpDomain"/>
+	<resultMap id="OpenAccountCorpResult" class="com.eyoubika.user.domain.OpenAccountCorpDomain">
+		<result column="OAC_OpenNo" property="openNo" jdbcType="CHAR" />
+		<result column="OAC_UserId" property="userId" jdbcType="int(10)" />
+		<result column="OAC_ClientName" property="clientName" jdbcType="VARCHAR" />
+		<result column="OAC_IdentifyType" property="identifyType" jdbcType="CHAR" />
+		<result column="OAC_IdentifyNumber" property="identifyNumber" jdbcType="VARCHAR" />
+		<result column="OAC_UserName" property="userName" jdbcType="VARCHAR" />
+		<result column="OAC_Pnumber" property="pnumber" jdbcType="VARCHAR" />
+		<result column="OAC_Email" property="email" jdbcType="VARCHAR" />
+		<result column="OAC_Province" property="province" jdbcType="VARCHAR" />
+		<result column="OAC_City" property="city" jdbcType="VARCHAR" />
+		<result column="OAC_Street" property="street" jdbcType="VARCHAR" />
+		<result column="OAC_BankId" property="bankId" jdbcType="VARCHAR" />
+		<result column="OAC_BankPlace" property="bankPlace" jdbcType="VARCHAR" />
+		<result column="OAC_BankAccount" property="bankAccount" jdbcType="VARCHAR" />
+		<result column="OAC_Status" property="status" jdbcType="CHAR" />
+		<result column="OAC_ExId" property="exId" jdbcType="VARCHAR" />
+		<result column="OAC_EmerName" property="emerName" jdbcType="VARCHAR" />
+		<result column="OAC_EmerPnumber" property="emerPnumber" jdbcType="VARCHAR" />
+		<result column="OAC_ApplyDate" property="applyDate" jdbcType="CHAR" />
+		<result column="OAC_ApplyTime" property="applyTime" jdbcType="VARCHAR" />
+		<result column="OAC_OperDate" property="operDate" jdbcType="CHAR" />
+		<result column="OAC_OperTime" property="operTime" jdbcType="VARCHAR" />
+		<result column="OAC_OperName" property="operName" jdbcType="VARCHAR" />
+		<result column="OAC_Channel" property="channel" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertOpenAccountCorp" parameterClass="com.eyoubika.user.domain.OpenAccountCorpDomain">
+		insert into tu_OpenAccountCorp(OAC_OpenNo ,OAC_UserId ,OAC_ClientName ,OAC_IdentifyType ,OAC_IdentifyNumber ,OAC_UserName ,OAC_Pnumber ,OAC_Email ,OAC_Province ,OAC_City ,OAC_Street ,OAC_BankId ,OAC_BankPlace ,OAC_BankAccount ,OAC_Status ,OAC_ExId ,OAC_EmerName ,OAC_EmerPnumber ,OAC_ApplyDate ,OAC_ApplyTime ,OAC_OperDate ,OAC_OperTime ,OAC_OperName, OAC_Channel) 
+		values (#openNo# ,#userId# ,#clientName# ,#identifyType# ,#identifyNumber# ,#userName# ,#pnumber# ,#email# ,#province# ,#city# ,#street# ,#bankId# ,#bankPlace# ,#bankAccount# ,#status# ,#exId# ,#emerName# ,#emerPnumber# ,#applyDate# ,#applyTime# ,#operDate# ,#operTime# ,#operName#,#channel#)
+	</insert>
+	<select id="selectOpenAccountCorp" parameterClass="String" resultMap="OpenAccountCorpResult">
+		select * from tu_OpenAccountCorp where OAC_OpenNo= #openNo#
+	</select>
+	<select id="selectOpenAccountCorpByDomain" parameterClass="com.eyoubika.user.domain.OpenAccountCorpDomain" resultMap="OpenAccountCorpResult">
+		select * from tu_OpenAccountCorp
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="openNo">
+				OAC_OpenNo = #openNo#
+			</isNotNull>
+			<isNotNull prepend="and" property="userId">
+				OAC_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="clientName">
+				OAC_ClientName = #clientName#
+			</isNotNull>
+			<isNotNull prepend="and" property="identifyType">
+				OAC_IdentifyType = #identifyType#
+			</isNotNull>
+			<isNotNull prepend="and" property="identifyNumber">
+				OAC_IdentifyNumber = #identifyNumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="userName">
+				OAC_UserName = #userName#
+			</isNotNull>
+			<isNotNull prepend="and" property="pnumber">
+				OAC_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="email">
+				OAC_Email = #email#
+			</isNotNull>
+			<isNotNull prepend="and" property="province">
+				OAC_Province = #province#
+			</isNotNull>
+			<isNotNull prepend="and" property="city">
+				OAC_City = #city#
+			</isNotNull>
+			<isNotNull prepend="and" property="street">
+				OAC_Street = #street#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankId">
+				OAC_BankId = #bankId#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankPlace">
+				OAC_BankPlace = #bankPlace#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankAccount">
+				OAC_BankAccount = #bankAccount#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				OAC_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				OAC_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="emerName">
+				OAC_EmerName = #emerName#
+			</isNotNull>
+			<isNotNull prepend="and" property="emerPnumber">
+				OAC_EmerPnumber = #emerPnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="applyDate">
+				OAC_ApplyDate = #applyDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="applyTime">
+				OAC_ApplyTime = #applyTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="operDate">
+				OAC_OperDate = #operDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="operTime">
+				OAC_OperTime = #operTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="operName">
+				OAC_OperName = #operName#
+			</isNotNull>
+			<isNotNull prepend="and" property="channel">
+				OAC_Channel = #channel#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectOpenAccountCorpList" parameterClass="com.eyoubika.user.domain.OpenAccountCorpDomain" resultMap="OpenAccountCorpResult">
+		select * from tu_OpenAccountCorp
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="openNo">
+				OAC_OpenNo = #openNo#
+			</isNotNull>
+			<isNotNull prepend="and" property="userId">
+				OAC_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="clientName">
+				OAC_ClientName = #clientName#
+			</isNotNull>
+			<isNotNull prepend="and" property="identifyType">
+				OAC_IdentifyType = #identifyType#
+			</isNotNull>
+			<isNotNull prepend="and" property="identifyNumber">
+				OAC_IdentifyNumber = #identifyNumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="userName">
+				OAC_UserName = #userName#
+			</isNotNull>
+			<isNotNull prepend="and" property="pnumber">
+				OAC_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="email">
+				OAC_Email = #email#
+			</isNotNull>
+			<isNotNull prepend="and" property="province">
+				OAC_Province = #province#
+			</isNotNull>
+			<isNotNull prepend="and" property="city">
+				OAC_City = #city#
+			</isNotNull>
+			<isNotNull prepend="and" property="street">
+				OAC_Street = #street#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankId">
+				OAC_BankId = #bankId#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankPlace">
+				OAC_BankPlace = #bankPlace#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankAccount">
+				OAC_BankAccount = #bankAccount#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				OAC_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				OAC_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="emerName">
+				OAC_EmerName = #emerName#
+			</isNotNull>
+			<isNotNull prepend="and" property="emerPnumber">
+				OAC_EmerPnumber = #emerPnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="applyDate">
+				OAC_ApplyDate = #applyDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="applyTime">
+				OAC_ApplyTime = #applyTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="operDate">
+				OAC_OperDate = #operDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="operTime">
+				OAC_OperTime = #operTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="operName">
+				OAC_OperName = #operName#
+			</isNotNull>
+			<isNotNull prepend="and" property="channel">
+				OAC_Channel = #channel#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteOpenAccountCorp"  parameterClass="String">
+		delete from tu_OpenAccountCorp where OAC_OpenNo = #openNo#
+	</delete>
+	<delete id = "deleteAll">
+		delete from tu_OpenAccountCorp
+	</delete>
+	<update id = "updateOpenAccountCorp" parameterClass="com.eyoubika.user.domain.OpenAccountCorpDomain">
+		update tu_OpenAccountCorp
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="openNo">
+				OAC_OpenNo = #openNo#
+			</isNotNull>
+			<isNotNull prepend="," property="userId">
+				OAC_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="," property="clientName">
+				OAC_ClientName = #clientName#
+			</isNotNull>
+			<isNotNull prepend="," property="identifyType">
+				OAC_IdentifyType = #identifyType#
+			</isNotNull>
+			<isNotNull prepend="," property="identifyNumber">
+				OAC_IdentifyNumber = #identifyNumber#
+			</isNotNull>
+			<isNotNull prepend="," property="userName">
+				OAC_UserName = #userName#
+			</isNotNull>
+			<isNotNull prepend="," property="pnumber">
+				OAC_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="," property="email">
+				OAC_Email = #email#
+			</isNotNull>
+			<isNotNull prepend="," property="province">
+				OAC_Province = #province#
+			</isNotNull>
+			<isNotNull prepend="," property="city">
+				OAC_City = #city#
+			</isNotNull>
+			<isNotNull prepend="," property="street">
+				OAC_Street = #street#
+			</isNotNull>
+			<isNotNull prepend="," property="bankId">
+				OAC_BankId = #bankId#
+			</isNotNull>
+			<isNotNull prepend="," property="bankPlace">
+				OAC_BankPlace = #bankPlace#
+			</isNotNull>
+			<isNotNull prepend="," property="bankAccount">
+				OAC_BankAccount = #bankAccount#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				OAC_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="exId">
+				OAC_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="," property="emerName">
+				OAC_EmerName = #emerName#
+			</isNotNull>
+			<isNotNull prepend="," property="emerPnumber">
+				OAC_EmerPnumber = #emerPnumber#
+			</isNotNull>
+			<isNotNull prepend="," property="applyDate">
+				OAC_ApplyDate = #applyDate#
+			</isNotNull>
+			<isNotNull prepend="," property="applyTime">
+				OAC_ApplyTime = #applyTime#
+			</isNotNull>
+			<isNotNull prepend="," property="operDate">
+				OAC_OperDate = #operDate#
+			</isNotNull>
+			<isNotNull prepend="," property="operTime">
+				OAC_OperTime = #operTime#
+			</isNotNull>
+			<isNotNull prepend="," property="operName">
+				OAC_OperName = #operName#
+			</isNotNull>
+			<isNotNull prepend="," property="channel">
+				OAC_Channel = #channel#
+			</isNotNull>
+		</dynamic>
+	where OAC_OpenNo = #openNo#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.user.domain.OpenAccountCorpDomain" resultClass="String">
+		select 1 from tu_OpenAccountCorp
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="openNo">
+				OAC_OpenNo = #openNo#
+			</isNotNull>
+			<isNotNull prepend="and" property="userId">
+				OAC_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="clientName">
+				OAC_ClientName = #clientName#
+			</isNotNull>
+			<isNotNull prepend="and" property="identifyType">
+				OAC_IdentifyType = #identifyType#
+			</isNotNull>
+			<isNotNull prepend="and" property="identifyNumber">
+				OAC_IdentifyNumber = #identifyNumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="userName">
+				OAC_UserName = #userName#
+			</isNotNull>
+			<isNotNull prepend="and" property="pnumber">
+				OAC_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="email">
+				OAC_Email = #email#
+			</isNotNull>
+			<isNotNull prepend="and" property="province">
+				OAC_Province = #province#
+			</isNotNull>
+			<isNotNull prepend="and" property="city">
+				OAC_City = #city#
+			</isNotNull>
+			<isNotNull prepend="and" property="street">
+				OAC_Street = #street#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankId">
+				OAC_BankId = #bankId#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankPlace">
+				OAC_BankPlace = #bankPlace#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankAccount">
+				OAC_BankAccount = #bankAccount#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				OAC_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				OAC_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="emerName">
+				OAC_EmerName = #emerName#
+			</isNotNull>
+			<isNotNull prepend="and" property="emerPnumber">
+				OAC_EmerPnumber = #emerPnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="applyDate">
+				OAC_ApplyDate = #applyDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="applyTime">
+				OAC_ApplyTime = #applyTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="operDate">
+				OAC_OperDate = #operDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="operTime">
+				OAC_OperTime = #operTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="operName">
+				OAC_OperName = #operName#
+			</isNotNull>
+			<isNotNull prepend="and" property="channel">
+				OAC_Channel = #channel#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+</sqlMap>

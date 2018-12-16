@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<!-- 指定Struts 2配置文件的根元素 -->
+<struts>
+	<package name="com.eyoubika.batch" extends="json-default" namespace="/batch">
+		<interceptors>
+			<interceptor name="errorInterceptor" class="com.eyoubika.common.ErrorInterceptor"></interceptor>
+			<interceptor name="authInterceptor" class="com.eyoubika.common.AuthInterceptor"></interceptor>
+			<interceptor-stack name="myErrorInterceptor">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="errorInterceptor" />
+			</interceptor-stack>
+
+		</interceptors>
+		<default-interceptor-ref name="myErrorInterceptor" />
+		<global-results>
+			<result name="YbkException" type="json">
+				<param name="root">jsonData</param>
+			</result>
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</global-results>
+		<action name="initSbcs" class="quotationsBatch" method="initSbcs">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="fetchQuotations" class="quotationsBatch" method="fetchQuotations">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		
+		<action name="initTradeDay" class="quotationsBatch" method="initTradeDay">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="initSbcHistory" class="quotationsBatch" method="initSbcHistory">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="initSbcRedis" class="quotationsBatch" method="initSbcRedis">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="cleanTChart" class="quotationsBatch" method="cleanTChart">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="cleanRedis" class="quotationsBatch" method="cleanRedis">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="cleanRedisTChart" class="quotationsBatch" method="cleanRedisTChart">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="cleanRedisSbc" class="quotationsBatch" method="cleanRedisSbc">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="inputVolatility" class="quotationsBatch" method="inputVolatility">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="inputFiveMinRise" class="quotationsBatch" method="inputFiveMinRise">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="inputThreeDayRise" class="quotationsBatch" method="inputThreeDayRise">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="initThreeDayPrice" class="quotationsBatch" method="initThreeDayPrice">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="fetchSbcVolume" class="quotationsBatch" method="fetchSbcVolume">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="fetchSbcVolumeFromFile" class="quotationsBatch" method="fetchSbcVolumeFromFile">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		
+		<action name="initSbcVolume" class="quotationsBatch" method="initSbcVolume">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="inputTurnoverRate" class="quotationsBatch" method="inputTurnoverRate">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="inputMarketValue" class="quotationsBatch" method="inputMarketValue">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="fetchQuotationsHist" class="quotationsBatch" method="fetchQuotationsHist">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		
+		
+		<action name="deleteSbcQuotationDetail" class="quotationsBatch" method="deleteSbcQuotationDetail">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>	
+		<action name="fetchSubscribeArticle" class="articleBatch" method="fetchSubscribeArticle">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>	
+		<action name="fetchDepositArticle" class="articleBatch" method="fetchDepositArticle">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>	
+		<action name="fetchNoticeArticle" class="articleBatch" method="fetchNoticeArticle">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="calSbcQuotationDayDetail" class="quotationsBatch" method="calSbcQuotationDayDetail">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="calSbcKQuotation" class="quotationsBatch" method="calSbcKQuotation">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="calAllWeekDetail" class="quotationsBatch" method="calAllWeekDetail">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="calSbcWeekData" class="quotationsBatch" method="calSbcWeekData">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="calSbcMonthData" class="quotationsBatch" method="calSbcMonthData">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="calAllMonthDetail" class="quotationsBatch" method="calAllMonthDetail">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+
+		<action name="buildSitemap" class="utilBatch" method="buildSitemap">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>			
+	</package>
+</struts>

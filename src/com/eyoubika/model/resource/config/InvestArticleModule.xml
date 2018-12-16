@@ -1,0 +1,79 @@
+<modules>
+	<module id="1">
+		<name>InvestArticle</name>
+		<package>com.eyoubika.info</package>
+		<action name="addInvestArticle">
+			<input>InvestArticleDomain</input>
+		</action>
+		<action name="getInvestArticle">
+		</action>
+		<action  name="deleteInvestArticle">
+			<input>InvestArticleDomain</input>
+		</action>
+		<action  name="modifyInvestArticle">
+			<input>InvestArticleDomain</input>
+		</action>
+		<vo voName="InvestArticle">
+			<val valName="articleId">
+				<attrType>String</attrType>
+				<attrName>articleId</attrName>
+				<attrNote>文章id</attrNote>
+			</val>
+			<val valName="title">
+				<attrType>String</attrType>
+				<attrName>title</attrName>
+				<attrNote>标题</attrNote>
+			</val>
+			<val valName="url">
+				<attrType>String</attrType>
+				<attrName>url</attrName>
+				<attrNote>url</attrNote>
+			</val>
+			<val valName="brief">
+				<attrType>String</attrType>
+				<attrName>brief</attrName>
+				<attrNote>简介</attrNote>
+			</val>
+			<val valName="content">
+				<attrType>String</attrType>
+				<attrName>content</attrName>
+				<attrNote>正文</attrNote>
+			</val>
+			<val valName="author">
+				<attrType>String</attrType>
+				<attrName>author</attrName>
+				<attrNote>作者</attrNote>
+			</val>
+			<val valName="exId">
+				<attrType>String</attrType>
+				<attrName>exId</attrName>
+				<attrNote>交易所</attrNote>
+			</val>
+			<val valName="tag">
+				<attrType>String</attrType>
+				<attrName>tag</attrName>
+				<attrNote>标签</attrNote>
+			</val>
+			<val valName="type">
+				<attrType>String</attrType>
+				<attrName>type</attrName>
+				<attrNote>类别</attrNote>
+			</val>
+			<val valName="genDate">
+				<attrType>String</attrType>
+				<attrName>genDate</attrName>
+				<attrNote>添加日期</attrNote>
+			</val>
+			<val valName="modDate">
+				<attrType>String</attrType>
+				<attrName>modDate</attrName>
+				<attrNote>最新修改日期</attrNote>
+			</val>
+			<val valName="status">
+				<attrType>String</attrType>
+				<attrName>status</attrName>
+				<attrNote>状态</attrNote>
+			</val>
+		</vo>
+	</module>
+</modules>

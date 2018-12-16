@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-08-01 09:33:37
+  -==========================================================================================-->
+<sqlMap namespace="tu_UserInfoInfo">
+	<typeAlias alias="UserInfoDomain" type="com.eyoubika.user.domain.UserInfoDomain"/>
+	<resultMap id="UserInfoResult" class="com.eyoubika.user.domain.UserInfoDomain">
+		<result column="UII_UserId" property="userId" jdbcType="int(10)" />
+		<result column="UII_NickName" property="nickName" jdbcType="VARCHAR" />
+		<result column="UII_Status" property="status" jdbcType="CHAR" />
+		<result column="UII_Pnumber" property="pnumber" jdbcType="VARCHAR" />
+		<result column="UII_UserName" property="userName" jdbcType="VARCHAR" />
+		<result column="UII_IdentifyNo" property="identifyNo" jdbcType="VARCHAR" />
+		<result column="UII_Email" property="email" jdbcType="VARCHAR" />
+		<result column="UII_RegiTime" property="regiTime" jdbcType="VARCHAR" />
+		<result column="UII_Sex" property="sex" jdbcType="CHAR" />
+		<result column="UII_Telephone" property="telephone" jdbcType="VARCHAR" />
+		<result column="UII_City" property="city" jdbcType="CHAR" />
+		<result column="UII_Address" property="address" jdbcType="VARCHAR" />
+		<result column="UII_Postcode" property="postcode" jdbcType="CHAR" />
+		<result column="UII_Icon" property="icon" jdbcType="BLOB" />
+		<result column="UII_VipLevel" property="vipLevel" jdbcType="CHAR" />
+		<result column="UII_SocialLevel" property="socialLevel" jdbcType="CHAR" />
+		<result column="UII_Species" property="species" jdbcType="INT" />
+		<result column="UII_Duration" property="duration" jdbcType="FLOAT" />
+	</resultMap>
+	<insert id="insertUserInfo" parameterClass="com.eyoubika.user.domain.UserInfoDomain">
+		insert into tu_UserInfoInfo(UII_UserId ,UII_NickName ,UII_Status ,UII_Pnumber ,UII_UserName ,UII_IdentifyNo ,UII_Email ,UII_RegiTime ,UII_Sex ,UII_Telephone ,UII_City ,UII_Address ,UII_Postcode ,UII_Icon ,UII_VipLevel ,UII_SocialLevel ,UII_Species ,UII_Duration) 
+		values (#userId# ,#nickName# ,#status# ,#pnumber# ,#userName# ,#identifyNo# ,#email# ,#regiTime# ,#sex# ,#telephone# ,#city# ,#address# ,#postcode# ,#icon# ,#vipLevel# ,#socialLevel# ,#species# ,#duration#)
+	</insert>
+	<select id="selectUserInfo" parameterClass="Integer" resultMap="UserInfoResult">
+		select * from tu_UserInfoInfo where UII_UserId= #userId#
+	</select>
+	<select id="selectUserInfoByDomain" parameterClass="com.eyoubika.user.domain.UserInfoDomain" resultMap="UserInfoResult">
+		select * from tu_UserInfoInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userId">
+				UII_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="nickName">
+				UII_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				UII_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="pnumber">
+				UII_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="userName">
+				UII_UserName = #userName#
+			</isNotNull>
+			<isNotNull prepend="and" property="identifyNo">
+				UII_IdentifyNo = #identifyNo#
+			</isNotNull>
+			<isNotNull prepend="and" property="email">
+				UII_Email = #email#
+			</isNotNull>
+			<isNotNull prepend="and" property="regiTime">
+				UII_RegiTime = #regiTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="sex">
+				UII_Sex = #sex#
+			</isNotNull>
+			<isNotNull prepend="and" property="telephone">
+				UII_Telephone = #telephone#
+			</isNotNull>
+			<isNotNull prepend="and" property="city">
+				UII_City = #city#
+			</isNotNull>
+			<isNotNull prepend="and" property="address">
+				UII_Address = #address#
+			</isNotNull>
+			<isNotNull prepend="and" property="postcode">
+				UII_Postcode = #postcode#
+			</isNotNull>
+			<isNotNull prepend="and" property="icon">
+				UII_Icon = #icon#
+			</isNotNull>
+			<isNotNull prepend="and" property="vipLevel">
+				UII_VipLevel = #vipLevel#
+			</isNotNull>
+			<isNotNull prepend="and" property="socialLevel">
+				UII_SocialLevel = #socialLevel#
+			</isNotNull>
+			<isNotNull prepend="and" property="species">
+				UII_Species = #species#
+			</isNotNull>
+			<isNotNull prepend="and" property="duration">
+				UII_Duration = #duration#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectUserInfoList" parameterClass="com.eyoubika.user.domain.UserInfoDomain" resultMap="UserInfoResult">
+		select * from tu_UserInfoInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userId">
+				UII_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="nickName">
+				UII_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				UII_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="pnumber">
+				UII_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="userName">
+				UII_UserName = #userName#
+			</isNotNull>
+			<isNotNull prepend="and" property="identifyNo">
+				UII_IdentifyNo = #identifyNo#
+			</isNotNull>
+			<isNotNull prepend="and" property="email">
+				UII_Email = #email#
+			</isNotNull>
+			<isNotNull prepend="and" property="regiTime">
+				UII_RegiTime = #regiTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="sex">
+				UII_Sex = #sex#
+			</isNotNull>
+			<isNotNull prepend="and" property="telephone">
+				UII_Telephone = #telephone#
+			</isNotNull>
+			<isNotNull prepend="and" property="city">
+				UII_City = #city#
+			</isNotNull>
+			<isNotNull prepend="and" property="address">
+				UII_Address = #address#
+			</isNotNull>
+			<isNotNull prepend="and" property="postcode">
+				UII_Postcode = #postcode#
+			</isNotNull>
+			<isNotNull prepend="and" property="icon">
+				UII_Icon = #icon#
+			</isNotNull>
+			<isNotNull prepend="and" property="vipLevel">
+				UII_VipLevel = #vipLevel#
+			</isNotNull>
+			<isNotNull prepend="and" property="socialLevel">
+				UII_SocialLevel = #socialLevel#
+			</isNotNull>
+			<isNotNull prepend="and" property="species">
+				UII_Species = #species#
+			</isNotNull>
+			<isNotNull prepend="and" property="duration">
+				UII_Duration = #duration#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteUserInfo"  parameterClass="Integer">
+		delete from tu_UserInfoInfo where UII_UserId = #userId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from tu_UserInfoInfo
+	</delete>
+	<update id = "updateUserInfo" parameterClass="com.eyoubika.user.domain.UserInfoDomain">
+		update tu_UserInfoInfo
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="userId">
+				UII_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="," property="nickName">
+				UII_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				UII_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="pnumber">
+				UII_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="," property="userName">
+				UII_UserName = #userName#
+			</isNotNull>
+			<isNotNull prepend="," property="identifyNo">
+				UII_IdentifyNo = #identifyNo#
+			</isNotNull>
+			<isNotNull prepend="," property="email">
+				UII_Email = #email#
+			</isNotNull>
+			<isNotNull prepend="," property="regiTime">
+				UII_RegiTime = #regiTime#
+			</isNotNull>
+			<isNotNull prepend="," property="sex">
+				UII_Sex = #sex#
+			</isNotNull>
+			<isNotNull prepend="," property="telephone">
+				UII_Telephone = #telephone#
+			</isNotNull>
+			<isNotNull prepend="," property="city">
+				UII_City = #city#
+			</isNotNull>
+			<isNotNull prepend="," property="address">
+				UII_Address = #address#
+			</isNotNull>
+			<isNotNull prepend="," property="postcode">
+				UII_Postcode = #postcode#
+			</isNotNull>
+			<isNotNull prepend="," property="icon">
+				UII_Icon = #icon#
+			</isNotNull>
+			<isNotNull prepend="," property="vipLevel">
+				UII_VipLevel = #vipLevel#
+			</isNotNull>
+			<isNotNull prepend="," property="socialLevel">
+				UII_SocialLevel = #socialLevel#
+			</isNotNull>
+			<isNotNull prepend="," property="species">
+				UII_Species = #species#
+			</isNotNull>
+			<isNotNull prepend="," property="duration">
+				UII_Duration = #duration#
+			</isNotNull>
+		</dynamic>
+	where UII_UserId = #userId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.user.domain.UserInfoDomain" resultClass="String">
+		select 1 from tu_UserInfoInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="userId">
+				UII_UserId = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="nickName">
+				UII_NickName = #nickName#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				UII_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="pnumber">
+				UII_Pnumber = #pnumber#
+			</isNotNull>
+			<isNotNull prepend="and" property="userName">
+				UII_UserName = #userName#
+			</isNotNull>
+			<isNotNull prepend="and" property="identifyNo">
+				UII_IdentifyNo = #identifyNo#
+			</isNotNull>
+			<isNotNull prepend="and" property="email">
+				UII_Email = #email#
+			</isNotNull>
+			<isNotNull prepend="and" property="regiTime">
+				UII_RegiTime = #regiTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="sex">
+				UII_Sex = #sex#
+			</isNotNull>
+			<isNotNull prepend="and" property="telephone">
+				UII_Telephone = #telephone#
+			</isNotNull>
+			<isNotNull prepend="and" property="city">
+				UII_City = #city#
+			</isNotNull>
+			<isNotNull prepend="and" property="address">
+				UII_Address = #address#
+			</isNotNull>
+			<isNotNull prepend="and" property="postcode">
+				UII_Postcode = #postcode#
+			</isNotNull>
+			<isNotNull prepend="and" property="icon">
+				UII_Icon = #icon#
+			</isNotNull>
+			<isNotNull prepend="and" property="vipLevel">
+				UII_VipLevel = #vipLevel#
+			</isNotNull>
+			<isNotNull prepend="and" property="socialLevel">
+				UII_SocialLevel = #socialLevel#
+			</isNotNull>
+			<isNotNull prepend="and" property="species">
+				UII_Species = #species#
+			</isNotNull>
+			<isNotNull prepend="and" property="duration">
+				UII_Duration = #duration#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	<!--<CustomFileTag>-->
+</sqlMap>

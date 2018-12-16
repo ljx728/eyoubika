@@ -1,0 +1,94 @@
+<modules>
+	<module id="1">
+		<name>Interface</name>
+		<package>com.eyoubika.platform</package>
+		<action name="addInterface">
+			<input>InterfaceBasicDomain</input>
+		</action>
+		<action name="getInterface">
+		</action>
+		<action  name="deleteInterface">
+		</action>
+		<action  name="modifyInterface">
+			<input>InterfaceBasicDomain</input>
+		</action>
+			<action name="addAttribute">
+			<input>InterfaceAttrDomain</input>
+		</action>
+		<action name="getAttribute">
+		</action>
+		<action  name="deleteAttribute">
+		</action>
+		<action  name="modifyAttribute">
+			<input>InterfaceAttrDomain</input>
+		</action>
+		<vo voName="Interface">
+			<val valName="code">
+				<attrType>String</attrType>
+				<attrName>code</attrName>
+				<attrNote>接口编码</attrNote>
+			</val>
+			<val valName="name">
+				<attrType>String</attrType>
+				<attrName>name</attrName>
+				<attrNote>名称</attrNote>
+			</val>
+			<val valName="nickName">
+				<attrType>String</attrType>
+				<attrName>nickName</attrName>
+				<attrNote>备用名称</attrNote>
+			</val>
+			<val valName="url">
+				<attrType>String</attrType>
+				<attrName>url</attrName>
+				<attrNote>url</attrNote>
+			</val>
+			<val valName="input">
+				<attrType>String</attrType>
+				<attrName>input</attrName>
+				<attrNote>输入</attrNote>
+			</val>
+			<val valName="output">
+				<attrType>String</attrType>
+				<attrName>output</attrName>
+				<attrNote>输出</attrNote>
+			</val>
+			<val valName="inputEx">
+				<attrType>String</attrType>
+				<attrName>inputEx</attrName>
+				<attrNote>输入示例</attrNote>
+			</val>
+			
+			<val valName="outputEx">
+				<attrType>String</attrType>
+				<attrName>outputEx</attrName>
+				<attrNote>输出示例</attrNote>
+			</val>
+			<val valName="text">
+				<attrType>String</attrType>
+				<attrName>text</attrName>
+				<attrNote>接口说明</attrNote>
+			</val>
+			<val valName="channel">
+				<attrType>String</attrType>
+				<attrName>channel</attrName>
+				<attrNote>渠道码</attrNote>
+			</val>
+			<val valName="note">
+				<attrType>String</attrType>
+				<attrName>note</attrName>
+				<attrNote>备注</attrNote>
+			</val>
+			<val valName="date">
+				<attrType>String</attrType>
+				<attrName>date</attrName>
+				<attrNote>添加日期</attrNote>
+			</val>
+			<val valName="time">
+				<attrType>String</attrType>
+				<attrName>time</attrName>
+				<attrNote>添加时间</attrNote>
+			</val>
+		</vo>
+	</module>
+</modules>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-08-18 09:58:33
+  -==========================================================================================-->
+<sqlMap namespace="ts_Quotations">
+	<typeAlias alias="QuotationsDomain" type="com.eyoubika.info.domain.QuotationsDomain"/>
+	<resultMap id="QuotationsResult" class="com.eyoubika.info.domain.QuotationsDomain">
+		<result column="Q_SbcId" property="sbcId" jdbcType="int(10)" />
+		<result column="Q_SbcCode" property="sbcCode" jdbcType="VARCHAR" />
+		<result column="Q_SbcName" property="sbcName" jdbcType="VARCHAR" />
+		<result column="Q_ExId" property="exId" jdbcType="CHAR" />
+		<result column="Q_YesterClPrice" property="yesterClPrice" jdbcType="VARCHAR" />
+		<result column="Q_OpeningPrice" property="openingPrice" jdbcType="VARCHAR" />
+		<result column="Q_CurrentPrice" property="currentPrice" jdbcType="VARCHAR" />
+		<result column="Q_HighestPrice" property="highestPrice" jdbcType="VARCHAR" />
+		<result column="Q_LowestPrice" property="lowestPrice" jdbcType="VARCHAR" />
+		<result column="Q_AveragePrice" property="averagePrice" jdbcType="VARCHAR" />
+		<result column="Q_YesterAvPrice" property="yesterAvPrice" jdbcType="VARCHAR" />
+		<result column="Q_RiseValue" property="riseValue" jdbcType="VARCHAR" />
+		<result column="Q_DealVolume" property="dealVolume" jdbcType="VARCHAR" />
+		<result column="Q_Poq" property="poq" jdbcType="VARCHAR" />
+		<result column="Q_TotalValue" property="totalValue" jdbcType="VARCHAR" />
+		<result column="Q_RecordTime" property="recordTime" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertQuotations" parameterClass="com.eyoubika.info.domain.QuotationsDomain">
+		insert into ts_Quotations(Q_SbcId ,Q_SbcCode ,Q_SbcName ,Q_ExId ,Q_YesterClPrice ,Q_OpeningPrice ,Q_CurrentPrice ,Q_HighestPrice ,Q_LowestPrice ,Q_AveragePrice ,Q_YesterAvPrice ,Q_RiseValue ,Q_DealVolume ,Q_Poq ,Q_TotalValue ,Q_RecordTime) 
+		values (#sbcId# ,#sbcCode# ,#sbcName# ,#exId# ,#yesterClPrice# ,#openingPrice# ,#currentPrice# ,#highestPrice# ,#lowestPrice# ,#averagePrice# ,#yesterAvPrice# ,#riseValue# ,#dealVolume# ,#poq# ,#totalValue# ,#recordTime#)
+	</insert>
+	<select id="selectQuotations" parameterClass="Integer" resultMap="QuotationsResult">
+		select * from ts_Quotations where Q_SbcId= #sbcId#
+	</select>
+	<select id="selectQuotationsByDomain" parameterClass="com.eyoubika.info.domain.QuotationsDomain" resultMap="QuotationsResult">
+		select * from ts_Quotations
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sbcId">
+				Q_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcCode">
+				Q_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcName">
+				Q_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				Q_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="yesterClPrice">
+				Q_YesterClPrice = #yesterClPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="openingPrice">
+				Q_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="currentPrice">
+				Q_CurrentPrice = #currentPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="highestPrice">
+				Q_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="lowestPrice">
+				Q_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="averagePrice">
+				Q_AveragePrice = #averagePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="yesterAvPrice">
+				Q_YesterAvPrice = #yesterAvPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="riseValue">
+				Q_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="dealVolume">
+				Q_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="poq">
+				Q_Poq = #poq#
+			</isNotNull>
+			<isNotNull prepend="and" property="totalValue">
+				Q_TotalValue = #totalValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="recordTime">
+				Q_RecordTime = #recordTime#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectQuotationsList" parameterClass="com.eyoubika.info.domain.QuotationsDomain" resultMap="QuotationsResult">
+		select * from ts_Quotations
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sbcId">
+				Q_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcCode">
+				Q_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcName">
+				Q_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				Q_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="yesterClPrice">
+				Q_YesterClPrice = #yesterClPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="openingPrice">
+				Q_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="currentPrice">
+				Q_CurrentPrice = #currentPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="highestPrice">
+				Q_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="lowestPrice">
+				Q_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="averagePrice">
+				Q_AveragePrice = #averagePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="yesterAvPrice">
+				Q_YesterAvPrice = #yesterAvPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="riseValue">
+				Q_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="dealVolume">
+				Q_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="poq">
+				Q_Poq = #poq#
+			</isNotNull>
+			<isNotNull prepend="and" property="totalValue">
+				Q_TotalValue = #totalValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="recordTime">
+				Q_RecordTime = #recordTime#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteQuotations"  parameterClass="Integer">
+		delete from ts_Quotations where Q_SbcId = #sbcId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ts_Quotations
+	</delete>
+	<update id = "updateQuotations" parameterClass="com.eyoubika.info.domain.QuotationsDomain">
+		update ts_Quotations
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="sbcId">
+				Q_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="," property="sbcCode">
+				Q_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="," property="sbcName">
+				Q_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="," property="exId">
+				Q_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="," property="yesterClPrice">
+				Q_YesterClPrice = #yesterClPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="openingPrice">
+				Q_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="currentPrice">
+				Q_CurrentPrice = #currentPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="highestPrice">
+				Q_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="lowestPrice">
+				Q_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="averagePrice">
+				Q_AveragePrice = #averagePrice#
+			</isNotNull>
+			<isNotNull prepend="," property="yesterAvPrice">
+				Q_YesterAvPrice = #yesterAvPrice#
+			</isNotNull>
+			<isNotNull prepend="," property="riseValue">
+				Q_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="," property="dealVolume">
+				Q_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="," property="poq">
+				Q_Poq = #poq#
+			</isNotNull>
+			<isNotNull prepend="," property="totalValue">
+				Q_TotalValue = #totalValue#
+			</isNotNull>
+			<isNotNull prepend="," property="recordTime">
+				Q_RecordTime = #recordTime#
+			</isNotNull>
+		</dynamic>
+	where Q_SbcId = #sbcId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.info.domain.QuotationsDomain" resultClass="String">
+		select 1 from ts_Quotations
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sbcId">
+				Q_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcCode">
+				Q_SbcCode = #sbcCode#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcName">
+				Q_SbcName = #sbcName#
+			</isNotNull>
+			<isNotNull prepend="and" property="exId">
+				Q_ExId = #exId#
+			</isNotNull>
+			<isNotNull prepend="and" property="yesterClPrice">
+				Q_YesterClPrice = #yesterClPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="openingPrice">
+				Q_OpeningPrice = #openingPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="currentPrice">
+				Q_CurrentPrice = #currentPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="highestPrice">
+				Q_HighestPrice = #highestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="lowestPrice">
+				Q_LowestPrice = #lowestPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="averagePrice">
+				Q_AveragePrice = #averagePrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="yesterAvPrice">
+				Q_YesterAvPrice = #yesterAvPrice#
+			</isNotNull>
+			<isNotNull prepend="and" property="riseValue">
+				Q_RiseValue = #riseValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="dealVolume">
+				Q_DealVolume = #dealVolume#
+			</isNotNull>
+			<isNotNull prepend="and" property="poq">
+				Q_Poq = #poq#
+			</isNotNull>
+			<isNotNull prepend="and" property="totalValue">
+				Q_TotalValue = #totalValue#
+			</isNotNull>
+			<isNotNull prepend="and" property="recordTime">
+				Q_RecordTime = #recordTime#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+</sqlMap>

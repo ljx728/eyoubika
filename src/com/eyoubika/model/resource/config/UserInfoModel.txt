@@ -1,0 +1,19 @@
+UserInfo com.eyoubika.user tu_UserInfoInfo userId
+Integer 	userId 		int(10) 		false 用户id
+String 	nickName 		varchar(64) 	true 昵称
+String 	status 	char(6) 	false 状态
+String 	pnumber 	varchar(32) 	true 手机号
+String 	userName 		varchar(32) 	true 姓名
+String 	identifyNo 	varchar(32) 	true 身份证
+String 	email  	varchar(64) 	true 邮箱
+String 	regiTime varchar(32)	true 注册时间
+String 	sex 	char(2) 	true 性别
+String 	telephone 	varchar(32) 	true 电话
+String 	city 	char(6) 	true 省市
+String 	address 	varchar(128) 	true 地址
+String 	postcode 		char(6) 	true 邮编
+byte[] 	icon 	MediumBlob 			true 头像	
+String 	vipLevel 		 char(6)	true vip等级
+String	socialLevel		char(6)		true 社交等级
+Integer 	species	 	int			true 金币
+Float 	duration 	float	true 时长

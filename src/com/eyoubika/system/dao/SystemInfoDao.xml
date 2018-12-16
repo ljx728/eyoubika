@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-11-19 10:31:50
+  -==========================================================================================-->
+<sqlMap namespace="ts_SystemInfo">
+	<typeAlias alias="SystemInfoDomain" type="com.eyoubika.system.domain.SystemInfoDomain"/>
+	<resultMap id="SystemInfoResult" class="com.eyoubika.system.domain.SystemInfoDomain">
+		<result column="SI_SysId" property="sysId" jdbcType="INT" />
+		<result column="SI_Name" property="name" jdbcType="VARCHAR" />
+		<result column="SI_Value" property="value" jdbcType="VARCHAR" />
+		<result column="SI_Type" property="type" jdbcType="CHAR" />
+		<result column="SI_Date" property="date" jdbcType="CHAR" />
+	</resultMap>
+	<insert id="insertSystemInfo" parameterClass="com.eyoubika.system.domain.SystemInfoDomain">
+		insert into ts_SystemInfo(SI_Name ,SI_Value ,SI_Type ,SI_Date) 
+		values (#name# ,#value# ,#type# ,#date#)
+		<selectKey resultClass="int" keyProperty="sysId">
+			SELECT LAST_INSERT_ID() as sysId
+		</selectKey>
+	</insert>
+	<select id="selectSystemInfo" parameterClass="Integer" resultMap="SystemInfoResult">
+		select * from ts_SystemInfo where SI_SysId= #sysId#
+	</select>
+	<select id="selectSystemInfoByDomain" parameterClass="com.eyoubika.system.domain.SystemInfoDomain" resultMap="SystemInfoResult">
+		select * from ts_SystemInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sysId">
+				SI_SysId = #sysId#
+			</isNotNull>
+			<isNotNull prepend="and" property="name">
+				SI_Name = #name#
+			</isNotNull>
+			<isNotNull prepend="and" property="value">
+				SI_Value = #value#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				SI_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				SI_Date = #date#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectSystemInfoList" parameterClass="com.eyoubika.system.domain.SystemInfoDomain" resultMap="SystemInfoResult">
+		select * from ts_SystemInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sysId">
+				SI_SysId = #sysId#
+			</isNotNull>
+			<isNotNull prepend="and" property="name">
+				SI_Name = #name#
+			</isNotNull>
+			<isNotNull prepend="and" property="value">
+				SI_Value = #value#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				SI_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				SI_Date = #date#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteSystemInfo"  parameterClass="Integer">
+		delete from ts_SystemInfo where SI_SysId = #sysId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ts_SystemInfo
+	</delete>
+	<update id = "updateSystemInfo" parameterClass="com.eyoubika.system.domain.SystemInfoDomain">
+		update ts_SystemInfo
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="name">
+				SI_Name = #name#
+			</isNotNull>
+			<isNotNull prepend="," property="value">
+				SI_Value = #value#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+				SI_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="date">
+				SI_Date = #date#
+			</isNotNull>
+		</dynamic>
+	where SI_SysId = #sysId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.system.domain.SystemInfoDomain" resultClass="String">
+		select 1 from ts_SystemInfo
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="sysId">
+				SI_SysId = #sysId#
+			</isNotNull>
+			<isNotNull prepend="and" property="name">
+				SI_Name = #name#
+			</isNotNull>
+			<isNotNull prepend="and" property="value">
+				SI_Value = #value#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				SI_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="date">
+				SI_Date = #date#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+	<!--<CustomFileTag>-->
+	
+	<select id="selectSystemInfoByName" parameterClass="string" resultMap="SystemInfoResult">
+		select * from ts_SystemInfo where  SI_Name = #name#
+	</select>
+	<!--<CustomFileTag>-->
+</sqlMap>

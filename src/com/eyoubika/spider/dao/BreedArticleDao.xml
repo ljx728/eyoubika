@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--==========================================================================================-
+  - Description:__Description__
+  - Sql:		__Sql__
+  - Author:		lijiaxuan
+  - Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+  - History:	1.0 created by lijiaxuan at 2015-07-31 17:21:42
+  -==========================================================================================-->
+<sqlMap namespace="ta_FetchBreedArticle">
+	<typeAlias alias="BreedArticleDomain" type="com.eyoubika.spider.domain.BreedArticleDomain"/>
+	<resultMap id="BreedArticleResult" class="com.eyoubika.spider.domain.BreedArticleDomain">
+		<result column="FBA_ArticleId" property="articleId" jdbcType="int(10)" />
+		<result column="FBA_SbcId" property="sbcId" jdbcType="int(10)" />
+		<result column="FBA_Title" property="title" jdbcType="VARCHAR" />
+		<result column="FBA_SubTitle" property="subTitle" jdbcType="VARCHAR" />
+		<result column="FBA_IssueTime" property="issueTime" jdbcType="VARCHAR" />
+		<result column="FBA_IssueUnit" property="issueUnit" jdbcType="VARCHAR" />
+		<result column="FBA_WebTime" property="webTime" jdbcType="VARCHAR" />
+		<result column="FBA_FetchTime" property="fetchTime" jdbcType="VARCHAR" />
+		<result column="FBA_From" property="from" jdbcType="VARCHAR" />
+		<result column="FBA_Article" property="article" jdbcType="text" />
+		<result column="FBA_Img" property="img" jdbcType="VARCHAR" />
+		<result column="FBA_ImgPos" property="imgPos" jdbcType="VARCHAR" />
+		<result column="FBA_Table" property="table" jdbcType="text" />
+		<result column="FBA_TablePos" property="tablePos" jdbcType="VARCHAR" />
+		<result column="FBA_Type" property="type" jdbcType="CHAR" />
+		<result column="FBA_Status" property="status" jdbcType="CHAR" />
+		<result column="FBA_HaveImg" property="haveImg" jdbcType="CHAR" />
+		<result column="FBA_HaveTable" property="haveTable" jdbcType="CHAR" />
+		<result column="FBA_ArticleUrl" property="articleUrl" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insertBreedArticle" parameterClass="com.eyoubika.spider.domain.BreedArticleDomain">
+		insert into ta_FetchBreedArticle(FBA_ArticleId ,FBA_SbcId ,FBA_Title ,FBA_SubTitle ,FBA_IssueTime ,FBA_IssueUnit ,FBA_WebTime ,FBA_FetchTime ,FBA_From ,FBA_Article ,FBA_Img ,FBA_ImgPos ,FBA_Table ,FBA_TablePos ,FBA_Type ,FBA_Status ,FBA_HaveImg ,FBA_HaveTable ,FBA_ArticleUrl) 
+		values (#articleId# ,#sbcId# ,#title# ,#subTitle# ,#issueTime# ,#issueUnit# ,#webTime# ,#fetchTime# ,#from# ,#article# ,#img# ,#imgPos# ,#table# ,#tablePos# ,#type# ,#status# ,#haveImg# ,#haveTable# ,#articleUrl#)
+	</insert>
+	<select id="selectBreedArticle" parameterClass="Integer" resultMap="BreedArticleResult">
+		select * from ta_FetchBreedArticle where FBA_ArticleId= #articleId#
+	</select>
+	<select id="selectBreedArticleByDomain" parameterClass="com.eyoubika.spider.domain.BreedArticleDomain" resultMap="BreedArticleResult">
+		select * from ta_FetchBreedArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				FBA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcId">
+				FBA_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				FBA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				FBA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				FBA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueUnit">
+				FBA_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				FBA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				FBA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				FBA_From = #from#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				FBA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="img">
+				FBA_Img = #img#
+			</isNotNull>
+			<isNotNull prepend="and" property="imgPos">
+				FBA_ImgPos = #imgPos#
+			</isNotNull>
+			<isNotNull prepend="and" property="table">
+				FBA_Table = #table#
+			</isNotNull>
+			<isNotNull prepend="and" property="tablePos">
+				FBA_TablePos = #tablePos#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				FBA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				FBA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				FBA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveTable">
+				FBA_HaveTable = #haveTable#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				FBA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectBreedArticleList" parameterClass="com.eyoubika.spider.domain.BreedArticleDomain" resultMap="BreedArticleResult">
+		select * from ta_FetchBreedArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				FBA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcId">
+				FBA_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				FBA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				FBA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				FBA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueUnit">
+				FBA_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				FBA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				FBA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				FBA_From = #from#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				FBA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="img">
+				FBA_Img = #img#
+			</isNotNull>
+			<isNotNull prepend="and" property="imgPos">
+				FBA_ImgPos = #imgPos#
+			</isNotNull>
+			<isNotNull prepend="and" property="table">
+				FBA_Table = #table#
+			</isNotNull>
+			<isNotNull prepend="and" property="tablePos">
+				FBA_TablePos = #tablePos#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				FBA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				FBA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				FBA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveTable">
+				FBA_HaveTable = #haveTable#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				FBA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteBreedArticle"  parameterClass="Integer">
+		delete from ta_FetchBreedArticle where FBA_ArticleId = #articleId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ta_FetchBreedArticle
+	</delete>
+	<update id = "updateBreedArticle" parameterClass="com.eyoubika.spider.domain.BreedArticleDomain">
+		update ta_FetchBreedArticle
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="articleId">
+				FBA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="," property="sbcId">
+				FBA_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="," property="title">
+				FBA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="," property="subTitle">
+				FBA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="," property="issueTime">
+				FBA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="," property="issueUnit">
+				FBA_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="," property="webTime">
+				FBA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="," property="fetchTime">
+				FBA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="," property="from">
+				FBA_From = #from#
+			</isNotNull>
+			<isNotNull prepend="," property="article">
+				FBA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="," property="img">
+				FBA_Img = #img#
+			</isNotNull>
+			<isNotNull prepend="," property="imgPos">
+				FBA_ImgPos = #imgPos#
+			</isNotNull>
+			<isNotNull prepend="," property="table">
+				FBA_Table = #table#
+			</isNotNull>
+			<isNotNull prepend="," property="tablePos">
+				FBA_TablePos = #tablePos#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+				FBA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				FBA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="haveImg">
+				FBA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="," property="haveTable">
+				FBA_HaveTable = #haveTable#
+			</isNotNull>
+			<isNotNull prepend="," property="articleUrl">
+				FBA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	where FBA_ArticleId = #articleId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.spider.domain.BreedArticleDomain" resultClass="String">
+		select 1 from ta_FetchBreedArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="articleId">
+				FBA_ArticleId = #articleId#
+			</isNotNull>
+			<isNotNull prepend="and" property="sbcId">
+				FBA_SbcId = #sbcId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				FBA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				FBA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				FBA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueUnit">
+				FBA_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				FBA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				FBA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				FBA_From = #from#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				FBA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="img">
+				FBA_Img = #img#
+			</isNotNull>
+			<isNotNull prepend="and" property="imgPos">
+				FBA_ImgPos = #imgPos#
+			</isNotNull>
+			<isNotNull prepend="and" property="table">
+				FBA_Table = #table#
+			</isNotNull>
+			<isNotNull prepend="and" property="tablePos">
+				FBA_TablePos = #tablePos#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				FBA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				FBA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				FBA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveTable">
+				FBA_HaveTable = #haveTable#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				FBA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>
+</sqlMap>

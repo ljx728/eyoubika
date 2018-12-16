@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<!-- 引用JDBC属性的配置文件 -->
+	<properties resource="conf/jdbc.properties" />
+	<settings useStatementNamespaces ="true"
+				cacheModelsEnabled="true"  
+	 /> 
+	   
+	<!-- 使用JDBC的事务管理 -->
+	<transactionManager type="JDBC">
+	<!-- 数据源 -->
+		<dataSource type="SIMPLE">
+			<property name="JDBC.Driver" value="${driver}"/>
+			<property name="JDBC.ConnectionURL" value="${url}"/>
+			<property name="JDBC.Username" value="${username}"/>
+			<property name="JDBC.Password" value="${password}"/>
+		</dataSource>
+	</transactionManager>
+	<!-- 这里可以写多个实体的映射文件 -->
+	<sqlMap resource="com/eyoubika/user/dao/FavoriteSbcsDao.xml"/>
+	<sqlMap resource="com/eyoubika/user/dao/FavoriteExsDao.xml"/>
+	<sqlMap resource="com/eyoubika/sbc/dao/TradeCalendarDao.xml"/>	
+	<sqlMap resource="com/eyoubika/user/dao/UserLoginDao.xml"/>
+	<sqlMap resource="com/eyoubika/system/dao/BadWordDao.xml"/>
+	<sqlMap resource="com/eyoubika/system/dao/SystemInfoDao.xml"/>
+	<sqlMap resource="com/eyoubika/user/dao/UserBasicDao.xml"/>
+	<sqlMap resource="com/eyoubika/user/dao/UserDetailDao.xml"/>
+	<sqlMap resource="com/eyoubika/user/dao/OpenAccountPersDao.xml"/>
+	<sqlMap resource="com/eyoubika/user/dao/OpenAccountCorpDao.xml"/>
+	<sqlMap resource="com/eyoubika/user/dao/OpenAccountDetailDao.xml"/>
+	<sqlMap resource="com/eyoubika/spider/dao/NewsArticleDao.xml"/>
+	<sqlMap resource="com/eyoubika/spider/dao/BreedArticleDao.xml"/>
+	<sqlMap resource="com/eyoubika/spider/dao/BreedBasicDao.xml"/>
+	<sqlMap resource="com/eyoubika/spider/dao/InvestGamesNewsDao.xml"/>
+	<sqlMap resource="com/eyoubika/model/dao/TestDao.xml"/>
+	<sqlMap resource="com/eyoubika/system/dao/CityInfoDao.xml"/>
+	<sqlMap resource="com/eyoubika/system/dao/ProvinceInfoDao.xml"/>
+	<sqlMap resource="com/eyoubika/system/dao/BankInfoDao.xml"/>
+	<sqlMap resource="com/eyoubika/system/dao/UserFeedbackDao.xml"/>
+	<sqlMap resource="com/eyoubika/sbc/dao/ExchangeBasicDao.xml"/>
+	<sqlMap resource="com/eyoubika/sbc/dao/SbcBasicDao.xml"/>
+	<sqlMap resource="com/eyoubika/sbc/dao/SbcPriceDao.xml"/>
+	<sqlMap resource="com/eyoubika/sbc/dao/SbcIdMapDao.xml"/>
+	<sqlMap resource="com/eyoubika/sbc/dao/SbcQuotationHistDao.xml"/>
+	<sqlMap resource="com/eyoubika/spider/dao/SubscribeArticleDao.xml"/>
+	<sqlMap resource="com/eyoubika/spider/dao/DepositArticleDao.xml"/>
+	<sqlMap resource="com/eyoubika/spider/dao/NoticeArticleDao.xml"/>
+	<sqlMap resource="com/eyoubika/info/dao/InvestArticleDao.xml"/>
+	<sqlMap resource="com/eyoubika/platform/dao/InterfaceBasicDao.xml"/>
+	<sqlMap resource="com/eyoubika/platform/dao/InterfaceAttrDao.xml"/>
+</sqlMapConfig>

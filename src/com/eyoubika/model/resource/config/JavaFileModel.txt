@@ -1,0 +1,10 @@
+JavaFileModel com.eyoubika.model 
+String moduleName 模块名称
+String moduleDir 模块路径
+String layerType 层次类型
+String packageName 包名
+String className	类名
+String fileDir	文件路径
+String fileType 文件类型
+String tableName 	表名
+List<Map<String,String>> attributeList 属性列表

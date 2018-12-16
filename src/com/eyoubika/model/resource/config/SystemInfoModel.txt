@@ -1,0 +1,6 @@
+SystemInfo com.eyoubika.system ts_SystemInfo sysId auto
+Integer  sysId 	int 	false 系统信息id
+String 	name 	varchar(128) false 名称
+String  value 	varchar(128) 	false 值
+String  type 	varchar(6) 	false 类型
+String  date	char(8)		false 添加时间

@@ -1,0 +1,12 @@
+SbcQuotationHist com.eyoubika.sbc tp_SbcQuotationHist sbcId
+Integer  sbcId 	int 	false sbcId
+String openingPrice	varchar(16)	false 开盘价  
+String closePrice	varchar(16)	false 收盘价 
+String highestPrice	varchar(16)	false 最高价 
+String lowestPrice	varchar(16)	false 最低价 
+String riseValue	varchar(16)	yes 涨跌 
+String dealVolume	varchar(16)	yes 成交量 
+String dealValue	varchar(16)	yes 成交额 
+String riseScope	varchar(16)	yes 涨幅 
+String 	type 	char(1) 	fale  类型：月，周，日 
+String  date	 char(8)		false 时间

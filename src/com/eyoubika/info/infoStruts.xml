@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<package name="com.eyoubika.info" extends="json-default" namespace="/info">
+		<interceptors>
+			<interceptor name="errorInterceptor" class="com.eyoubika.common.ErrorInterceptor"></interceptor>
+			<interceptor name="authInterceptor" class="com.eyoubika.common.AuthInterceptor"></interceptor>
+			<interceptor-stack name="myErrorInterceptor">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authInterceptor" />
+				<interceptor-ref name="errorInterceptor" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myErrorInterceptor" />
+		<global-results>
+			<result name="YbkException" type="json">
+				<param name="root">jsonData</param>
+			</result>
+			<result type="json">
+		<param name="root">jsonData</param>
+			</result>
+		</global-results>
+		<action name="addInvestNews" class="investNewsAction" method="addInvestNews">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getInvestNews" class="investNewsAction" method="getInvestNews">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getInvestNewsList" class="investNewsAction" method="getInvestNewsList">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>		
+		<action name="deleteInvestNews" class="investNewsAction" method="deleteInvestNews">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getNews" class="newsAction" method="getNews">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getNewsByParams" class="newsAction" method="getNewsByParams">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getNewsList" class="newsAction" method="getNewsList">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getArticle" class="articleAction" method="getArticle">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getArticleList" class="articleAction" method="getArticleList">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getQuotationList" class="quotationsAction" method="getQuotationList">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getExQuotations" class="quotationsAction" method="getExQuotations">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getSbcQuotation" class="quotationsAction" method="getSbcQuotation">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getBillboard" class="quotationsAction" method="getBillboard">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		
+		<action name="getSbcQuotationDetail" class="quotationsAction" method="getSbcQuotationDetail">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+			<action name="getSbcQuotationRefresh" class="quotationsAction" method="getSbcQuotationRefresh">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<!--  投资参考 -->
+		<action name="addInvestArticle" class="investArticleAction" method="addInvestArticle">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getInvestArticle" class="investArticleAction" method="getInvestArticle">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="deleteInvestArticle" class="investArticleAction" method="deleteInvestArticle">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="modifyInvestArticle" class="investArticleAction" method="modifyInvestArticle">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="getInvestArticleList" class="investArticleAction" method="getInvestArticleList">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		<action name="editInvestArticle" class="investArticleAction" method="editInvestArticle">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>

@@ -1,0 +1,14 @@
+InterfaceBasic com.eyoubika.platform ts_InterfaceBasicInfo code
+String  code 	varchar(8)	false 接口编码
+String 	name 	varchar(128) 	false 名称
+String 	nickName varchar(128) 	false 备用名称
+String  url 	varchar(256) 	true url
+String  input 	varchar(256) 	true 输入
+String 	output 	varchar(256) 	true 输出
+String  inputEx varchar(2048) 	true 输入示例
+String 	outputEx varchar(2048) 	true 输出示例
+String  text 	text 	true 接口说明
+String  channel char(2)	true 渠道码
+String 	note 	varchar(512) 	true 备注
+String  date	 char(8)		true 添加日期
+String  time	 char(8)		true 添加时间

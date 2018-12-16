@@ -1,0 +1,9 @@
+DbManager com.eyoubika.system ts_DbManager cId
+String  cId 		varchar(6) 	false cIdid
+String 	host 	varchar(32) 	false 主机
+String 	port 	varchar(8) 	false 端口
+String 	database 	varchar(32) 	false 数据库名
+String 	table 	varchar(32) 	false 数据表名
+String 	type 	varchar(6) 	false 类型
+String 	user 	varchar(32) 	false 数据库用户名
+String 	password 	varchar(32) 	false 数据库密码

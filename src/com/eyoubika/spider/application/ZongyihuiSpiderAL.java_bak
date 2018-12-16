@@ -1,0 +1,492 @@
+package com.eyoubika.spider.application;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.select.Elements;
+
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+import com.eyoubika.sbc.dao.SbcBasicDao;
+import com.eyoubika.sbc.dao.SbcIdMapDao;
+import com.eyoubika.sbc.domain.SbcBasicDomain;
+import com.eyoubika.sbc.domain.SbcIdMapDomain;
+import com.eyoubika.spider.web.VO.FetchVO;
+import com.eyoubika.util.CommonUtil;
+import com.eyoubika.util.ConverterUtil;
+import com.eyoubika.common.BaseSpider;
+import com.eyoubika.common.CommonMaps;
+import com.eyoubika.common.RedisDao;
+import com.eyoubika.common.CommonVariables;
+import com.eyoubika.info.domain.QuotationsDomain;
+import com.eyoubika.spider.domain.*;
+import com.eyoubika.spider.dao.*;
+import com.eyoubika.util.*;
+/*==========================================================================================*
+ * Description:	抓取epianhong数据的小蜘蛛哈哈
+ * Class:		EpianhongSpiderAL
+ * Author:		lijiaxuan
+ * Copyright:	CaiDan (c) 2015 jiaxuan.li@eyoubika.com
+ * History:		1.0 created by lijiaxuan at 2015-8-06 15:26:18
+ *==========================================================================================*/
+public class ZongyihuiSpiderAL extends BaseSpider {
+	private QuotesRedisDao quotesRedisDao;
+	private SbcBasicDao sbcBasicDao;
+	private SbcIdMapDao sbcIdMapDao;
+	private SbcMapRedisDao sbcMapRedisDao;
+	private String uid = "31acf78bc5afc2e8f5e79be35e81aca4";
+	
+	
+	public SbcMapRedisDao getSbcMapRedisDao() {
+		return sbcMapRedisDao;
+	}
+
+	public void setSbcMapRedisDao(SbcMapRedisDao sbcMapRedisDao) {
+		this.sbcMapRedisDao = sbcMapRedisDao;
+	}
+
+	public SbcIdMapDao getSbcIdMapDao() {
+		return sbcIdMapDao;
+	}
+
+	public void setSbcIdMapDao(SbcIdMapDao sbcIdMapDao) {
+		this.sbcIdMapDao = sbcIdMapDao;
+	}
+
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
+	public QuotesRedisDao getQuotesRedisDao() {
+		return quotesRedisDao;
+	}
+
+	public void setQuotesRedisDao(QuotesRedisDao quotesRedisDao) {
+		this.quotesRedisDao = quotesRedisDao;
+	}
+
+	public SbcBasicDao getSbcBasicDao() {
+		return sbcBasicDao;
+	}
+
+	public void setSbcBasicDao(SbcBasicDao sbcBasicDao) {
+		this.sbcBasicDao = sbcBasicDao;
+	}
+
+	public void fetchTopQuotations(FetchVO fetchVO){
+		host = "www.zongyihui.cn";
+		init(host);
+		String marketId = "15";//南方文交所
+		//String marketId = "16";//南京文交所
+		int pageIndex = 13;
+		String url = host + "/web/info/hqcenter1.jsp?kind=selectmarket&market="+marketId+"&hqwb=&industry=0&pageIndex=" + pageIndex;
+		Document doc = fetchDocument(url);
+		Elements texts = doc.select("div.bor");		//正文
+		System.out.println(texts.toString());
+		//String exId = CommonVariables.EXCHANGE_FULITE;
+		//RedisDao redisDao = new RedisDao();
+		//quotesRedisDao.addQuotes(JSONObject.fromObject(jsonStr), exId);
+	} 
+	
+	
+	/*--------------------------------------------------------------------------------------*
+	 * Description:	TODO
+	 * Method:		initQuotRedis
+	 * Author:		1.0 created by lijiaxuan at 2015年8月19日 下午3:57:56
+	 *--------------------------------------------------------------------------------------*/
+	public void initQuotRedis(FetchVO fetchVO){
+		host = "www.zongyihui.cn";
+		Integer sbcId  = 0;
+		init(host);
+		Map<String, String> exMap = new HashMap<String, String>();
+		exMap.put("16", CommonVariables.EXCHANGE_NANJING);//南京文交所
+		exMap.put("15", CommonVariables.EXCHANGE_NANFANG); //南方文交所
+		exMap.put("19", CommonVariables.EXCHANGE_FULITE);
+		exMap.put("42", CommonVariables.EXCHANGE_ZHONGNAN);
+		
+		exMap.put("36", CommonVariables.EXCHANGE_JINMAJIA);
+		exMap.put("91", CommonVariables.EXCHANGE_JIANGSU);
+		//exMap.put("16", CommonVariables.EXCHANGE_SHANGHAI);
+		exMap.put("30", CommonVariables.EXCHANGE_HUAXIA);
+		exMap.put("41", CommonVariables.EXCHANGE_HUAZHONG);
+		/**/
+		SbcBasicDomain sbcBasicDomain= new SbcBasicDomain();
+		for (Map.Entry<String, String> entry : exMap.entrySet()) {
+			String marketId= entry.getKey();
+			String exId = entry.getValue();			
+			int page = getMaxPageIndex(marketId);
+			for (int i = 1; i <= page; i++){
+				System.out.println("page: " + i);
+				String url = "http://" + host + "/web/info/hqcenter1.jsp?kind=selectmarket&market="+marketId+"&hqwb=&industry=0&pageIndex=" +  i;
+				Document doc = fetchRealTimedoc(url);
+				Elements trs = doc.select("div.bor tr");		//正文				
+				for (Element tr : trs) {					
+					Elements tds = tr.select("td.tb_bt11, td.tb_bt111");
+					if (tds != null && ! tds.text().equals("")){					
+						sbcBasicDomain.setExId(exId);
+						sbcBasicDomain.setSbcCode(tds.eq(0).text());
+						sbcBasicDomain.setSbcName(tds.eq(1).text());
+						sbcBasicDomain.setInputDate(CommonUtil.getNowDate());
+						sbcBasicDomain.setStatus(CommonVariables.FETCH_CONTENT_ORIGIN);
+						if (sbcBasicDomain.getSbcName().contains("指数")){
+							sbcBasicDomain.setSbcType(CommonVariables.SBC_INDEX);
+						} else {
+							sbcBasicDomain.setSbcType(CommonVariables.SBC_INITIAL);
+						}				
+						sbcId = sbcBasicDao.addSbcBasic(sbcBasicDomain);
+						sbcBasicDomain.setSbcId(sbcId);
+						quotesRedisDao.initQuoteRedis(sbcBasicDomain);			
+					}
+				}
+			}
+		}
+		sbcBasicDomain = null;
+	} 
+	
+	public void fetchQuotationsMore(){
+		host = "www.zongyihui.cn";
+		//Integer sbcId  = 0;
+		init(host);
+		Map<String, String> exMap = new HashMap<String, String>();
+		exMap.put("16", CommonVariables.EXCHANGE_NANJING);//南京文交所
+		exMap.put("15", CommonVariables.EXCHANGE_NANFANG); //南方文交所
+		exMap.put("19", CommonVariables.EXCHANGE_FULITE);
+		exMap.put("42", CommonVariables.EXCHANGE_ZHONGNAN);
+		exMap.put("19", CommonVariables.EXCHANGE_FULITE);
+		exMap.put("36", CommonVariables.EXCHANGE_JINMAJIA);
+		exMap.put("91", CommonVariables.EXCHANGE_JIANGSU);
+		//exMap.put("16", CommonVariables.EXCHANGE_SHANGHAI);
+		exMap.put("30", CommonVariables.EXCHANGE_HUAXIA);
+		exMap.put("41", CommonVariables.EXCHANGE_HUAZHONG);
+			
+		String content = "=======================\nFetch BEG: "+ CommonUtil.getNow()  +"\n";
+		CommonUtil.toLog(content);
+		
+		
+		for (Map.Entry<String, String> entry : exMap.entrySet()) {
+			String marketId= entry.getKey();
+			String exId = entry.getValue();
+			Thread thread=new Thread(new QuotesMoreFetcher(exId, marketId, quotesRedisDao, sbcBasicDao));
+			thread.start();	
+		}
+	}
+	/*--------------------------------------------------------------------------------------*
+	 * Description:	TODO
+	 * Method:		fetchQuotations
+	 * Author:		1.0 created by lijiaxuan at 2015年8月19日 下午3:58:45
+	 *--------------------------------------------------------------------------------------*/
+	public void fetchQuotations(FetchVO fetchVO){
+		//initQuotRedis(fetchVO);
+		host = "www.zongyihui.cn";
+		//Integer sbcId  = 0;
+		init(host);
+		Map<String, String> exMap = new HashMap<String, String>();
+		exMap.put("16", CommonVariables.EXCHANGE_NANJING);//南京文交所
+		exMap.put("15", CommonVariables.EXCHANGE_NANFANG); //南方文交所
+		exMap.put("19", CommonVariables.EXCHANGE_FULITE);
+		exMap.put("42", CommonVariables.EXCHANGE_ZHONGNAN);
+		exMap.put("19", CommonVariables.EXCHANGE_FULITE);
+		exMap.put("36", CommonVariables.EXCHANGE_JINMAJIA);
+		exMap.put("91", CommonVariables.EXCHANGE_JIANGSU);
+		//exMap.put("16", CommonVariables.EXCHANGE_SHANGHAI);
+		exMap.put("30", CommonVariables.EXCHANGE_HUAXIA);
+		exMap.put("41", CommonVariables.EXCHANGE_HUAZHONG);
+			
+		String content = "=======================\nFetch BEG: "+ CommonUtil.getNow()  +"\n";
+		CommonUtil.toLog(content);
+
+		for (Map.Entry<String, String> entry : exMap.entrySet()) {
+			String marketId= entry.getKey();
+			String exId = entry.getValue();
+			Thread thread=new Thread(new Fetcher(exId, marketId,  quotesRedisDao));
+			thread.start();		
+		}		
+	} 
+	
+	public int getMaxPageIndex(String marketId){
+		int page = 0;
+		String url = "http://" + host + "/web/info/hqcenter1.jsp?kind=selectmarket&market="+marketId+"&hqwb=&industry=0";
+		Document doc = fetchDocument(url);
+		Elements tds = doc.select("td[height=30] td");		//正文
+		if (tds !=null){
+			System.out.println("tds.last().text().split()[2] " + tds.last().text());
+			page = Integer.parseInt(tds.last().text().split("/")[1]);
+		}
+		return page;
+	}
+	
+	public void fetchSbcs(FetchVO fetchVO){
+		host = "http://app.epianhong.com";
+		init(host);
+		String exList[] = {"3","4","5","6"};//,"3","4","5","6"
+		int size = exList.length;
+		for (int j = 0; j < size; j++){
+			String dzpid = exList[j];
+			String url = host + "/getAllGoodsMarketInfoByDzp?uid="+uid+"&phonetype=1&dzpid=" + dzpid;
+			Document doc = fetchDocument(url, "phone");
+			String jsonStr = doc.select("body").text().toString();
+			System.out.println("url" + url);
+			String exId = sbcMapRedisDao.findExId(dzpid) ;
+					JSONArray jsonArray = JSONArray.fromObject(JSONObject.fromObject(jsonStr).get("goods"));
+					 for (int i = 0; i < jsonArray.size(); i++) { 	
+						 SbcBasicDomain  sbcBasicDomain = new SbcBasicDomain();
+						 JSONObject obj = JSONObject.fromObject(jsonArray.get(i));
+						
+						 sbcBasicDomain.setSbcName(obj.get("name").toString());
+						// Integer sbcId = null;
+						 SbcBasicDomain  tmpDomain = sbcBasicDao.findSbcBasicByDomain(sbcBasicDomain);//.findSbcIdBySbcCode(obj.get("code").toString());						 
+						 sbcBasicDomain.setSbcCode(obj.get("code").toString());						
+						 sbcBasicDomain.setIssuePrice(obj.get("publishprice").toString());
+						 sbcBasicDomain.setIssueTime(obj.get("publishtime").toString());						 					 
+						 String type = "";
+						 if (obj.get("type").toString().equals("1")){
+							 type = CommonVariables.SBC_INITIAL;
+						 } else  if (obj.get("type").toString().equals("2")){
+							 type = CommonVariables.SBC_INDEX;
+						 } 
+						 sbcBasicDomain.setSbcType(type);
+						 
+						if (tmpDomain == null) {	
+							sbcBasicDomain.setInputDate(CommonUtil.getNowDate());
+							sbcBasicDomain.setStatus(CommonVariables.FETCH_CONTENT_ORIGIN);
+							sbcBasicDomain.setExId(exId);	 
+							sbcBasicDao.addSbcBasic(sbcBasicDomain);
+							//sbcIdMapDomain.setSbcId(sbcId);
+							//sbcIdMapDomain.setEphId(obj.get("goodsId").toString());
+							//sbcIdMapDomain.setEphCode(obj.get("code").toString());
+							//sbcIdMapDomain.setStatus(CommonVariables.FETCH_CONTENT_ORIGIN);
+							//System.out.println("sbcIdMapDomain ; " + sbcIdMapDomain);
+							//sbcIdMapDao.addSbcIdMap(sbcIdMapDomain);	
+							//sbcMapRedisDao.addSbcMap(sbcIdMapDomain);
+						} else {
+							sbcBasicDao.modifySbcBasic(sbcBasicDomain);
+						}
+					}
+		}
+		
+	}
+}
+
+
+/*==========================================================================================*
+ * Description:	多线程之抓取行情子线程
+ * Class:		Fetcher
+ * Author:		lijiaxuan
+ * Copyright:	ABC (c) 2015 ljx728@gmail.com
+ * History:		1.0 created by lijiaxuan at 2015年8月19日 下午3:59:38
+ *==========================================================================================*/
+class Fetcher extends BaseSpider implements Runnable{
+
+	private  String exId;
+	private  String marketId;
+	private QuotesRedisDao quotesRedisDao;
+	public Fetcher(String exId, String marketId,  QuotesRedisDao quotesRedisDao){
+		host = "www.zongyihui.cn";
+		init(host);
+		this.exId = exId;
+		this.marketId = marketId;
+		this.quotesRedisDao= quotesRedisDao;
+	}
+	public int getMaxPageIndex(String marketId){
+		int page = 0;
+		String url = "http://" + host + "/web/info/hqcenter1.jsp?kind=selectmarket&market="+marketId+"&hqwb=&industry=0";
+		Document doc = fetchDocument(url);
+		Elements tds = doc.select("td[height=30] td");		//正文
+		
+		if (tds !=null){
+			System.out.println("tds.last().text().split()[2] " + tds.last().text());
+			page = Integer.parseInt(tds.last().text().split("/")[1]);
+		}
+		return page;
+	}
+	public void run()
+    {
+		Integer sbcId  = 0;
+		SbcBasicDomain sbcBasicDomain= new SbcBasicDomain();
+		int count = 0;
+		QuotationsDomain quotationsDomain=new QuotationsDomain();
+		int page = getMaxPageIndex(marketId);
+		for (int i = 1; i <= page; i++){
+			String url = "http://" + host + "/web/info/hqcenter1.jsp?kind=selectmarket&market="+marketId+"&hqwb=&industry=0&pageIndex=" +  i;
+			System.out.println("url " + url);
+			Document doc = fetchRealTimedoc(url);
+			Elements trs = doc.select("div.bor tr");		//正文				
+			for (Element tr : trs) {					
+				Elements tds = tr.select("td.tb_bt11, td.tb_bt111");
+				if (tds != null && ! tds.text().equals("")){
+					//System.out.println("tds.toString()" + tds.toString());
+					quotationsDomain.setSbcCode(tds.eq(0).text());
+					String querySbcId = quotesRedisDao.getSbcId(exId, quotationsDomain.getSbcCode());
+					if (querySbcId==null){
+						System.out.println( "找不到对应的Id： "+  exId  + quotationsDomain.getSbcCode());
+						continue;
+					}
+					sbcId = Integer.parseInt(querySbcId);
+					quotationsDomain.setSbcName(tds.eq(1).text());
+					
+					quotationsDomain.setExId(exId);
+					quotationsDomain.setCurrentPrice(tds.eq(2).text());
+					quotationsDomain.setOpeningPrice(tds.eq(3).text());
+					quotationsDomain.setHighestPrice(tds.eq(4).text());
+					quotationsDomain.setLowestPrice(tds.eq(5).text());
+					quotationsDomain.setAveragePrice(tds.eq(6).text());
+					quotationsDomain.setYesterAvPrice(tds.eq(7).text());
+					quotationsDomain.setRiseValue(tds.eq(8).text());
+					quotationsDomain.setDealVolume(tds.eq(9).text());
+					quotationsDomain.setPoq(tds.eq(10).text());	
+								
+					/*sbcBasicDomain.setExId(exId);
+					sbcBasicDomain.setSbcCode(quotationsDomain.getSbcCode());
+					sbcBasicDomain.setSbcName(quotationsDomain.getSbcName());
+					sbcBasicDomain.setInputDate(CommonUtil.getNowDate());
+					sbcBasicDomain.setExId(CommonVariables.EXCHANGE_NANFANG);
+					sbcBasicDomain.setStatus(CommonVariables.FETCH_CONTENT_ORIGIN);
+					sbcBasicDomain.setSbcType(CommonVariables.SBC_INITIAL);*/
+					
+					quotationsDomain.setSbcId(sbcId);
+					quotationsDomain.setYesterClPrice(quotesRedisDao.getClosePrice(querySbcId));
+					
+					String clPrice = quotationsDomain.getYesterClPrice();
+					String riseValue = quotationsDomain.getRiseValue();
+					if (CommonUtil.isStringDigit(clPrice) && CommonUtil.isStringDigit(riseValue) ){	
+						Float riseScope = Float.parseFloat(riseValue) / Float.parseFloat(clPrice);
+						quotationsDomain.setRiseScope(riseScope.toString());
+					} else {
+						quotationsDomain.setRiseScope("0");
+					}
+					count++;
+					String content = count +" -->: " +quotationsDomain.toString()+ "\n" +"============================ \n" ;
+					CommonUtil.toLog(content);
+					quotesRedisDao.addQuoteDomain(quotationsDomain);
+					//resDomain = null;					
+				}
+			}
+		}
+		String content = "Fetch END: "+ CommonUtil.getNow() +"\n" + "-----------------------------------\n";
+		CommonUtil.toLog(content);
+		quotationsDomain = null;
+		sbcBasicDomain = null;
+    }
+}
+
+
+
+class QuotesMoreFetcher extends BaseSpider implements Runnable{
+
+	private  String exId;
+	private  String marketId;
+	private QuotesRedisDao quotesRedisDao;
+	private SbcBasicDao sbcBasicDao;
+	public QuotesMoreFetcher( String exId, String marketId, QuotesRedisDao quotesRedisDao,SbcBasicDao sbcBasicDao){
+		host = "www.zongyihui.cn";
+		init(host);
+		this.exId = exId;
+		this.marketId = marketId;
+		this.quotesRedisDao= quotesRedisDao;
+		this.sbcBasicDao = sbcBasicDao;
+	}
+	public int getMaxPageIndex(){
+		int page = 0;
+		//String url = "http://" + host + "/web/info/bika/news/ybkhq.jsp?kind=kind&market=0&hqwb=&industry=0";
+		String url = "http://" + host + "/web/info/bika/news/ybkhq.jsp?kind=selectmarket&market="+marketId+"&hqwb=&industry=0";
+		Document doc = fetchDocument(url);
+		Elements tds = doc.select("td[height=30] td");		//正文
+		
+		if (tds !=null){
+			System.out.println("tds.last().text().split()[2] " + tds.last().text());
+			page = Integer.parseInt(tds.last().text().split("/")[1]);
+		}
+		System.out.println("page: " + page);
+		return page;
+	}
+	public void run()
+    {
+		Integer sbcId  = null;
+		int count = 0;
+		int page = getMaxPageIndex();
+		String sbcName = null;
+		String exName = null;
+		String totalVolume = null;
+		String totalValue = null;
+		String exId = null;
+		Map<String, String> map = new HashMap<String, String>();
+		for (int i = 1; i <= page; i++){
+			String url = "http://" + host + "/web/info/bika/news/ybkhq.jsp?kind=selectmarket&market="+marketId+"&hqwb=&industry=0&pageIndex=" +  i;
+			System.out.println("url " + url);
+			Document doc = null;
+			try {
+				doc = fetchRealTimedoc(url);
+			} catch (Exception e){
+				System.out.println("打不开了：：： " + url);
+			}
+			System.out.println("0..");
+			Elements trs = doc.select("div.bor tr");		//正文				
+			for (Element tr : trs) {
+				Elements tds = tr.select("td.tb_bt11, td.tb_bt111");
+				if (tds != null &&  tds.text() != null && ! tds.text().equals("")){
+					sbcName = tds.eq(1).text().trim();
+					exName = tds.eq(0).text().trim();
+					totalVolume = tds.eq(7).text().trim();
+					totalValue = tds.eq(8).text().trim();
+					System.out.println("sbcName: " + sbcName);
+					System.out.println("exName: " + exName);
+					exId = getExId(exName);//CommonMaps.exchangeMap.get(exName);
+					if (exId == null){
+						System.out.println("交易所id竟然是空的");
+						continue;
+					}
+					System.out.println("exId: " + exId);
+					sbcId = sbcBasicDao.findSbcIdByName(sbcName, exId);
+			
+					System.out.println("找到对应的sbcId: " + sbcId);
+					if (sbcId != null) {
+						map.put("totalVolume", totalVolume);
+						map.put("totalValue", totalValue);
+						quotesRedisDao.hmset(CommonVariables.REDIS_KEY_QUOTSMORE+ sbcId.toString(), map);
+					}				
+				}
+			}
+		}
+		String content = "Fetch END: "+ CommonUtil.getNow() +"\n" + "-----------------------------------\n";
+		CommonUtil.toLog(content);
+    }
+	
+	public String getExId(String name){
+		String res = null;
+		if (name.equals("南京文交所")) {
+			res = CommonVariables.EXCHANGE_NANJING;
+		} else if (name.equals("南方文交所")) {
+			res = CommonVariables.EXCHANGE_NANFANG;
+		} else if (name.equals("中南邮票交易")) {
+			res = CommonVariables.EXCHANGE_ZHONGNAN;
+		} else if (name.equals("北交所福丽特")) {
+			res = CommonVariables.EXCHANGE_FULITE;
+		} else if (name.equals("金马甲")) {
+			res = CommonVariables.EXCHANGE_JINMAJIA;
+		} else if (name.equals("江苏省文交所")) {
+			res = CommonVariables.EXCHANGE_JIANGSU;
+		} else if (name.equals("华夏文交所")) {
+			res = CommonVariables.EXCHANGE_HUAXIA;
+		} else if (name.equals("华中文交所")) {
+			res = CommonVariables.EXCHANGE_HUAZHONG;
+		} 	
+		return res;
+	}
+}

@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ta_FetchNewsArticle">
+	<typeAlias alias="NewsArticleDomain" type="com.eyoubika.spider.domain.NewsArticleDomain"/>
+	<resultMap id="NewsArticleResult" class="com.eyoubika.spider.domain.NewsArticleDomain">
+		<result column="FNA_NewsId" property="newsId" jdbcType="int(10)" />
+		<result column="FNA_Title" property="title" jdbcType="VARCHAR" />
+		<result column="FNA_SubTitle" property="subTitle" jdbcType="VARCHAR" />
+		<result column="FNA_IssueTime" property="issueTime" jdbcType="VARCHAR" />
+		<result column="FNA_IssueUnit" property="issueUnit" jdbcType="VARCHAR" />
+		<result column="FNA_WebTime" property="webTime" jdbcType="VARCHAR" />
+		<result column="FNA_FetchTime" property="fetchTime" jdbcType="VARCHAR" />
+		<result column="FNA_From" property="from" jdbcType="VARCHAR" />
+		<result column="FNA_Article" property="article" jdbcType="text" />
+		<result column="FNA_Img" property="img" jdbcType="VARCHAR" />
+		<result column="FNA_ImgPos" property="imgPos" jdbcType="VARCHAR" />
+		<result column="FNA_Table" property="table" jdbcType="text" />
+		<result column="FNA_TablePos" property="tablePos" jdbcType="VARCHAR" />
+		<result column="FNA_Type" property="type" jdbcType="CHAR" />
+		<result column="FNA_Status" property="status" jdbcType="CHAR" />
+		<result column="FNA_HaveImg" property="haveImg" jdbcType="CHAR" />
+		<result column="FNA_HaveTable" property="haveTable" jdbcType="CHAR" />
+		<result column="FNA_ArticleUrl" property="articleUrl" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="NewsBasicResult" class="com.eyoubika.spider.domain.NewsBasicDomain">
+		<result column="FNA_NewsId" property="newsId" jdbcType="int(10)" />
+		<result column="FNA_Title" property="title" jdbcType="VARCHAR" />
+		<result column="FNA_IssueTime" property="issueTime" jdbcType="VARCHAR" />
+		<result column="FNA_IssueUnit" property="issueUnit" jdbcType="VARCHAR" />
+		<result column="FNA_WebTime" property="webTime" jdbcType="VARCHAR" />
+		<result column="FNA_From" property="from" jdbcType="VARCHAR" />
+		<result column="FNA_Article" property="brief" jdbcType="text" />
+		<result column="FNA_Type" property="type" jdbcType="CHAR" />
+		<result column="FNA_Status" property="status" jdbcType="CHAR" />
+		<result column="FNA_HaveImg" property="haveImg" jdbcType="CHAR" />
+		<result column="FNA_HaveTable" property="haveTable" jdbcType="CHAR" />
+		<result column="FNA_ArticleUrl" property="articleUrl" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<insert id="insertNewsArticle" parameterClass="com.eyoubika.spider.domain.NewsArticleDomain">
+		insert into ta_FetchNewsArticle(FNA_Title ,FNA_SubTitle ,FNA_IssueTime ,FNA_IssueUnit ,FNA_WebTime ,FNA_FetchTime ,FNA_From ,FNA_Article ,FNA_Img ,FNA_ImgPos ,FNA_Table ,FNA_TablePos ,FNA_Type ,FNA_Status ,FNA_HaveImg ,FNA_HaveTable ,FNA_ArticleUrl) 
+		values (#title# ,#subTitle# ,#issueTime# ,#issueUnit# ,#webTime# ,#fetchTime# ,#from# ,#article# ,#img# ,#imgPos# ,#table# ,#tablePos# ,#type# ,#status# ,#haveImg# ,#haveTable# ,#articleUrl#)
+		<selectKey resultClass="int" keyProperty="newsId">
+			SELECT LAST_INSERT_ID() as newsId
+		</selectKey>
+	</insert>
+	<select id="selectNewsArticle" parameterClass="int" resultMap="NewsArticleResult">
+		select * from ta_FetchNewsArticle where FNA_NewsId= #newsId#
+	</select>
+	<select id="selectNewsArticleByDomain" parameterClass="com.eyoubika.spider.domain.NewsArticleDomain" resultMap="NewsArticleResult">
+		select * from ta_FetchNewsArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="newsId">
+				FNA_NewsId = #newsId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				FNA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				FNA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				FNA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueUnit">
+				FNA_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				FNA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				FNA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				FNA_From = #from#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				FNA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="img">
+				FNA_Img = #img#
+			</isNotNull>
+			<isNotNull prepend="and" property="imgPos">
+				FNA_ImgPos = #imgPos#
+			</isNotNull>
+			<isNotNull prepend="and" property="table">
+				FNA_Table = #table#
+			</isNotNull>
+			<isNotNull prepend="and" property="tablePos">
+				FNA_TablePos = #tablePos#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				FNA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				FNA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				FNA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveTable">
+				FNA_HaveTable = #haveTable#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				FNA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="selectNewsArticleList" parameterClass="com.eyoubika.spider.domain.NewsArticleDomain" resultMap="NewsArticleResult">
+		select * from ta_FetchNewsArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="newsId">
+				FNA_NewsId = #newsId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				FNA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				FNA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				FNA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueUnit">
+				FNA_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				FNA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				FNA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				FNA_From = #from#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				FNA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="img">
+				FNA_Img = #img#
+			</isNotNull>
+			<isNotNull prepend="and" property="imgPos">
+				FNA_ImgPos = #imgPos#
+			</isNotNull>
+			<isNotNull prepend="and" property="table">
+				FNA_Table = #table#
+			</isNotNull>
+			<isNotNull prepend="and" property="tablePos">
+				FNA_TablePos = #tablePos#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				FNA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				FNA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				FNA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveTable">
+				FNA_HaveTable = #haveTable#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				FNA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	</select>
+	<delete id = "deleteNewsArticle"  parameterClass="int">
+		delete from ta_FetchNewsArticle where FNA_NewsId = #newsId#
+	</delete>
+	<delete id = "deleteAll">
+		delete from ta_FetchNewsArticle
+	</delete>
+	<update id = "updateNewsArticle" parameterClass="com.eyoubika.spider.domain.NewsArticleDomain">
+		update ta_FetchNewsArticle
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="title">
+				FNA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="," property="subTitle">
+				FNA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="," property="issueTime">
+				FNA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="," property="issueUnit">
+				FNA_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="," property="webTime">
+				FNA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="," property="fetchTime">
+				FNA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="," property="from">
+				FNA_From = #from#
+			</isNotNull>
+			<isNotNull prepend="," property="article">
+				FNA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="," property="img">
+				FNA_Img = #img#
+			</isNotNull>
+			<isNotNull prepend="," property="imgPos">
+				FNA_ImgPos = #imgPos#
+			</isNotNull>
+			<isNotNull prepend="," property="table">
+				FNA_Table = #table#
+			</isNotNull>
+			<isNotNull prepend="," property="tablePos">
+				FNA_TablePos = #tablePos#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+				FNA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+				FNA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="haveImg">
+				FNA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="," property="haveTable">
+				FNA_HaveTable = #haveTable#
+			</isNotNull>
+			<isNotNull prepend="," property="articleUrl">
+				FNA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	where FNA_NewsId = #newsId#
+	</update>
+	<select id="isExistByDomain" parameterClass="com.eyoubika.spider.domain.NewsArticleDomain" resultClass="String">
+		select 1 from ta_FetchNewsArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="newsId">
+				FNA_NewsId = #newsId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				FNA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="subTitle">
+				FNA_SubTitle = #subTitle#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				FNA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueUnit">
+				FNA_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				FNA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="fetchTime">
+				FNA_FetchTime = #fetchTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				FNA_From = #from#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				FNA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="img">
+				FNA_Img = #img#
+			</isNotNull>
+			<isNotNull prepend="and" property="imgPos">
+				FNA_ImgPos = #imgPos#
+			</isNotNull>
+			<isNotNull prepend="and" property="table">
+				FNA_Table = #table#
+			</isNotNull>
+			<isNotNull prepend="and" property="tablePos">
+				FNA_TablePos = #tablePos#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				FNA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				FNA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				FNA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveTable">
+				FNA_HaveTable = #haveTable#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				FNA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+		 limit 1
+	</select>	
+	
+	<select id="isExistByTitle" parameterClass="String" resultClass="String">
+		select 1 from ta_FetchNewsArticle where FNA_Title = #title# limit 1		
+	</select>
+	
+	
+	<select id="selectNewsBasicList" parameterClass="com.eyoubika.spider.domain.NewsBasicDomain" resultMap="NewsBasicResult">
+		select FNA_NewsId, FNA_Title, FNA_IssueTime, FNA_IssueUnit, FNA_WebTime, FNA_FetchTime, FNA_From,
+				FNA_Article, FNA_Type, FNA_Status, FNA_HaveImg, FNA_HaveTable, FNA_ArticleUrl
+		from ta_FetchNewsArticle
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="newsId">
+				FNA_NewsId = #newsId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				FNA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				FNA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueUnit">
+				FNA_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				FNA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="from">
+				FNA_From = #from#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				FNA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				FNA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				FNA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				FNA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveTable">
+				FNA_HaveTable = #haveTable#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				FNA_ArticleUrl = #articleUrl#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<sql id="sql_count"> 
+                select count(1) 
+        </sql> 
+        <sql id="sql_select"> 
+                select FNA_NewsId, FNA_Title, FNA_IssueTime, FNA_IssueUnit, FNA_WebTime, FNA_FetchTime, FNA_From,
+				FNA_Article, FNA_Type, FNA_Status, FNA_HaveImg, FNA_HaveTable, FNA_ArticleUrl
+        </sql> 
+	
+	 <sql id="sql_where"> 
+		from ta_FetchNewsArticle where 1=1 
+		
+			<isNotNull prepend="and" property="newsId">
+				FNA_NewsId = #newsId#
+			</isNotNull>
+			<isNotNull prepend="and" property="title">
+				FNA_Title = #title#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueTime">
+				FNA_IssueTime = #issueTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="issueUnit">
+				FNA_IssueUnit = #issueUnit#
+			</isNotNull>
+			<isNotNull prepend="and" property="webTime">
+				FNA_WebTime = #webTime#
+			</isNotNull>
+			<isNotNull prepend="and" property="article">
+				FNA_Article = #article#
+			</isNotNull>
+			<isNotNull prepend="and" property="type">
+				FNA_Type = #type#
+			</isNotNull>
+			<isNotNull prepend="and" property="status">
+				FNA_Status = #status#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveImg">
+				FNA_HaveImg = #haveImg#
+			</isNotNull>
+			<isNotNull prepend="and" property="haveTable">
+				FNA_HaveTable = #haveTable#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				FNA_ArticleUrl = #articleUrl#
+			</isNotNull>
+			<isNotNull prepend="and" property="articleUrl">
+				FNA_ArticleUrl = #articleUrl#
+			</isNotNull>		
+		<dynamic prepend="and">
+			<isNotNull property="exIds"> 
+			FNA_From in
+			<iterate property="exIds" open="(" close=")" conjunction=",">
+				#exIds[]#
+			</iterate>
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotNull property="ff">
+				$ff$
+			</isNotNull>	
+			<isNotNull property="rank">
+				$rank$
+			</isNotNull>	
+		</dynamic>
+		<dynamic prepend="limit">
+			<isNotNull property="limit">
+				#start#, #limit#
+			</isNotNull>		
+		</dynamic>
+	</sql>
+	<select id="selectNewsBasicListCount" parameterClass="java.util.HashMap" resultClass="int"> 
+                <include refid="sql_count"/> 
+                <include refid="sql_where"/> 
+    </select> 
+    <select id="selectNewsBasicListInPage" parameterClass="java.util.HashMap" resultMap="NewsBasicResult"> 
+                <include refid="sql_select"/> 
+                <include refid="sql_where"/> 
+    </select>
+</sqlMap>

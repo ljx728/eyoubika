@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="sbcQueryVO" class="com.eyoubika.sbc.web.VO.SbcQueryVO">
+	</bean>
+	<bean id="sbcBasicDomain" class="com.eyoubika.sbc.domain.SbcBasicDomain">
+	</bean>
+	<bean id="sbcBasicDao" class="com.eyoubika.sbc.dao.SbcBasicDao">
+	</bean>
+	
+	<bean id="sbcAL" class="com.eyoubika.sbc.application.SbcAL">
+	<property name="sbcBasicDao" ref="sbcBasicDao" />
+	</bean>
+	<bean id="sbcService" class="com.eyoubika.sbc.service.impl.SbcServiceImpl">
+		<property name="sbcBasicDomain" ref="sbcBasicDomain" />
+		<property name="sbcAL" ref="sbcAL" />
+	</bean>
+	<bean id="sbcAction" class="com.eyoubika.sbc.web.action.SbcAction">
+		<property name="sbcQueryVO" ref="sbcQueryVO" />
+		<property name="sbcService" ref="sbcService" />
+	</bean>
+	<!--<CustomFileTag>-->
+	
+	<bean id="tradeCalendarVO" class="com.eyoubika.sbc.web.VO.TradeCalendarVO">
+	</bean>
+	<bean id="tradeCalendarDao" class="com.eyoubika.sbc.dao.TradeCalendarDao">
+	</bean>
+	<bean id="tradeCalendarDomain" class="com.eyoubika.sbc.domain.TradeCalendarDomain">
+	</bean>
+	<bean id="tradeCalendarAL" class="com.eyoubika.sbc.application.TradeCalendarAL">
+		<property name="tradeCalendarDao" ref="tradeCalendarDao" />
+	</bean>
+	<bean id="tradeCalendarService" class="com.eyoubika.sbc.service.impl.TradeCalendarServiceImpl">
+		<property name="tradeCalendarDomain" ref="tradeCalendarDomain" />
+		<property name="tradeCalendarAL" ref="tradeCalendarAL" />
+	</bean>
+	<bean id="tradeCalendarAction" class="com.eyoubika.sbc.web.action.TradeCalendarAction">
+		<property name="tradeCalendarVO" ref="tradeCalendarVO" />
+		<property name="tradeCalendarService" ref="tradeCalendarService" />
+	</bean>
+	
+	<bean id="sbcQuotationHistDao" class="com.eyoubika.sbc.dao.SbcQuotationHistDao">
+	</bean>
+	<!--<CustomFileTag>-->
+</beans>
